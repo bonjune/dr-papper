@@ -13,9 +13,15 @@ import PapperBoard from "../PapperBoard"
 // Test Code
 import Test from "../../components/Tests"
 
+const INITIAL_STATE = {
+    "boardMode": "to-read",
+}
 class App extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            ...INITIAL_STATE,
+        };
     }
 
     render() {

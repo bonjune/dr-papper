@@ -23,8 +23,6 @@ class Firebase extends React.Component {
 
 
     // Interfaces for Firebase Database API
-    createReviewKey = (entry) => entry.reviewID;
-
     getReviews = () => this.reviewListRef;
 
     makeNewPapperReview = (entry) => {

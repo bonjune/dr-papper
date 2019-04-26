@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 // Components
 import MenuBar from "../../components/MenuBar"
 import NavigationBar from "../../components/NavigationBar"
-import TagBar from "../../components/TagBar"
+import TagBar from '../../components/TagBar'
 
 // Containers
 import PapperBoard from "../PapperBoard"

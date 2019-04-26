@@ -17,12 +17,14 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <NavigationBar />
-                <MenuBar />
-                <TagBar />
-                <PapperBoard />
-            </div>
+            <BrowserRouter>
+                <div>
+                    <NavigationBar />
+                    <MenuBar />
+                    <TagBar />
+                    <PapperBoard />
+                </div>
+            </BrowserRouter>
         );
     }
 }

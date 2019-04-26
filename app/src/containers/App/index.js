@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 
 // Components
@@ -8,7 +8,8 @@ import NavigationBar from "../../components/NavigationBar"
 import TagBar from '../../components/TagBar'
 
 // Containers
-import PapperBoard from "../PapperBoard"
+import ReadBoard from "../ReadBoard"
+import ToReadBoard from "../ToReadBoard"
 
 // Test Code
 import Test from "../../components/Tests"
@@ -31,7 +32,10 @@ class App extends Component {
                     <NavigationBar />
                     <MenuBar />
                     <TagBar />
-                    <PapperBoard />
+                    <Switch>
+                        <Route exact path='/' component={ReadBoard} />
+                        <Route path='/unread' component={ToReadBoard} />
+                    </Switch>
                 </div>
                 <div>
                     <Test/>

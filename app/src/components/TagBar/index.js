@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 class TagBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <section className="component-tag-bar">

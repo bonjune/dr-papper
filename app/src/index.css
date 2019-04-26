@@ -17,7 +17,8 @@ code {
 .component-tag-bar span{
   margin-top: 20px;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 90%;
 }
 
 /* FinnedBox */

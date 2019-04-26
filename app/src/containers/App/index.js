@@ -10,9 +10,12 @@ import TagBar from '../../components/TagBar'
 // Containers
 import PapperBoard from "../PapperBoard"
 
+// Test Code
+import Test from "../../components/Tests"
+
 class App extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
@@ -23,6 +26,9 @@ class App extends Component {
                     <MenuBar />
                     <TagBar />
                     <PapperBoard />
+                </div>
+                <div>
+                    <Test/>
                 </div>
             </BrowserRouter>
         );

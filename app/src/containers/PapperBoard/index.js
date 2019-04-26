@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import FinnedBox from './FinnedBox'
+import TagBar from './TagBar'
 
 class PapperBoard extends Component {
     constructor(props) {
@@ -8,7 +10,8 @@ class PapperBoard extends Component {
     render() {
         return (
             <div className="container-papper-board">
-                This is a Board.
+                <TagBar />
+                <FinnedBox />
             </div>
         );
     }

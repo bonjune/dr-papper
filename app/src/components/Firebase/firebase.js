@@ -34,8 +34,7 @@ class Firebase extends React.Component {
         })
     }
     updatePapperReview = (reviewKey, entry) => {
-        const targetReviewRef = this.db.ref(`reviews/${reviewID}`);
-        const targetReviewKey = targetReviewRef.key;
+        const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
         let updates = {};
         updates[`reviews/${reviewKey}`] = entry;
         targetReviewRef.update(updates);

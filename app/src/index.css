@@ -12,3 +12,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Tagbar */
+.component-tag-bar span{
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+/* FinnedBox */
+.component-finned-box {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.component-finned-box h3{
+  color: #2c3e50 !important;
+  padding-bottom: 10px;
+}
+.component-finned-box h3::after{
+  content: '';
+  background: #2c3e50;
+  display: block;
+  height: 3px;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.component-finned-box img{
+  width: 100%;
+}
+.component-finned-box .title{
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.component-finned-box .content{
+  margin-bottom: 5px;
+}
+.component-finned-box .tags{
+  margin-right: 5px;
+}

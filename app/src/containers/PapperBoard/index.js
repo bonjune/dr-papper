@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FinnedBox from './FinnedBox'
 
 class PapperBoard extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class PapperBoard extends Component {
     render() {
         return (
             <div className="container-papper-board">
-                This is a Board.
+                <FinnedBox />
             </div>
         );
     }

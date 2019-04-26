@@ -7,9 +7,15 @@ class TagBar extends Component {
 
     render() {
         return (
-            <div className="component-tag-bar">
-                This is a tag bar.
+            <section className="component-tag-bar">
+            <div className="container">
+                <div className="sm-12">
+                <span className="badge badge-light font-weight-normal">#Light</span>
+                <span className="badge badge-light font-weight-normal">#Light</span>
+                <span className="badge badge-light font-weight-normal">#Light</span>
+                </div>
             </div>
+            </section>
         );
     }
 

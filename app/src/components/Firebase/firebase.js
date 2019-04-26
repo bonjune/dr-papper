@@ -3,6 +3,8 @@ import React from "react";
 import app from "firebase/app";
 import "firebase/database";
 
+import reviewEntry from "./reviewEntry";
+
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -18,8 +20,28 @@ class Firebase extends React.Component {
         app.initializeApp(config);
 
         this.db = app.database();
+        this.reviewListRef = this.db.ref(`reviews`)
     }
 
-    // Firebase Database API
-    makeNewPapperReview = (reviewEntry) => null;
+
+    // Interfaces for Firebase Database API
+    createReviewKey = (entry) => entry.reviewID;
+
+    makeNewPapperReview = (entry) => {
+        const newReviewRef = this.reviewListRef.push();
+        newReviewRef.set({
+            ...entry
+        })
+    }
+    updatePapperReview = (reviewKey, entry) => {
+        const targetReviewRef = this.db.ref(`reviews/${reviewID}`);
+        const targetReviewKey = targetReviewRef.key;
+        let updates = {};
+        updates[`reviews/${reviewKey}`] = entry;
+        targetReviewRef.update(updates);
+    }
+    deletePapperReview = (reviewKey) => {
+        const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
+        targetReviewRef.remove();
+    }
 }

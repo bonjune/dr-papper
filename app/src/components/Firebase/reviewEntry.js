@@ -1,11 +1,11 @@
 export const reviewEntry = {
+    // Identification
+    "reviewId ": "",
+    "userId ": "",
+
     // Time Stamp
     "createAt": "",
     "updateAt": "",
-
-    // Identification
-    "userId ": "",
-    "reviewId ": "",
 
     // Basic Informatino
     "title ": "",

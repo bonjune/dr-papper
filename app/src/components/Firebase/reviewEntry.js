@@ -7,7 +7,7 @@ export const reviewEntry = {
     "createAt": "",
     "updateAt": "",
 
-    // Basic Informatino
+    // Basic Information
     "title ": "",
     "authors": "",
     "publishDate ": "",

@@ -33,6 +33,7 @@ class App extends Component {
                     <TagBar />
                     <PapperBoard />
                 </div>
+                <hr/>
                 <div>
                     <Test/>
                 </div>

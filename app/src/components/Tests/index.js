@@ -17,6 +17,14 @@ class TestBase extends React.Component {
                     Run Test Code Here!
                 </h3>
                 <div>
+                    <button
+                    onClick={this.props.firebase.pushDummyReview}
+                    >
+                    NEW DUMMY REVIEW
+                    </button>
+                </div>
+                <hr/>
+                <div>
                     <PapperEditor/>
                 </div>
             </div>

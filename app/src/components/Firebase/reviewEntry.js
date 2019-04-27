@@ -1,23 +1,26 @@
 export const reviewEntry = {
     // Identification
-    "reviewId ": "",
-    "userId ": "",
+    "reviewId": "",
+    "userId": "",
 
     // Time Stamp
     "createAt": "",
     "updateAt": "",
 
     // Basic Information
-    "title ": "",
+    "title": "",
     "authors": "",
-    "publishDate ": "",
-    "published ": "",
+    "publishDate": "",
+    "published": "",
     "link": "",
 
+    // Figure
+    "mainFigure": "",
+
     // State
-    "toRead": "",
-    "pinned": "",
-    "trash": "",
+    "toRead": false,
+    "pinned": false,
+    "trash": false,
 
     // Tags
     "tags": [

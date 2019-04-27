@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import testimage from '../../../assets/img/boxmain.png'
 import pinIcon from '../../../assets/icons/pinIcon.png'
 
 
-class ReadPinned extends Component {
+class ToReadPinned extends Component {
     render(){
         // init
         let reviews = null;
@@ -14,11 +13,10 @@ class ReadPinned extends Component {
         
         function check(review) {
             let div = null;
-            if(review.toRead === false) {
+            if(review.toRead) {
                 if(review.pinned) {
                     div = (
                         <div class="col-sm-4 box">
-                        <img src={testimage} alt="testimage"/>
                         <p className="title font-weight-normal">{review.title}</p>
                         <p className="content font-weight-light">Ipsum Lorem ipsum dolor, maiores distinctio perferendis quas recusandae architecto consequatur quis, nobis quibusdam iste.</p>
                         <section className="tags">
@@ -41,7 +39,7 @@ class ReadPinned extends Component {
               <h3 className="text-uppercase">pinned paper <span><img src={pinIcon} alt="pinned" style={{width:'30px'}}/></span> </h3>
               </div>
               </div>
-              <div className="row">
+              <div class="row">
                 { reviews && reviews.map(review => {
                     return (
                       check(review)
@@ -54,4 +52,4 @@ class ReadPinned extends Component {
     }
 }
 
-export default ReadPinned
+export default ToReadPinned

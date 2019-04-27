@@ -21,38 +21,38 @@ code {
   font-size: 90%;
 }
 
-/* FinnedBox */
-.component-finned-box {
+/* read-pinnedBox */
+.component-read-pinned-box {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.component-finned-box h3{
+.component-read-pinned-box h3{
   color: #2c3e50 !important;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 }
-.component-finned-box h3::after{
+.component-read-pinned-box h3::after{
   content: '';
   background: #2c3e50;
   display: block;
   height: 3px;
-  width: 400px;
+  width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.component-finned-box img{
+.component-read-pinned-box img{
   width: 100%;
 }
-.component-finned-box .title{
+.component-read-pinned-box .title{
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.component-finned-box .content{
+.component-read-pinned-box .content{
   margin-bottom: 5px;
 }
-.component-finned-box .tags{
+.component-read-pinned-box .tags{
   margin-right: 5px;
 }
-.component-finned-box .box{
+.component-read-pinned-box .box{
   margin-bottom: 10px;
 }
 

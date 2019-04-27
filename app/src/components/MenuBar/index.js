@@ -8,7 +8,11 @@ class MenuBar extends Component {
     render() {
         return (
             <div className="component-menu-bar">
-                {/* This is a Menu Bar. */}
+                <div className="row text-uppercase">Add</div>
+                <div className="row text-uppercase">toread</div>
+                <div className="row text-uppercase">read</div>
+                <div className="row text-uppercase">tag</div>
+                <div className="row text-uppercase">trash</div>
             </div>
         );
     }

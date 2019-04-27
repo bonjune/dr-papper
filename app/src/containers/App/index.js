@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 
 // Components
@@ -8,7 +8,8 @@ import NavigationBar from "../../components/NavigationBar"
 import TagBar from '../../components/TagBar'
 
 // Containers
-import PapperBoard from "../PapperBoard"
+import ReadBoard from "../ReadBoard"
+import ToReadBoard from "../ToReadBoard"
 
 // Test Code
 import Test from "../../components/Tests"
@@ -27,11 +28,20 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <div className="container">
                     <NavigationBar />
-                    <MenuBar />
-                    <TagBar />
-                    <PapperBoard />
+                    <div className="row">
+                        <div className="col-sm-1">
+                        <MenuBar />
+                        </div>
+                        <div className="col-sm-11">
+                        <TagBar />
+                        <Switch>
+                            <Route exact path='/read' component={ReadBoard} />
+                            <Route path='/unread' component={ToReadBoard} />
+                        </Switch>
+                        </div>
+                    </div>
                 </div>
                 <hr/>
                 <div>

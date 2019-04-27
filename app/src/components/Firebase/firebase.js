@@ -36,19 +36,6 @@ class Firebase extends React.Component {
     // Interfaces for Firebase Database API
     getReviews = () => this.reviewListRef;
 
-    sanitizeInputReviewEntry = (entry) => {
-        let defaultEntry = {
-            ...reviewEntry // javascript destructing assignment
-        }
-
-        defaultEntry.createAt = Date.now();
-        defaultEntry.updateAt = defaultEntry.createAt;
-
-        defaultEntry.toRead = true;
-        defaultEntry.pinned = true;
-        defaultEntry.trash = false;
-    }
-
     makeNewPapperReview = (entry) => {
         console.log(entry);
         debugger;

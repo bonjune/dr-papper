@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import testimage from '../../../assets/img/boxmain.png'
-import pinIcon from '../../../assets/icons/pinIcon.png'
 
 
 class ReadPinned extends Component {
@@ -15,7 +14,7 @@ class ReadPinned extends Component {
         function check(review) {
             let div = null;
             if(review.toRead === false) {
-                if(review.pinned) {
+                if(review.pinned === false) {
                     div = (
                         <div class="col-sm-4 box">
                         <img src={testimage} alt="testimage"/>
@@ -38,7 +37,7 @@ class ReadPinned extends Component {
           <div class="container">
               <div className="row">
               <div className="col-sm-auto">
-              <h3 className="text-uppercase">pinned paper <span><img src={pinIcon} alt="pinned" style={{width:'30px'}}/></span> </h3>
+              <h3 className="text-uppercase">archived</h3>
               </div>
               </div>
               <div className="row">

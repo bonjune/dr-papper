@@ -37,7 +37,7 @@ class App extends Component {
                         <div className="col-sm-11">
                         <TagBar />
                         <Switch>
-                            <Route exact path='/' component={ReadBoard} />
+                            <Route exact path='/read' component={ReadBoard} />
                             <Route path='/unread' component={ToReadBoard} />
                         </Switch>
                         </div>

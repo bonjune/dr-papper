@@ -34,7 +34,7 @@ class ReadBoardBase extends Component {
             </div>
             </div>
             <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 box">
                     <img src={testimage} alt="testimage"/>
                     <p className="title font-weight-normal">Layout</p>
                     <p className="content font-weight-light">Ipsum Lorem ipsum dolor, maiores distinctio perferendis quas recusandae architecto consequatur quis, nobis quibusdam iste.</p>

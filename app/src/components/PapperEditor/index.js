@@ -13,10 +13,17 @@ export class PapperEditorBase extends Component {
         this.state = {
             ...reviewEntry
         };
+        this.state.tags = "";
     }
     
+    parseTags = tags => {
+        const tagList = tags.split(',');
+        console.log(tagList);
+        return tagList;
+    }
 
     onSubmit = event => {
+        this.state.tags = this.parseTags(this.state.tags);
         this.props.firebase.makeNewPapperReview({
             ...this.state
         });

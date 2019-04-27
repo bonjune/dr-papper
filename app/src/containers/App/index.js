@@ -28,14 +28,20 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <div className="container">
                     <NavigationBar />
-                    <MenuBar />
-                    <TagBar />
-                    <Switch>
-                        <Route exact path='/' component={ReadBoard} />
-                        <Route path='/unread' component={ToReadBoard} />
-                    </Switch>
+                    <div className="row">
+                        <div className="col-sm-1">
+                        <MenuBar />
+                        </div>
+                        <div className="col-sm-11">
+                        <TagBar />
+                        <Switch>
+                            <Route exact path='/' component={ReadBoard} />
+                            <Route path='/unread' component={ToReadBoard} />
+                        </Switch>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <Test/>

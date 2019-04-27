@@ -52,3 +52,19 @@ code {
 .component-finned-box .tags{
   margin-right: 5px;
 }
+.component-finned-box .box{
+  margin-bottom: 10px;
+}
+
+
+/* MenuBar */
+.component-menu-bar{
+  margin-top: 10px;
+}
+.component-menu-bar button{
+  width: 100%;
+  margin-top: 5px;
+}
+.component-menu-bar img{
+  width: 20px;
+}

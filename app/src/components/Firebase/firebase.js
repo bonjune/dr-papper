@@ -2,15 +2,10 @@ import React from "react";
 
 import app from "firebase/app";
 import "firebase/database";
+import config from "./config";
 
-const config = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_DATABASE_URL,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET, 
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-};
+// Review Entry Template
+import { reviewEntry } from "../Firebase/reviewEntry"
 
 class Firebase extends React.Component {
     constructor(props) {
@@ -21,11 +16,42 @@ class Firebase extends React.Component {
         this.reviewListRef = this.db.ref(`reviews`)
     }
 
+    // Test functions
+    pushDummyReview = (event) => {
+        const dummy = this.reviewListRef.push();
+        let entry = reviewEntry;
+        entry.title = "Hello Firebase!";
+        entry.authors = "Jimmy Raynor";
+        entry.comment = "Go jim Go";
+        entry.link = "www.google.com";
+        entry["publishDate "] = "Doom's Day";
+        entry.toRead = true;
+        entry.pinned = false;
+        dummy.set({
+            ...entry
+        })
+    }
+
 
     // Interfaces for Firebase Database API
     getReviews = () => this.reviewListRef;
 
+    sanitizeInputReviewEntry = (entry) => {
+        let defaultEntry = {
+            ...reviewEntry // javascript destructing assignment
+        }
+
+        defaultEntry.createAt = Date.now();
+        defaultEntry.updateAt = defaultEntry.createAt;
+
+        defaultEntry.toRead = true;
+        defaultEntry.pinned = true;
+        defaultEntry.trash = false;
+    }
+
     makeNewPapperReview = (entry) => {
+        console.log(entry);
+        debugger;
         const newReviewRef = this.reviewListRef.push();
         newReviewRef.set({
             ...entry

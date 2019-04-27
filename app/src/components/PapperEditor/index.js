@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
 
 import { compose } from "recompose";
@@ -7,125 +8,122 @@ import { withFirebase } from "../Firebase";
 export class PapperEditorBase extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        console.log(props.firebase);
-    }
 
-    makeSubmitEntry = () => ({
-        "reviewId ": "",
-        "userId ": "defaultUser",
+        /* Set default entry */
+        this.state = {
+            ...reviewEntry
+        };
+    }
     
-        // Time Stamp
-        "createAt": new Date().now(),
-        "updateAt": new Date().now(),
-    
-        // Basic Information
-        "title ": this.state.title,
-        "authors": this.state.author,
-        "publishDate ": this.state.publishDate,
-        "published ": this.state.published,
-        "link": this.state.link,
-    
-        // State
-        "toRead": true,
-        "pinned": false,
-        "trash": false,
-    
-        // Tags
-        "tags": [
-            {
-                "key": "",
-                "name": "",
-            }
-        ],
-    
-        // Note
-        "comment": "",
-        "boxes": [
-            {
-                "box": "",
-                "format": "",
-                "figure": "",
-                "subtitle": "",
-                "content": "",
-            }
-        ],
-    });
 
     onSubmit = event => {
-        const {
-            title,
-            author,
-            publishDate,
-            published,
-            link
-        } = this.state;
         this.props.firebase.makeNewPapperReview({
-            title,
-            author,
-            publishDate,
-            published,
-            link
+            ...this.state
         });
     };
 
-    onInputChange = event => {
+    onCalendarChange = time => {
         this.setState({
-            [event.target.name]: event.target.value
+            "publishDate": time 
+        })
+    }
+
+    onInputChange = event => {
+        const target = event.target;
+        const name = target.name;
+        const value = target.type === 'checkbox'
+            ? target.checked
+            : target.value
+        this.setState({
+            [name]: value
         });
     };
 
     render() {
-        const {
-            title,
-            author,
-            publishDate,
-            published,
-            link,
-        } = this.state;
-
         return (
-            <div>
+            <div className="container">
                 <form onSubmit={this.onSubmit}>
-                    <input
-                    name="title"
-                    value={title}
-                    onChange = {this.onInputChange}
-                    type="text"
-                    placeholder="Title"k
-                    />
-                    <input
-                    name="author"
-                    value={author}
-                    onChange = {this.onInputChange}
-                    type="text"
-                    placeholder="Author"
-                    />
-                    <input
-                    name="publishDate"
-                    value={publishDate}
-                    onChange = {this.onInputChange}
-                    type="text"
-                    placeholder="Publish Date"
-                    />
-                    <input
-                    name="published"
-                    value={published}
-                    onChange = {this.onInputChange}
-                    type="text"
-                    placeholder="Published Conference Or Journal"
-                    />
-                    <input
-                    name="link"
-                    value={link}
-                    onChange = {this.onInputChange}
-                    type="text"
-                    placeholder="Link to the Paper"
-                    />
-                    <button
-                    type="submit">
-                    Done
-                    </button>
+                    <div className="row">
+                        Title
+                        <input
+                        name="title"
+                        value={this.state.title}
+                        onChange = {this.onInputChange}
+                        type="text"
+                        placeholder="Title"
+                        />
+                    </div>
+                    <div className="row">
+                        Authors
+                        <input
+                        name="authors"
+                        value={this.state.authors}
+                        onChange = {this.onInputChange}
+                        type="text"
+                        placeholder="Authors"
+                        />
+                    </div>
+                    <div className="row">
+                        PublishDate
+                        <DatePicker
+                        name="publishDate"
+                        value={this.state.publishDate}
+                        onChange = {this.onCalendarChange}
+                        />
+                    </div>
+                    <div className="row">
+                        Published Conference or Journal
+                        <input
+                        name="published"
+                        value={this.state.published}
+                        onChange = {this.onInputChange}
+                        type="text"
+                        placeholder="Conference or Journal"
+                        />
+                    </div>
+                    <div className="row">
+                        Link
+                        <input
+                        name="link"
+                        value={this.state.link}
+                        onChange = {this.onInputChange}
+                        type="text"
+                        placeholder="Link to the Paper"
+                        />
+                    </div>
+                    <div className="row">
+                        <input
+                        name="toRead"
+                        value={this.state.toRead}
+                        checked={this.state.toRead}
+                        onChange = {this.onInputChange}
+                        type="checkbox"
+                        />To Read
+
+                        <input
+                        name="pinned"
+                        value={this.state.pinned}
+                        checked={this.state.pinned}
+                        onChange={this.onInputChange}
+                        type="checkbox"
+                        />Pinned
+                    </div>
+                    <div>
+                        Tags
+                        <input
+                        name="tags"
+                        value={this.state.tags}
+                        onChange={this.onInputChange}
+                        type="text"
+                        placeholder="Tags"
+                        />
+                    </div>
+                    <div className="row">
+                        <button
+                        type="submit">
+                        Done
+                        </button>
+                    </div>
                 </form>
             </div>
         )

@@ -13,8 +13,8 @@ export class PapperEditorBase extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalShow : false,
-            editMode : false, //toread
+            modalShow : true,
+            editMode : true, //toread
         };
         this.handleModal = this.handleModal.bind(this);
     }
@@ -69,16 +69,16 @@ export class PapperEditorBase extends Component {
             link
         } = this.state;
 
-        //console.log(title, author, publishDate, published, link)
+        console.log(title, author, publishDate, published, link)
 
         
-        this.props.firebase.makeNewPapperReview({
+        /*this.props.firebase.makeNewPapperReview({
             title,
             author,
             publishDate,
             published,
             link
-        });
+        });*/
     };
 
 

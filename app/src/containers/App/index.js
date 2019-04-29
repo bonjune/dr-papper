@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 
 
 // Components
@@ -27,7 +27,7 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div className="container">
                     <NavigationBar />
                     <div className="row">
@@ -47,7 +47,7 @@ class App extends Component {
                 <div>
                     <Test/>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }

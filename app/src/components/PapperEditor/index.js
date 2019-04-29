@@ -1,21 +1,55 @@
 import React, { Component } from 'react';
 import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
+import {Button, ButtonGroup, Modal, ModalHeader, ModalBody, ModalFooter, Form} from 'reactstrap'
 
-import { compose } from "recompose";
+import CommonEdit from './commonEdit'
+import ToreadEdit from './toreadEdit'
+import ReadEdit from './readEdit'
+
+import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
 
 export class PapperEditorBase extends Component {
     constructor(props) {
         super(props);
-
-        /* Set default entry */
         this.state = {
-            ...reviewEntry
+            ...reviewEntry,
+            modalShow : false,
+            editMode : true,
         };
-        this.state.tags = "";
+        this.handleModal = this.handleModal.bind(this);
     }
     
+    makeSubmitEntry = () => ({
+        "reviewId ": "",
+        "userId ": "defaultUser",
+    
+        // Time Stamp
+        "createAt": new Date().now(),
+        "updateAt": new Date().now(),
+    
+        // Basic Information
+        "title ": this.state.title,
+        "authors": this.state.author,
+        "publishDate ": this.state.publishDate,
+        "published ": this.state.published,
+        "link": this.state.link,
+    
+        // State
+        "toRead": !this.state.editMode,
+        "pinned": false,
+        "trash": false,
+    
+        // Tags
+        "tags": [
+            {
+                "key": "",
+                "name": "",
+            }
+        ],
+    })
+
     parseTags = tags => {
         const tagList = tags.split(',');
         console.log(tagList);
@@ -27,6 +61,7 @@ export class PapperEditorBase extends Component {
         this.props.firebase.makeNewPapperReview({
             ...this.state
         });
+        console.log(title, author, publishDate, published, link)
     };
 
     onCalendarChange = time => {
@@ -46,93 +81,53 @@ export class PapperEditorBase extends Component {
         });
     };
 
+    handleModal = () => {
+        this.setState(prevState => ({
+            modalShow: !prevState.modalShow
+        }));
+    }
+
+    handleMode = (mode) => {
+        this.setState({
+            editMode : mode
+        })
+    }
+
+    handleEdit = e => {
+        this.setState(e)
+    }
+
     render() {
         return (
-            <div className="container">
-                <form onSubmit={this.onSubmit}>
-                    <div className="row">
-                        Title
-                        <input
-                        name="title"
-                        value={this.state.title}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Title"
-                        />
-                    </div>
-                    <div className="row">
-                        Authors
-                        <input
-                        name="authors"
-                        value={this.state.authors}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Authors"
-                        />
-                    </div>
-                    <div className="row">
-                        PublishDate
-                        <DatePicker
-                        name="publishDate"
-                        value={this.state.publishDate}
-                        onChange = {this.onCalendarChange}
-                        />
-                    </div>
-                    <div className="row">
-                        Published Conference or Journal
-                        <input
-                        name="published"
-                        value={this.state.published}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Conference or Journal"
-                        />
-                    </div>
-                    <div className="row">
-                        Link
-                        <input
-                        name="link"
-                        value={this.state.link}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Link to the Paper"
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                        name="toRead"
-                        value={this.state.toRead}
-                        checked={this.state.toRead}
-                        onChange = {this.onInputChange}
-                        type="checkbox"
-                        />To Read
+            <>
+                <Button onClick={this.handleModal}>
+                    Add
+                </Button>
 
-                        <input
-                        name="pinned"
-                        value={this.state.pinned}
-                        checked={this.state.pinned}
-                        onChange={this.onInputChange}
-                        type="checkbox"
-                        />Pinned
-                    </div>
-                    <div>
-                        Tags
-                        <input
-                        name="tags"
-                        value={this.state.tags}
-                        onChange={this.onInputChange}
-                        type="text"
-                        placeholder="Tags"
-                        />
-                    </div>
-                    <div className="row">
-                        <button
-                        type="submit">
-                        Done
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <Modal isOpen={this.state.modalShow} toggle={this.handleModal} size="lg" scrollable={true}>
+                    <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
+                        <div style={{flex:"1", display:"flex"}}>
+                            <ButtonGroup style={{flex:"1"}}>
+                                <Button style={{flex:"1", border:"0", background: this.state.editMode ? "white" : "#EEEEEE", color:"black", fontSize:"20px"}}
+                                        onClick= {this.handleMode.bind(this, false)}>TOREAD</Button>
+                                <Button style={{flex:"1", border:"0", background:this.state.editMode ? "#EEEEEE" : "white", color:"black", fontSize:"20px"}}
+                                        onClick={this.handleMode.bind(this, true)}>READ</Button>
+                            </ButtonGroup>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody style={{background:"#EEEEEE"}}>
+                        <Form>
+                            <CommonEdit handleEdit={this.handleEdit}/>
+                            {this.state.editMode ? <ReadEdit /> : <ToreadEdit handleEdit={this.handleEdit}/>}
+                            
+
+                        </Form>
+                    </ModalBody>
+                    <ModalFooter style={{background:"#EEEEEE"}}>
+                        <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.onSubmit}>Done</Button>
+                    </ModalFooter>
+                </Modal>
+            </>
         )
     }
 }

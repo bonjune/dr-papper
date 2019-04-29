@@ -28,8 +28,8 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div className="container">
-                    <NavigationBar />
+                <NavigationBar />
+                <div className="container full-width">
                     <div className="row">
                         <div className="col-sm-1">
                         <MenuBar />

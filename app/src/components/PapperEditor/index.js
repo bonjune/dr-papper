@@ -61,7 +61,6 @@ export class PapperEditorBase extends Component {
         this.props.firebase.makeNewPapperReview({
             ...this.state
         });
-        console.log(title, author, publishDate, published, link)
     };
 
     onCalendarChange = time => {

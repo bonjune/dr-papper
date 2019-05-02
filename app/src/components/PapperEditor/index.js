@@ -9,6 +9,7 @@ import ReadEdit from './readEdit'
 
 import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
+import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 export class PapperEditorBase extends Component {
     constructor(props) {
@@ -99,9 +100,7 @@ export class PapperEditorBase extends Component {
     render() {
         return (
             <>
-                <Button onClick={this.handleModal}>
-                    Add
-                </Button>
+                <button type="button" className="btn btn-outline-secondary text-uppercase" onClick={this.handleModal}><span><img src={addbutton} alt="addbutton"/></span> Add</button>
 
                 <Modal isOpen={this.state.modalShow} toggle={this.handleModal} size="lg" scrollable={true}>
                     <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >

@@ -13,12 +13,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Page Layout */
 .full-width {
   max-width:100%;
   top:0;
   left:0;
   min-width: 100%;
   background-color: #FFFFFF;
+}
+.col-md-1-5 { 
+  width: 12.5%; 
+  background-color: #FFFFFF;
+}
+.col-md-10-5 { 
+  width: 87.5%; 
 }
 
 /* Tagbar */
@@ -65,8 +74,15 @@ code {
 }
 
 /* NavBar */
+.searchBar {
+  width: 70%;
+}
 .searchForm{
   margin-right: 30px;
+}
+.active-pink input[type=text] {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
 }
 
 /* MenuBar */
@@ -75,34 +91,39 @@ code {
   outline-offset: none !important;
   box-shadow: none!important;
 }
+.component-menu-bar{
+  margin-top: 40px;
+  margin-left: 5px;
+}
+.component-menu-bar button{
+  border-radius: 0;
+  width: 100%;
+  margin-top: 5px;
+  background-color: #E1F5FE;
+  margin-bottom: 20px;
+  color: black;
+}
+.component-menu-bar button:hover{
+  background-color: #03A9F4;
+}
+.component-menu-bar img{
+  width: 20px;
+}
+.component-menu-bar .row {
+  width: 100%;
+}
 #tab_button{
   border-radius: 0;
   margin-top: 10px;
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
 }
 #tab_button:hover{
-  background-color: #FFFFFF;
+  background-color: #EEEEEE;
 }
 #tab_button:focus,
 #tab_button:active,
 #tab_button:active {
-  background-color: #FFFFFF;
-  border-color: #FFFFFF;
-}
-.col-sm-1{
-  background-color: #bdbdbd;
-}
-.component-menu-bar{
-  margin-top: 10px;
-}
-.component-menu-bar button{
-  width: 100%;
-  margin-top: 5px;
-  background-color: #FFFFFF;
-}
-.component-menu-bar button:hover{
-  background-color: #FFFFFF;
-}
-.component-menu-bar img{
-  width: 20px;
+  background-color: #C5CAE9;
+  border-color: #C5CAE9;
 }

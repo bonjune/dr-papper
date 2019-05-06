@@ -31,10 +31,10 @@ class App extends Component {
                 <NavigationBar />
                 <div className="container full-width">
                     <div className="row">
-                        <div className="col-sm-1">
+                        <div className="col-md-1-5">
                         <MenuBar />
                         </div>
-                        <div className="col-sm-11">
+                        <div className="col-md-10-5">
                         <TagBar />
                         <Switch>
                             <Route exact path='/' component={ReadBoard} />

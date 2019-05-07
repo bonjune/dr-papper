@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
+import PapperEditor from "../PapperEditor";
 import addbutton from '../../assets/icons/MenuBar_addReview.png'
 import readimg from '../../assets/icons/readIcon.png'
 import toreadimg from '../../assets/icons/toreadIcon.png'
 import pinimg from '../../assets/icons/pinIcon.png'
 import trashimg from '../../assets/icons/MenuBar_trashBin.png'
 
+import PapperView from "../PapperView";
+
 class MenuBar extends Component {
     render() {
         return (
             <div className="component-menu-bar box">
                 <div className="row">
+                    <PapperView />
                 	<button type="button" className="btn text-uppercase">
                 		<span><img src={addbutton} alt="addbutton"/></span> Add
               		</button>

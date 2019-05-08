@@ -7060,7 +7060,18 @@ react-fit@^1.0.3:
     detect-element-overflow "^1.1.1"
     prop-types "^15.6.0"
 
+<<<<<<< HEAD
 react-is@^16.6.0, react-is@^16.7.0:
+=======
+react-gluejar@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-gluejar/-/react-gluejar-1.0.0.tgz#ff47d483811c5e2c58849becfb50f064d8fb12b3"
+  integrity sha1-/0fUg4EcXixYhJvs+1DwZNj7ErM=
+  dependencies:
+    react "^16.3.2"
+
+react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.4:
+>>>>>>> e61bce9226493a6ec0940ec3c32fba508a34d5af
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
@@ -7171,7 +7182,7 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.8.6:
+react@^16.3.2, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==

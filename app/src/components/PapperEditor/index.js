@@ -7,33 +7,35 @@ import CommonEdit from './commonEdit'
 import ToreadEdit from './toreadEdit'
 import ReadEdit from './readEdit'
 
+
 import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
+import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 export class PapperEditorBase extends Component {
     constructor(props) {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : false,
+            modalShow : true,
             editMode : true,
         };
         this.handleModal = this.handleModal.bind(this);
     }
     
     makeSubmitEntry = () => ({
-        "reviewId ": "",
-        "userId ": "defaultUser",
+        "reviewId": "",
+        "userId": "defaultUser",
     
         // Time Stamp
-        "createAt": new Date().now(),
-        "updateAt": new Date().now(),
+        "createAt": Date.now(),
+        "updateAt": Date.now(),
     
         // Basic Information
-        "title ": this.state.title,
-        "authors": this.state.author,
-        "publishDate ": this.state.publishDate,
-        "published ": this.state.published,
+        "title": this.state.title,
+        "authors": this.state.authors,
+        "publishDate": this.state.publishDate,
+        "published": this.state.published,
         "link": this.state.link,
     
         // State
@@ -42,24 +44,27 @@ export class PapperEditorBase extends Component {
         "trash": false,
     
         // Tags
-        "tags": [
-            {
-                "key": "",
-                "name": "",
-            }
-        ],
+        "tags": this.state.tags,
+
+        //boxes
+        "boxes": this.state.boxes
     })
 
     parseTags = tags => {
+        console.log(tags)
         const tagList = tags.split(',');
-        console.log(tagList);
-        return tagList;
+        var tags = [];
+        tagList.map( (tag, idx) => {
+            tags.push({key:idx, name:tag})
+        })
+        return tags;
     }
 
     onSubmit = event => {
-        this.state.tags = this.parseTags(this.state.tags);
+        //this.state.tags = this.parseTags(this.state.tags);
+        //console.log()
         this.props.firebase.makeNewPapperReview({
-            ...this.state
+            ...this.makeSubmitEntry()
         });
     };
 
@@ -93,10 +98,12 @@ export class PapperEditorBase extends Component {
     }
 
     handleEdit = e => {
+        //console.log(e)
         this.setState(e)
     }
 
     render() {
+        //console.log(this.state)
         return (
           <div>
                 <Button onClick={this.handleModal}>
@@ -117,7 +124,7 @@ export class PapperEditorBase extends Component {
                     <ModalBody style={{background:"#EEEEEE"}}>
                         <Form>
                             <CommonEdit handleEdit={this.handleEdit}/>
-                            {this.state.editMode ? <ReadEdit /> : <ToreadEdit handleEdit={this.handleEdit}/>}
+                            {this.state.editMode ? <ReadEdit handleEdit={this.handleEdit}/> : <ToreadEdit handleEdit={this.handleEdit}/>}
                             
 
                         </Form>

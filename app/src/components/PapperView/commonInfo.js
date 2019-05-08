@@ -1,53 +1,49 @@
 import React, { Component }from "react";
 import {FormGroup, Label, Input, Col} from 'reactstrap'
 
-export default class CommonEdit extends React.Component{
+export default class CommonInfo extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            title : "",
-            authors : "",
-            publishDate : "",
-            published : "",
-            link : "",
-            tags: ""
+            title : "Face to InterFace: Facial Affect",
+            authors : "Dian J.Schiano",
+            publishDate : "2019.05.03",
+            published : "CHI 00",
+            link : "https://dl.acm.org/citation.cfm?id=766017",
+            tags: "persona"
         };
     }
-    
-    onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
-    };
 
 
     render() {
         return(
-            <div>
+            <>
             <div style={{background:"white", padding:"5px"}}>
-                <Input type="text" name="title" placeholder="Add Title" style={{border:"0", fontSize:"30px", marginBottom:"8px"}}
-                        onChange={this.onInputChange}></Input>
+                <div class="form-control" style={{border: "0px", fontSize:"30px", color: "black", marginBottom:"8px"}}>{this.state.title}</div>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Authors</Label>
                     <Col sm={10}>
-                        <Input type="text" name="authors" bsSize="lg" onChange={this.onInputChange}/>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.authors}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Date</Label>
                     <Col sm={10}>
-                        <Input type="text" name="publishDate" bsSize="lg" onChange={this.onInputChange}/>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.publishDate}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Published</Label>
                     <Col sm={10}>
-                        <Input type="text" name="published" bsSize="lg" onChange={this.onInputChange}/>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.published}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Link</Label>
                     <Col sm={10}>
-                        <Input type="url" name="link" bsSize="lg" onChange={this.onInputChange}/>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>
+                            <a href={this.state.link}>{this.state.link}</a>
+                        </div>
                     </Col>
                 </FormGroup>
             </div>
@@ -56,10 +52,10 @@ export default class CommonEdit extends React.Component{
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Tags</Label>
                     <Col sm={10}>
-                        <Input type="text" name="tags" bsSize="lg" onChange={this.onInputChange}/>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.tags}</div>
                     </Col>
                 </FormGroup>
             </div>
-            </div>
+            </>
         )}
 }

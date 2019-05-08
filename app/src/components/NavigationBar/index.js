@@ -10,7 +10,10 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    DropdownItem,
+    Form,
+    Input,
+    Button } from 'reactstrap';
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -34,6 +37,10 @@ class NavigationBar extends Component {
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
+                  <Form inline className="searchForm">
+                    <Input type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                  </Form>
                   <NavItem>
                     <NavLink href="/components/">Components</NavLink>
                   </NavItem>

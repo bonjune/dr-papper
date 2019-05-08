@@ -24,9 +24,6 @@ class TestBase extends React.Component {
                     </button>
                 </div>
                 <hr/>
-                <div>
-                    <PapperEditor/>
-                </div>
             </div>
         )
     }

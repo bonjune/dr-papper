@@ -6,11 +6,11 @@ export default class CommonEdit extends React.Component{
         super(props);
         this.state = {
             title : "",
-            author : "",
+            authors : "",
             publishDate : "",
             published : "",
             link : "",
-            tag: ""
+            tags: ""
         };
     }
     
@@ -27,9 +27,9 @@ export default class CommonEdit extends React.Component{
                 <Input type="text" name="title" placeholder="Add Title" style={{border:"0", fontSize:"30px", marginBottom:"8px"}}
                         onChange={this.onInputChange}></Input>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Author</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Authors</Label>
                     <Col sm={10}>
-                        <Input type="text" name="author" bsSize="lg" onChange={this.onInputChange}/>
+                        <Input type="text" name="authors" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -56,7 +56,7 @@ export default class CommonEdit extends React.Component{
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"center"}}>Tags</Label>
                     <Col sm={10}>
-                        <Input type="text" name="tag" bsSize="lg" onChange={this.onInputChange}/>
+                        <Input type="text" name="tags" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
                 </FormGroup>
             </div>

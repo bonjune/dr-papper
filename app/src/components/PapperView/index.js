@@ -29,7 +29,7 @@ export class PapperView extends Component {
 
 		render() {
 			return (
-				<>
+				<div>
 					<Button type='button' className="btn btn-outline-secondary text-uppercase" onClick={this.toggle}>
 						PapperView
 					</Button>
@@ -60,7 +60,7 @@ export class PapperView extends Component {
 	          	<Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.toggle}> Done</Button>
 	          </ModalFooter>
         	</Modal>
-      	</>
+      	</div>
     	)
     }
 }

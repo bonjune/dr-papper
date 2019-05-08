@@ -17,7 +17,7 @@ export default class CommonInfo extends React.Component{
 
     render() {
         return(
-            <>
+            <div>
             <div style={{background:"white", padding:"5px"}}>
                 <div class="form-control" style={{border: "0px", fontSize:"30px", color: "black", marginBottom:"8px"}}>{this.state.title}</div>
                 <FormGroup row>
@@ -56,6 +56,6 @@ export default class CommonInfo extends React.Component{
                     </Col>
                 </FormGroup>
             </div>
-            </>
+            </div>
         )}
 }

@@ -27,25 +27,25 @@ export default class CommonEdit extends React.Component{
                 <Input type="text" name="title" placeholder="Add Title" style={{border:"0", fontSize:"30px", marginBottom:"8px"}}
                         onChange={this.onInputChange}></Input>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Authors</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Authors</Label>
                     <Col sm={10}>
                         <Input type="text" name="authors" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Date</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Date</Label>
                     <Col sm={10}>
                         <Input type="text" name="publishDate" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Published</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Published</Label>
                     <Col sm={10}>
                         <Input type="text" name="published" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Link</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Link</Label>
                     <Col sm={10}>
                         <Input type="url" name="link" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>
@@ -54,7 +54,7 @@ export default class CommonEdit extends React.Component{
 
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Tags</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Tags</Label>
                     <Col sm={10}>
                         <Input type="text" name="tags" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>

@@ -41,7 +41,7 @@ class ToreadEdit extends React.Component {
 		return (
       <div style={{background:"white", marginTop:"10px", padding:"5px 5px 5px 1px"}}>
         <FormGroup row>
-          <Label sm={2} size="lg" style={{textAlign:"center"}}>Comment</Label>
+          <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
           <Col sm={10}>
             <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.content}</div>
           </Col>
@@ -92,7 +92,7 @@ class ContentFormat extends React.Component {
 			<Row>
         <Col style={{margin:"15px"}}>
           <Row style={{height:"50px"}}>
-            <div class="form-control-lg" style={{color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
+            <div class="form-control-lg" style={{background:"#E8EAF6",color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
           </Row>
           <Row style={{height:"140px", marginTop:"10px"}}>
             <div class="form-control-lg" style={{border: "0px", fontSize:"1rem", marginBottom:"8px"}}>{this.props.content}</div>
@@ -117,7 +117,7 @@ class FigureFormat extends React.Component {
         	</Col>
           <Col xs="7" style={{margin:"15px"}}>
             <Row style={{height:"50px"}}>
-              <div class="form-control-lg" style={{color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
+              <div class="form-control-lg" style={{background:"#E8EAF6", color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
             </Row>
             <Row style={{height:"140px", marginTop:"10px"}}>
               <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.content}</div>

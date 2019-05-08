@@ -11,27 +11,27 @@ export default class CommonInfo extends React.Component{
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>
-                <div class="form-control" style={{border: "0px", fontSize:"30px", color: "black", marginBottom:"8px"}}>{this.props.title}</div>
+                <div class="form-control" style={{background:"#E3F2FD", border: "0px", fontWeight:"bold", fontSize:"30px", color: "black", marginBottom:"8px"}}>{this.props.title}</div>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Authors</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Authors</Label>
                     <Col sm={10}>
                         <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.authors}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Date</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Date</Label>
                     <Col sm={10}>
                         <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.publishDate}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Published</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Published</Label>
                     <Col sm={10}>
                         <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.published}</div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Link</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Link</Label>
                     <Col sm={10}>
                         <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>
                             <a href={this.props.link}>{this.props.link}</a>
@@ -42,7 +42,7 @@ export default class CommonInfo extends React.Component{
 
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Tags</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Tags</Label>
                     <Col sm={10}>
                         <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.tags}</div>
                     </Col>

@@ -13,12 +13,8 @@ class MenuBar extends Component {
     render() {
         return (
             <div className="component-menu-bar box">
-                <div className="row">
                     <PapperView />
-                	<button type="button" className="btn text-uppercase">
-                		<span><img src={addbutton} alt="addbutton"/></span> Add
-              		</button>
-            		</div>
+                    <PapperEditor />
                 <Link to='/'><div className="row">
                 	<button type="button" id="tab_button" className="btn text-uppercase" active="true">
                 		<span><img src={readimg} alt="addbutton"/></span> Read

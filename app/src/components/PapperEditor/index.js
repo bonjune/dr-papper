@@ -17,7 +17,7 @@ export class PapperEditorBase extends Component {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : true,
+            modalShow : false,
             editMode : true,
         };
         this.handleModal = this.handleModal.bind(this);
@@ -106,9 +106,11 @@ export class PapperEditorBase extends Component {
         //console.log(this.state)
         return (
           <div>
-                <Button onClick={this.handleModal}>
-                    Add
-                </Button>
+                <div className="row">
+                <button onClick={this.handleModal} type="button" className="btn text-uppercase">
+                        <span><img src={addbutton} alt="addbutton"/></span> Add
+                </button>
+                </div>
 
                 <Modal isOpen={this.state.modalShow} toggle={this.handleModal} size="lg" scrollable={true}>
                     <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >

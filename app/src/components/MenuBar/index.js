@@ -20,22 +20,22 @@ class MenuBar extends Component {
               		</button>
             		</div>
                 <Link to='/'><div className="row">
-                	<button type="button" id="tab_button" className="btn text-uppercase" active>
+                	<button type="button" id="tab_button" className="btn text-uppercase" active="true">
                 		<span><img src={readimg} alt="addbutton"/></span> Read
               		</button>
             		</div></Link>
                 <Link to='/toread'><div className="row">
-                	<button type="button" id="tab_button" className="btn text-uppercase" active>
+                	<button type="button" id="tab_button" className="btn text-uppercase" active="true">
                 		<span><img src={toreadimg} alt="addbutton"/></span> ToRead
               		</button>
           			</div></Link>
                 <div className="row">
-                    <button type="button" id="tab_button" className="btn text-uppercase" active>
+                    <button type="button" id="tab_button" className="btn text-uppercase" active="true">
                         <span><img src={pinimg} alt="addbutton"/></span> Pinned
                     </button>
                     </div>
                 <div className="row">
-                    <button type="button" id="tab_button" className="btn text-uppercase" active>
+                    <button type="button" id="tab_button" className="btn text-uppercase" active="true">
                         <span><img src={trashimg} alt="addbutton"/></span> Deleted
                     </button>
                     </div>

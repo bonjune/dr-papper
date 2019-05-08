@@ -10,7 +10,7 @@ export default class App extends Component {
 }
 
   replacePaste = (files) => {
-    this.state.figure = files.pop()
+    this.state.figure = files.pop();
   }
 
   render() {

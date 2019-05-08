@@ -22,7 +22,7 @@ export default class CommonEdit extends React.Component{
 
     render() {
         return(
-            <>
+            <div>
             <div style={{background:"white", padding:"5px"}}>
                 <Input type="text" name="title" placeholder="Add Title" style={{border:"0", fontSize:"30px", marginBottom:"8px"}}
                         onChange={this.onInputChange}></Input>
@@ -60,6 +60,6 @@ export default class CommonEdit extends React.Component{
                     </Col>
                 </FormGroup>
             </div>
-            </>
+            </div>
         )}
 }

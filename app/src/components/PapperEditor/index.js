@@ -98,7 +98,7 @@ export class PapperEditorBase extends Component {
 
     render() {
         return (
-            <>
+          <div>
                 <Button onClick={this.handleModal}>
                     Add
                 </Button>
@@ -126,7 +126,7 @@ export class PapperEditorBase extends Component {
                         <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.onSubmit}>Done</Button>
                     </ModalFooter>
                 </Modal>
-            </>
+              </div>
         )
     }
 }

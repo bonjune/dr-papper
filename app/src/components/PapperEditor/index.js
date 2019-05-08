@@ -1,31 +1,70 @@
 import React, { Component } from 'react';
 import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
+import {Button, ButtonGroup, Modal, ModalHeader, ModalBody, ModalFooter, Form} from 'reactstrap'
 
-import { compose } from "recompose";
+import CommonEdit from './commonEdit'
+import ToreadEdit from './toreadEdit'
+import ReadEdit from './readEdit'
+
+
+import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
+import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 export class PapperEditorBase extends Component {
     constructor(props) {
         super(props);
-
-        /* Set default entry */
         this.state = {
-            ...reviewEntry
+            ...reviewEntry,
+            modalShow : true,
+            editMode : true,
         };
-        this.state.tags = "";
+        this.handleModal = this.handleModal.bind(this);
     }
     
+    makeSubmitEntry = () => ({
+        "reviewId": "",
+        "userId": "defaultUser",
+    
+        // Time Stamp
+        "createAt": Date.now(),
+        "updateAt": Date.now(),
+    
+        // Basic Information
+        "title": this.state.title,
+        "authors": this.state.authors,
+        "publishDate": this.state.publishDate,
+        "published": this.state.published,
+        "link": this.state.link,
+    
+        // State
+        "toRead": !this.state.editMode,
+        "pinned": false,
+        "trash": false,
+    
+        // Tags
+        "tags": this.state.tags,
+
+        //boxes
+        "boxes": this.state.boxes
+    })
+
     parseTags = tags => {
+        console.log(tags)
         const tagList = tags.split(',');
-        console.log(tagList);
-        return tagList;
+        var tags = [];
+        tagList.map( (tag, idx) => {
+            tags.push({key:idx, name:tag})
+        })
+        return tags;
     }
 
     onSubmit = event => {
-        this.state.tags = this.parseTags(this.state.tags);
+        //this.state.tags = this.parseTags(this.state.tags);
+        //console.log()
         this.props.firebase.makeNewPapperReview({
-            ...this.state
+            ...this.makeSubmitEntry()
         });
     };
 
@@ -46,93 +85,53 @@ export class PapperEditorBase extends Component {
         });
     };
 
-    render() {
-        return (
-            <div className="container">
-                <form onSubmit={this.onSubmit}>
-                    <div className="row">
-                        Title
-                        <input
-                        name="title"
-                        value={this.state.title}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Title"
-                        />
-                    </div>
-                    <div className="row">
-                        Authors
-                        <input
-                        name="authors"
-                        value={this.state.authors}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Authors"
-                        />
-                    </div>
-                    <div className="row">
-                        PublishDate
-                        <DatePicker
-                        name="publishDate"
-                        value={this.state.publishDate}
-                        onChange = {this.onCalendarChange}
-                        />
-                    </div>
-                    <div className="row">
-                        Published Conference or Journal
-                        <input
-                        name="published"
-                        value={this.state.published}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Conference or Journal"
-                        />
-                    </div>
-                    <div className="row">
-                        Link
-                        <input
-                        name="link"
-                        value={this.state.link}
-                        onChange = {this.onInputChange}
-                        type="text"
-                        placeholder="Link to the Paper"
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                        name="toRead"
-                        value={this.state.toRead}
-                        checked={this.state.toRead}
-                        onChange = {this.onInputChange}
-                        type="checkbox"
-                        />To Read
+    handleModal = () => {
+        this.setState(prevState => ({
+            modalShow: !prevState.modalShow
+        }));
+    }
 
-                        <input
-                        name="pinned"
-                        value={this.state.pinned}
-                        checked={this.state.pinned}
-                        onChange={this.onInputChange}
-                        type="checkbox"
-                        />Pinned
-                    </div>
-                    <div>
-                        Tags
-                        <input
-                        name="tags"
-                        value={this.state.tags}
-                        onChange={this.onInputChange}
-                        type="text"
-                        placeholder="Tags"
-                        />
-                    </div>
-                    <div className="row">
-                        <button
-                        type="submit">
-                        Done
-                        </button>
-                    </div>
-                </form>
-            </div>
+    handleMode = (mode) => {
+        this.setState({
+            editMode : mode
+        })
+    }
+
+    handleEdit = e => {
+        //console.log(e)
+        this.setState(e)
+    }
+
+    render() {
+        //console.log(this.state)
+        return (
+            <>
+                <button type="button" className="btn btn-outline-secondary text-uppercase" onClick={this.handleModal}><span><img src={addbutton} alt="addbutton"/></span> Add</button>
+
+                <Modal isOpen={this.state.modalShow} toggle={this.handleModal} size="lg" scrollable={true}>
+                    <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
+                        <div style={{flex:"1", display:"flex"}}>
+                            <ButtonGroup style={{flex:"1"}}>
+                                <Button style={{flex:"1", border:"0", background: this.state.editMode ? "white" : "#EEEEEE", color:"black", fontSize:"20px"}}
+                                        onClick= {this.handleMode.bind(this, false)}>TOREAD</Button>
+                                <Button style={{flex:"1", border:"0", background:this.state.editMode ? "#EEEEEE" : "white", color:"black", fontSize:"20px"}}
+                                        onClick={this.handleMode.bind(this, true)}>READ</Button>
+                            </ButtonGroup>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody style={{background:"#EEEEEE"}}>
+                        <Form>
+                            <CommonEdit handleEdit={this.handleEdit}/>
+                            {this.state.editMode ? <ReadEdit handleEdit={this.handleEdit}/> : <ToreadEdit handleEdit={this.handleEdit}/>}
+                            
+
+                        </Form>
+                    </ModalBody>
+                    <ModalFooter style={{background:"#EEEEEE"}}>
+                        <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.onSubmit}>Done</Button>
+                    </ModalFooter>
+                </Modal>
+            </>
         )
     }
 }

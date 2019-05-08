@@ -34,7 +34,6 @@ export const reviewEntry = {
     "comment": "",
     "boxes": [
         {
-            "box": "",
             "format": "",
             "figure": "",
             "subtitle": "",

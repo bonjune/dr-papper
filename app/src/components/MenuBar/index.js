@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
+import PapperView from "../PapperView";
 import PapperEditor from "../PapperEditor";
 import addbutton from '../../assets/icons/MenuBar_addReview.png'
+
 import readimg from '../../assets/icons/readIcon.png'
 import toreadimg from '../../assets/icons/toreadIcon.png'
 import pinimg from '../../assets/icons/pinIcon.png'
 import trashimg from '../../assets/icons/MenuBar_trashBin.png'
-
-import PapperView from "../PapperView";
 
 class MenuBar extends Component {
     render() {

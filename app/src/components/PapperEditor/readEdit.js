@@ -31,7 +31,7 @@ export default class ReadEdit extends React.Component{
         //console.log(this.state)
         return(
             <div>
-            {boxes.map((box) => box)}
+            {containers.map((box) => box.container)}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <Button block color="white" onClick={this.addBox}>+</Button>
             </div>

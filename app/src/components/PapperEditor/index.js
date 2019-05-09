@@ -17,8 +17,8 @@ export class PapperEditorBase extends Component {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : false,
-            editMode : false,
+            modalShow : true,
+            editMode : true,
         };
         this.handleModal = this.handleModal.bind(this);
     }
@@ -70,13 +70,13 @@ export class PapperEditorBase extends Component {
         var boxKeys = Object.keys(this.state.boxes)
         boxKeys.forEach(key => {
             if(this.state.boxes[key].figure !== ""){
-                var figsrc = `reviewID_${key}.png`;
+                var figsrc = `${Math.random().toString(36)}_${key}.png`;
                 this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
                 this.state.boxes[key].figsrc = figsrc
             }
         })
 
-        console.log(this.makeSubmitEntry());
+        //console.log(this.makeSubmitEntry());
 
         //set db
         this.props.firebase.makeNewPapperReview({
@@ -119,7 +119,7 @@ export class PapperEditorBase extends Component {
     }
 
     render() {
-        //console.log(this.state)
+        console.log(this.state)
         return (
           <div>
                 <Button onClick={this.handleModal}>

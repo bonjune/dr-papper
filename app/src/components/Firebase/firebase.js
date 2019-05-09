@@ -43,6 +43,9 @@ class Firebase extends React.Component {
       console.log(entry);
       debugger;
       const newReviewRef = this.reviewListRef.push();
+      
+      entry.reviewId = newReviewRef.key;
+
       newReviewRef.set({
           ...entry
       })

@@ -13,19 +13,19 @@ export default class ReadEdit extends React.Component{
     
     state = {
         containers : [],
-        boxes: {}
+        boxes: {},
+        key: 0
     }
 
     addBox = () => {
-        var {containers, boxes} = this.state
-        const key = containers.length
+        var {containers, boxes, key} = this.state
         var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)}/>
         containers.push(box)
 
         boxes[key] = {
             ...boxdb
         }
-        this.setState({containers : containers, boxes:boxes}, () =>this.props.handleEdit({boxes:this.state.boxes}))
+        this.setState({containers : containers, boxes:boxes, key:key+1}, () =>this.props.handleEdit({boxes:this.state.boxes}))
     }
 
     handleEdit = (key, box) => {

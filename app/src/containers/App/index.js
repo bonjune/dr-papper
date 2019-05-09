@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 
 
 // Components
@@ -27,14 +27,14 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <div className="container">
-                    <NavigationBar />
+            <HashRouter>
+                <NavigationBar />
+                <div className="container full-width">
                     <div className="row">
-                        <div className="col-sm-1">
+                        <div className="col-md-1-5">
                         <MenuBar />
                         </div>
-                        <div className="col-sm-11">
+                        <div className="col-md-10-5">
                         <TagBar />
                         <Switch>
                             <Route exact path='/' component={ReadBoard} />
@@ -47,7 +47,7 @@ class App extends Component {
                 <div>
                     <Test/>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }

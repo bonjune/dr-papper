@@ -127,3 +127,24 @@ code {
   background-color: #C5CAE9;
   border-color: #C5CAE9;
 }
+
+/* boxlayout */
+.papper-tag{
+  margin-right: 5px;
+}
+.ellipse{
+  width:100%; padding:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.multi-ellipse{
+  text-align: justify;
+  display: -webkit-box; display: -ms-flexbox; display: box; margin-top:1px; max-height:78px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:3
+}
+
+/* pappercard */
+.papper-card{
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.papper-card:hover{
+  background: #dfe6e9;
+}

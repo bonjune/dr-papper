@@ -15,37 +15,45 @@ import {
     Input,
     Button } from 'reactstrap';
 
+import * as ROUTES from "../../constants/routes";
+
 class NavigationBar extends Component {
     constructor(props) {
         super(props);
     
-        this.toggle = this.toggle.bind(this);
         this.state = {
           isOpen: false
         };
       }
-      toggle() {
+
+      toggle = () => {
         this.setState({
           isOpen: !this.state.isOpen
         });
       }
+
       render() {
         return (
           <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Dr.Papper</NavbarBrand>
-              <NavbarToggler onClick={this.toggle} />
+              <NavbarBrand href={ROUTES.HOME}>
+                Dr.Papper
+              </NavbarBrand>
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <Form inline className="searchForm">
+                  <Form inline={true} className="searchForm">
                     <Input type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-success">Search</Button>
                   </Form>
                   <NavItem>
-                    <NavLink href="/components/">Components</NavLink>
+                    <NavLink href={ROUTES.COMPONENTS}>
+                      Components
+                    </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Login</NavLink>
+                    <NavLink href="https://github.com/reactstrap/reactstrap">
+                      Login
+                    </NavLink>
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
@@ -58,7 +66,7 @@ class NavigationBar extends Component {
                       <DropdownItem>
                         Option 2
                       </DropdownItem>
-                      <DropdownItem divider />
+                      <DropdownItem divider={true} />
                       <DropdownItem>
                         Reset
                       </DropdownItem>

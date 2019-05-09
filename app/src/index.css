@@ -74,6 +74,11 @@ code {
 }
 
 /* NavBar */
+.navClass {
+  width: 100%;
+  height: 56px;
+  background-color: #E8EAF6;
+}
 .searchBar {
   width: 70%;
 }

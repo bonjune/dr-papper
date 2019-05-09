@@ -30,12 +30,12 @@ export default class ReadEdit extends React.Component{
         var {containers} = this.state
         //console.log(this.state)
         return(
-            <>
+            <div>
             {containers.map((box) => box.container)}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <Button block color="white" onClick={this.addBox}>+</Button>
             </div>
-            </>
+            </div>
         )}
 }
 
@@ -78,7 +78,7 @@ class BoxFormat extends React.Component {
             case 1: 
                 f = <ContentFormat key={this.props} handleEdit={this.handleEdit}/>
                 break
-            default: f = <> </>
+            default: f = <div> </div>
         }
 
         return(

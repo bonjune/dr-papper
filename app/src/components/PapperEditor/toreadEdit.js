@@ -23,7 +23,7 @@ export default class ToreadEdit extends React.Component{
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px 5px 5px 1px"}}>
                 <FormGroup row>
-                    <Label sm={2} size="lg" style={{textAlign:"center"}}>Comment</Label>
+                    <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
                     <Col sm={10}>
                         <Input type="text" name="comment" bsSize="lg" onChange={this.onInputChange}/>
                     </Col>

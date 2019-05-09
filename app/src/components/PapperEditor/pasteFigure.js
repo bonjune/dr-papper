@@ -1,8 +1,4 @@
 import React, { Component }from "react";
-
-import sample from '../../assets/img/boxmain.png'
-
-//document.getElementsByClassName("pastefigure")
  
 export default class App extends Component {
   constructor(props) {
@@ -12,6 +8,7 @@ export default class App extends Component {
     };
   }
 
+<<<<<<< HEAD
   pasteFigure = (file) => {
 
     var item = file.clipboardData.items[0]
@@ -24,12 +21,11 @@ export default class App extends Component {
       this.setState({
         figure:source
       }, () => this.props.handleFigure(this.state.figure))
-  }
 }
 
   render() {
-    //console.log(sample)
     var {figure} = this.state
+
     return (
       <div onPaste={file => this.pasteFigure(file)}>
       {figure ? <img src={figure} key={figure} style={{width:"100%", height:"100%"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div>Paste(Ctrl + V) Figure!</div>}

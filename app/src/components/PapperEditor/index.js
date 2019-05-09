@@ -107,8 +107,10 @@ export class PapperEditorBase extends Component {
     render() {
         //console.log(this.state)
         return (
-            <>
-                <button type="button" className="btn btn-outline-secondary text-uppercase" onClick={this.handleModal}><span><img src={addbutton} alt="addbutton"/></span> Add</button>
+          <div>
+                <Button onClick={this.handleModal}>
+                    Add
+                </Button>
 
                 <Modal isOpen={this.state.modalShow} toggle={this.handleModal} size="lg" scrollable={true}>
                     <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
@@ -133,7 +135,7 @@ export class PapperEditorBase extends Component {
                         <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.onSubmit}>Done</Button>
                     </ModalFooter>
                 </Modal>
-            </>
+              </div>
         )
     }
 }

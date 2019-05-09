@@ -99,7 +99,7 @@ code {
   border-radius: 0;
   width: 100%;
   margin-top: 5px;
-  background-color: #E1F5FE;
+  background-color: #90CAF9;
   margin-bottom: 20px;
   color: black;
   text-align: left;
@@ -107,7 +107,7 @@ code {
   min-width: 150px;
 }
 .component-menu-bar button:hover{
-  background-color: #03A9F4;
+  background-color: #42A5F5;
 }
 .component-menu-bar img{
   width: 20px;
@@ -129,4 +129,16 @@ code {
 #tab_button:active {
   background-color: #C5CAE9;
   border-color: #C5CAE9;
+}
+#tab_button_activeState,
+#tab_button_activeState:focus{
+  border-radius: 0;
+  margin-top: 10px;
+  background-color: #C5CAE9;
+  margin-bottom: 0px;
+}
+#tab_button_activeState:active,
+#tab_button_activeState:active {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
 }

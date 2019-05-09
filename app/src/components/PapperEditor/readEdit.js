@@ -45,20 +45,22 @@ class BoxFormat extends React.Component {
         this.state = {
             format : 0,
             subtitle : "",
-            content: ""
+            content: "",
+            figure: ""
         };
     }
 
     handleEdit = e => {
-        this.state = {
-            ...e,
-            format:this.state.format
-        }
-        this.props.handleEdit(this.state)
+        this.setState(e, ()=> this.props.handleEdit(this.state))
     }
 
     changeFormat = (id) => {
-        this.setState({format:id})
+        this.setState({
+            format:id,
+            subtitle : "",
+            content: "",
+            figure: ""
+        }, ()=> this.props.handleEdit(this.state))
     }
 
     formatting = () => {
@@ -96,20 +98,31 @@ class FigureFormat extends React.Component {
         super(props);
         this.state = {
             subtitle : "",
-            content: ""
+            content: "",
+            figure: ""
         };
     }
 
     onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name]: value
+        }, () => this.props.handleEdit(this.state))
     };
+
+    onFigureChange = fig => {
+        this.setState({
+            figure : fig
+        }, () => this.props.handleEdit(this.state))
+    }
 
     render() {
         return(
             
             <Row>
-                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px"}}>PASTE IMAGE!<PasteFigure /></Col>
+                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px", textAlign:"center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
                 <Col xs="7" style={{margin:"15px"}}>
                     <Row style={{height:"50px"}}>
                         <Input placeholder="Add Subtitle" name="subtitle" onChange={this.onInputChange}></Input>
@@ -135,8 +148,12 @@ class ContentFormat extends React.Component {
     }
 
     onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name]: value
+        }, () => this.props.handleEdit(this.state))
     };
 
 

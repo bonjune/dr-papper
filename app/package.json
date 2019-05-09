@@ -8,11 +8,11 @@
     "react": "^16.8.6",
     "react-date-picker": "^7.5.0",
     "react-dom": "^16.8.6",
-    "react-gluejar": "^1.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "reactstrap": "^8.0.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "slate-plugins": "^1.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

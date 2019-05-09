@@ -1,27 +1,40 @@
 import React, { Component }from "react";
-import Gluejar from 'react-gluejar'
+
+import sample from '../../assets/img/boxmain.png'
+
+//document.getElementsByClassName("pastefigure")
  
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        figure: null
+        figure: null,
     };
-}
-
-  replacePaste = (files) => {
-    this.state.figure = files.pop()
   }
 
+  pasteFigure = (file) => {
+
+    var item = file.clipboardData.items[0]
+
+    if (item.type.indexOf("image") !== -1) {
+      //image
+      var blob = item.getAsFile();
+      var URLObj = window.URL || window.webkitURL;
+      var source = URLObj.createObjectURL(blob);
+      this.setState({
+        figure:source
+      }, () => this.props.handleFigure(this.state.figure))
+  }
+}
+
   render() {
-    //console.log(this.state)
+    //console.log(sample)
+    var {figure} = this.state
     return (
-      <Gluejar onPaste={files => this.replacePaste(files)}>
-        {images =>
-          images.length > 0 &&
-          images.map(image => <img src={image} key={image} alt={`Pasted: ${image}`} width="100%" height="100%"/>)
-        }
-      </Gluejar>
+      <div onPaste={file => this.pasteFigure(file)}>
+      {figure ? <img src={figure} key={figure} style={{width:"100%", height:"100%"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div>Paste(Ctrl + V) Figure!</div>}
+      </div>
+
     )
   }
 }

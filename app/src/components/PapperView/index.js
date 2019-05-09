@@ -15,7 +15,7 @@ export class PapperView extends Component {
       super(props);
       this.state = {
       		title : "Face to InterFace: Facial Affect",
-          modalShow  : true,
+          modalShow  : false,
       };
 
       this.toggle = this.toggle.bind(this);

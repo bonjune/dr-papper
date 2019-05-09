@@ -46,6 +46,9 @@ export class PapperEditorBase extends Component {
         // Tags
         "tags": this.state.tags,
 
+        //toread comment
+        "comment": this.state.comment,
+
         //boxes
         "boxes": this.state.boxes
     })
@@ -62,10 +65,10 @@ export class PapperEditorBase extends Component {
 
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
-        //console.log()
-        this.props.firebase.makeNewPapperReview({
-            ...this.makeSubmitEntry()
-        });
+        console.log(this.makeSubmitEntry())
+        //this.props.firebase.makeNewPapperReview({
+        //    ...this.makeSubmitEntry()
+        //});
     };
 
     onCalendarChange = time => {
@@ -98,7 +101,6 @@ export class PapperEditorBase extends Component {
     }
 
     handleEdit = e => {
-        //console.log(e)
         this.setState(e)
     }
 

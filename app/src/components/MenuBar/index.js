@@ -15,9 +15,7 @@ class MenuBar extends Component {
             <div className="component-menu-bar box">
                 <div className="row">
                     <PapperView />
-                	<button type="button" className="btn text-uppercase">
-                		<span><img src={addbutton} alt="addbutton"/></span> Add
-              		</button>
+                	<PapperEditor />
             		</div>
                 <Link to='/'><div className="row">
                 	<button type="button" id="tab_button" className="btn text-uppercase" active>

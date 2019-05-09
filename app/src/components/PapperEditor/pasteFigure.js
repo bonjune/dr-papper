@@ -8,7 +8,6 @@ export default class App extends Component {
     };
   }
 
-<<<<<<< HEAD
   pasteFigure = (file) => {
 
     var item = file.clipboardData.items[0]
@@ -21,7 +20,8 @@ export default class App extends Component {
       this.setState({
         figure:source
       }, () => this.props.handleFigure(this.state.figure))
-}
+    }
+  }
 
   render() {
     var {figure} = this.state

@@ -17,8 +17,8 @@ export class PapperEditorBase extends Component {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : true,
-            editMode : true,
+            modalShow : false,
+            editMode : false,
         };
         this.handleModal = this.handleModal.bind(this);
     }
@@ -65,10 +65,23 @@ export class PapperEditorBase extends Component {
 
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
-        console.log(this.makeSubmitEntry())
-        //this.props.firebase.makeNewPapperReview({
-        //    ...this.makeSubmitEntry()
-        //});
+
+        //uploading figure image in box
+        var boxKeys = Object.keys(this.state.boxes)
+        boxKeys.forEach(key => {
+            if(this.state.boxes[key].figure !== ""){
+                var figsrc = `reviewID_${key}.png`;
+                this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
+                this.state.boxes[key].figsrc = figsrc
+            }
+        })
+
+        console.log(this.makeSubmitEntry());
+
+        //set db
+        this.props.firebase.makeNewPapperReview({
+            ...this.makeSubmitEntry()
+        });
     };
 
     onCalendarChange = time => {
@@ -101,6 +114,7 @@ export class PapperEditorBase extends Component {
     }
 
     handleEdit = e => {
+        //console.log(e)
         this.setState(e)
     }
 

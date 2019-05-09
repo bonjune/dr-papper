@@ -2,6 +2,7 @@ import React from "react";
 
 import app from "firebase/app";
 import "firebase/database";
+import "firebase/storage";
 import config from "./config";
 
 // Review Entry Template
@@ -13,7 +14,9 @@ class Firebase extends React.Component {
     app.initializeApp(config);
 
     this.db = app.database();
+    this.storage = app.storage();
     this.reviewListRef = this.db.ref(`reviews`);
+    this.storageRef = this.storage.ref();
   }
 
     // Test functions
@@ -53,6 +56,15 @@ class Firebase extends React.Component {
   deletePapperReview = (reviewKey) => {
       const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
       targetReviewRef.remove();
+  }
+
+  uploadFigure = (figure, filename) => {
+    const targetRef = this.storageRef.child(filename);
+
+    targetRef.put(figure).then(function(snapshot) {
+      console.log('Uploaded a blob or file!');
+    });
+
   }
 }
 

@@ -2,6 +2,13 @@ import React, { Component }from "react";
 import {Button, Col, Row, Input , ButtonGroup} from 'reactstrap'
 import PasteFigure from './pasteFigure'
 
+const boxdb = {
+    format : 0,
+    subtitle : "",
+    content: "",
+    figure: ""
+}
+
 export default class ReadEdit extends React.Component{
     
     state = {
@@ -10,10 +17,15 @@ export default class ReadEdit extends React.Component{
     }
 
     addBox = () => {
-        var {containers} = this.state
-        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, containers.length)}/>
-        containers.push({container:box})
-        this.setState({containers : containers})
+        var {containers, boxes} = this.state
+        const key = containers.length
+        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)}/>
+        containers.push(box)
+
+        boxes[key] = {
+            ...boxdb
+        }
+        this.setState({containers : containers, boxes:boxes}, () =>this.props.handleEdit({boxes:this.state.boxes}))
     }
 
     handleEdit = (key, box) => {
@@ -31,7 +43,7 @@ export default class ReadEdit extends React.Component{
         //console.log(this.state)
         return(
             <div>
-            {containers.map((box) => box.container)}
+            {containers.map((box) => box)}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <Button block color="white" onClick={this.addBox}>+</Button>
             </div>

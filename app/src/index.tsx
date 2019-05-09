@@ -7,8 +7,8 @@ import Firebase, { FirebaseContext } from './components/Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-    <FirebaseContext.Provider value={new Firebase()}>
-        <App />
+  <FirebaseContext.Provider value={new Firebase({})}>
+      <App />
     </FirebaseContext.Provider>,
     document.getElementById('root'));
 

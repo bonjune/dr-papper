@@ -8,7 +8,7 @@ class ToReadBoardBase extends Component {
   constructor(props) {
     super(props);
     this.state = {reviews: []};
-    const reviews = this.props.firebase.getReviews();
+    const reviews = this.props.firebase.reviews();
     reviews.once('value').then(
       snapshot => {
         const data = snapshot.val();

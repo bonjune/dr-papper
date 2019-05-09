@@ -46,22 +46,21 @@ export class PapperView extends Component {
 
 		render() {
 			return (
-				<div>
-					<Button type="button" className="btn text-uppercase" onClick={this.toggle}> PapperView</Button>
-
-					<Modal isOpen={this.state.modalShow} toggle={this.toggle} size='lg' scrollable={true}>
-						<ModalHeader toggle={this.toggle} style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
-	          </ModalHeader>
-	          <ModalBody style={{background:"#EEEEEE"}}>
-	          	<CommonInfo title={this.state.title} authors={this.state.authors} publishDate={this.state.publishDate} 
-	          	published={this.state.published} link={this.state.link} tags={this.state.tags}/>
-	          	<EditBox toRead={this.state.toRead} />
-	          </ModalBody>
-	          <ModalFooter style={{background:"#EEEEEE"}}>
-	          	<Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.toggle}> Done</Button>
-	          </ModalFooter>
-        	</Modal>
-      	</div>
+        	<div>
+                <Button type="button" className="btn text-uppercase" onClick={this.toggle}> PapperView</Button>
+                <Modal isOpen={this.state.modalShow} toggle={this.toggle} size='lg' scrollable={true}>
+        			<ModalHeader toggle={this.toggle} style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
+                    </ModalHeader>
+                    <ModalBody style={{background:"#EEEEEE"}}>
+                        <CommonInfo title={this.state.title} authors={this.state.authors} publishDate={this.state.publishDate} 
+                        published={this.state.published} link={this.state.link} tags={this.state.tags}/>
+                        <EditBox toRead={this.state.toRead} />
+                    </ModalBody>
+                    <ModalFooter style={{background:"#EEEEEE"}}>
+                        <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.toggle}> Done</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
     	)
     }
 }

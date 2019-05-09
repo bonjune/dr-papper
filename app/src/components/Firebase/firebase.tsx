@@ -88,18 +88,24 @@ class Firebase extends React.Component<any, {}> {
 
   reviews = () => this.db.ref(`reviews`);
 
+  tag = (tagKey: string) => this.db.ref(`tags/${tagKey}`);
+
+  tags = () => this.db.ref('tags');
+
   makeNewPapperReview = (entry: IReview) => {
       const newReviewRef = this.reviews().push();
       newReviewRef.set({
           ...entry
       })
   }
+
   updatePapperReview = (reviewKey: string, entry: IReview) => {
       const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
       let updates = {};
       updates[`reviews/${reviewKey}`] = entry;
       targetReviewRef.update(updates);
   }
+
   deletePapperReview = (reviewKey: string) => {
       const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
       targetReviewRef.remove();
@@ -114,9 +120,6 @@ class Firebase extends React.Component<any, {}> {
     return newTagRef.key;
   }
 
-  tag = (tagKey: string) => this.db.ref(`tags/${tagKey}`);
-
-  tags = () => this.db.ref('tags');
 }
 
 export default Firebase;

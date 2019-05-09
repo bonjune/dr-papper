@@ -19,6 +19,7 @@ reviews
         |-- boxes (array)  
             |-- box (object)  
                 +-- format (enum)             
-                +-- figure (url)  
+                +-- figure (file)
+                +-- figsrc (string, "reviewID_boxkey.png")  
                 +-- subtitle (string)  
                 +-- content (string)  

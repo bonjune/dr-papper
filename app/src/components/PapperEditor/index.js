@@ -46,6 +46,9 @@ export class PapperEditorBase extends Component {
         // Tags
         "tags": this.state.tags,
 
+        //toread comment
+        "comment": this.state.comment,
+
         //boxes
         "boxes": this.state.boxes
     })
@@ -62,7 +65,20 @@ export class PapperEditorBase extends Component {
 
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
-        //console.log()
+
+        //uploading figure image in box
+        var boxKeys = Object.keys(this.state.boxes)
+        boxKeys.forEach(key => {
+            if(this.state.boxes[key].figure !== ""){
+                var figsrc = `${Math.random().toString(36)}_${key}.png`;
+                this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
+                this.state.boxes[key].figsrc = figsrc
+            }
+        })
+
+        //console.log(this.makeSubmitEntry());
+
+        //set db
         this.props.firebase.makeNewPapperReview({
             ...this.makeSubmitEntry()
         });
@@ -103,7 +119,7 @@ export class PapperEditorBase extends Component {
     }
 
     render() {
-        //console.log(this.state)
+        console.log(this.state)
         return (
           <div>
                 <div className="row">

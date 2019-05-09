@@ -2,18 +2,30 @@ import React, { Component }from "react";
 import {Button, Col, Row, Input , ButtonGroup} from 'reactstrap'
 import PasteFigure from './pasteFigure'
 
+const boxdb = {
+    format : 0,
+    subtitle : "",
+    content: "",
+    figure: ""
+}
+
 export default class ReadEdit extends React.Component{
     
     state = {
-        containers : [],
-        boxes: {}
+        containers : {},
+        boxes: {},
+        key: 0
     }
 
     addBox = () => {
-        var {containers} = this.state
-        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, containers.length)}/>
-        containers.push({container:box})
-        this.setState({containers : containers})
+        var {containers, boxes, key} = this.state
+        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)} onDelete={this.handleDelete.bind(this, key)}/>
+        containers[key] = box
+
+        boxes[key] = {
+            ...boxdb
+        }
+        this.setState({containers : containers, boxes:boxes, key:key+1}, () =>this.props.handleEdit({boxes:this.state.boxes}))
     }
 
     handleEdit = (key, box) => {
@@ -26,12 +38,20 @@ export default class ReadEdit extends React.Component{
         //this.setState(boxes)
     }
 
+    handleDelete = (key) => {
+        var {containers, boxes} = this.state
+        delete containers[key];
+        delete boxes[key];
+        console.log(boxes)
+        this.setState({containers : containers, boxes:boxes}, () => this.props.handleEdit({boxes:this.state.boxes}))
+    }
+
     render() {
         var {containers} = this.state
         //console.log(this.state)
         return(
             <div>
-            {containers.map((box) => box.container)}
+            {Object.keys(containers).map(key => containers[key])}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <Button block color="white" onClick={this.addBox}>+</Button>
             </div>
@@ -45,24 +65,30 @@ class BoxFormat extends React.Component {
         this.state = {
             format : 0,
             subtitle : "",
-            content: ""
+            content: "",
+            figure: ""
         };
     }
 
     handleEdit = e => {
-        this.state = {
-            ...e,
-            format:this.state.format
-        }
-        this.props.handleEdit(this.state)
+        this.setState(e, ()=> this.props.handleEdit(this.state))
     }
 
     changeFormat = (id) => {
-        this.setState({format:id})
+        this.setState({
+            format:id,
+            subtitle : "",
+            content: "",
+            figure: ""
+        }, ()=> this.props.handleEdit(this.state))
     }
 
     formatting = () => {
         
+    }
+
+    deleteBox = () => {
+        this.props.onDelete();
     }
 
     render() {
@@ -82,10 +108,14 @@ class BoxFormat extends React.Component {
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 {f}
-                <ButtonGroup>
-                    <Button id="0" onClick={this.changeFormat.bind(this, 0)}>Figure</Button>
-                    <Button id="1" onClick={this.changeFormat.bind(this, 1)}>Content</Button>
-                </ButtonGroup>
+                <div>
+                    <div className="d-inline" style={{marginRight:"10px"}}> format </div>
+                    <ButtonGroup className="d-inline">
+                        <Button id="0" onClick={this.changeFormat.bind(this, 0)}>Figure</Button>
+                        <Button id="1" onClick={this.changeFormat.bind(this, 1)}>Content</Button>
+                    </ButtonGroup>
+                    <Button className="float-right d-inline" onClick={this.deleteBox}>Delete</Button>
+                </div>
             </div>
         )
     }
@@ -96,20 +126,31 @@ class FigureFormat extends React.Component {
         super(props);
         this.state = {
             subtitle : "",
-            content: ""
+            content: "",
+            figure: ""
         };
     }
 
     onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name]: value
+        }, () => this.props.handleEdit(this.state))
     };
+
+    onFigureChange = fig => {
+        this.setState({
+            figure : fig
+        }, () => this.props.handleEdit(this.state))
+    }
 
     render() {
         return(
             
             <Row>
-                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px"}}>PASTE IMAGE!<PasteFigure /></Col>
+                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px", display: "flex", alignItems: "center", justifyContent: "center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
                 <Col xs="7" style={{margin:"15px"}}>
                     <Row style={{height:"50px"}}>
                         <Input placeholder="Add Subtitle" name="subtitle" onChange={this.onInputChange}></Input>
@@ -135,8 +176,12 @@ class ContentFormat extends React.Component {
     }
 
     onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name]: value
+        }, () => this.props.handleEdit(this.state))
     };
 
 

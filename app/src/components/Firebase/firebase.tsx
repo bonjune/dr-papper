@@ -17,12 +17,14 @@ import { IReview, ITag } from './interface';
 class Firebase extends React.Component<any, {}> {
   auth: firebase.auth.Auth;
   db: firebase.database.Database;
+  storage: firebase.storage.Storage;
   constructor(props: any) {
     super(props);
 
     app.initializeApp(config);
     this.auth = app.auth();
     this.db = app.database();
+    this.storage = app.storage();
   }
 
   /**
@@ -118,6 +120,15 @@ class Firebase extends React.Component<any, {}> {
       reviews: []
     } as ITag));
     return newTagRef.key;
+  }
+
+  uploadFigure = (figure: any, filename: string) => {
+    const targetRef = this.storage.ref().child(filename);
+
+    targetRef.put(figure).then(function(snapshot) {
+      console.log('Uploaded a blob or file!');
+    });
+
   }
 
 }

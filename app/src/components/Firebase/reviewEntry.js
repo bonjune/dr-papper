@@ -32,12 +32,5 @@ export const reviewEntry = {
 
     // Note
     "comment": "",
-    "boxes": [
-        {
-            "format": "",
-            "figure": "",
-            "subtitle": "",
-            "content": "",
-        }
-    ],
+    "boxes": "",
 }

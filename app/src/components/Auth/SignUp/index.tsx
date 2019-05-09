@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { compose } from "recompose";
 
-import Firebase, { withFirebase } from "../../Firebase";
+import { withFirebase } from "../../Firebase";
 
 interface ISignUpForm {
   username: string;

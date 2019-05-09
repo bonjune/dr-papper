@@ -9,6 +9,7 @@ import React from "react";
 import app from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
+import "firebase/storage";
 import config from "./config";
 
 // Review Entry Template

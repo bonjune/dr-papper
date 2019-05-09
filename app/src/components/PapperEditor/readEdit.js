@@ -12,15 +12,15 @@ const boxdb = {
 export default class ReadEdit extends React.Component{
     
     state = {
-        containers : [],
+        containers : {},
         boxes: {},
         key: 0
     }
 
     addBox = () => {
         var {containers, boxes, key} = this.state
-        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)}/>
-        containers.push(box)
+        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)} onDelete={this.handleDelete.bind(this, key)}/>
+        containers[key] = box
 
         boxes[key] = {
             ...boxdb
@@ -38,12 +38,20 @@ export default class ReadEdit extends React.Component{
         //this.setState(boxes)
     }
 
+    handleDelete = (key) => {
+        var {containers, boxes} = this.state
+        delete containers[key];
+        delete boxes[key];
+        console.log(boxes)
+        this.setState({containers : containers, boxes:boxes}, () => this.props.handleEdit({boxes:this.state.boxes}))
+    }
+
     render() {
         var {containers} = this.state
         //console.log(this.state)
         return(
             <div>
-            {containers.map((box) => box)}
+            {Object.keys(containers).map(key => containers[key])}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <Button block color="white" onClick={this.addBox}>+</Button>
             </div>
@@ -79,6 +87,10 @@ class BoxFormat extends React.Component {
         
     }
 
+    deleteBox = () => {
+        this.props.onDelete();
+    }
+
     render() {
 
         var {format} = this.state
@@ -96,10 +108,14 @@ class BoxFormat extends React.Component {
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 {f}
-                <ButtonGroup>
-                    <Button id="0" onClick={this.changeFormat.bind(this, 0)}>Figure</Button>
-                    <Button id="1" onClick={this.changeFormat.bind(this, 1)}>Content</Button>
-                </ButtonGroup>
+                <div>
+                    <div className="d-inline" style={{marginRight:"10px"}}> format </div>
+                    <ButtonGroup className="d-inline">
+                        <Button id="0" onClick={this.changeFormat.bind(this, 0)}>Figure</Button>
+                        <Button id="1" onClick={this.changeFormat.bind(this, 1)}>Content</Button>
+                    </ButtonGroup>
+                    <Button className="float-right d-inline" onClick={this.deleteBox}>Delete</Button>
+                </div>
             </div>
         )
     }
@@ -134,7 +150,7 @@ class FigureFormat extends React.Component {
         return(
             
             <Row>
-                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px", textAlign:"center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
+                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px", display: "flex", alignItems: "center", justifyContent: "center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
                 <Col xs="7" style={{margin:"15px"}}>
                     <Row style={{height:"50px"}}>
                         <Input placeholder="Add Subtitle" name="subtitle" onChange={this.onInputChange}></Input>

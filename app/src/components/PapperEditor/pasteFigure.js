@@ -30,7 +30,7 @@ export default class App extends Component {
 
     return (
       <div onPaste={file => this.pasteFigure(file)}>
-      {figuresrc ? <img src={figuresrc} key={figuresrc} style={{width:"100%", height:"100%"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div>Paste(Ctrl + V) Figure!</div>}
+      {figuresrc ? <img src={figuresrc} key={figuresrc} style={{maxWidth:"180px", maxHeight:"180px"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div>Paste(Ctrl + V) Figure!</div>}
       </div>
 
     )

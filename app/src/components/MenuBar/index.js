@@ -42,10 +42,8 @@ class MenuBar extends Component {
 
         return (
             <div className="component-menu-bar box">
-                <div className="row">
-                  <PapperView />
-                  <PapperEditor />
-            		</div>
+                    <PapperView />
+                    <PapperEditor />
                 <Link to='/'><div className="row">
                 	<button type="button" id={btn_id1} className="btn text-uppercase" active="true" onClick={this.changeColor1.bind(this)}>
                 		<span><img src={readimg} alt="addbutton"/></span> Read

@@ -15,8 +15,13 @@ export default class CommonEdit extends React.Component{
     }
     
     onInputChange = event => {
-        this.state[event.target.name] = event.target.value
-        this.props.handleEdit(this.state)
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name]: value
+        }, () => this.props.handleEdit(this.state))
+        
     };
 
 

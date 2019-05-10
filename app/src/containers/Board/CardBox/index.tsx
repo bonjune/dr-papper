@@ -19,6 +19,11 @@ interface ICardBoxProps {
   cardPredicate: (review: IReview) => boolean;
 }
 
+export const CardPredicate = {
+  Pinned: (review: IReview) => review.pinned,
+  Archived: (review: IReview) => !review.pinned,
+}
+
 const papperview = () => {
 }
 

@@ -5,7 +5,7 @@
 import React from "react";
 import { withFirebase, IFirebaseProps } from "../../components/Firebase";
 import { IReview } from 'src/components/Firebase/interface';
-import CardBox from './CardBox';
+import CardBox, { CardPredicate } from './CardBox';
 
 interface IBoardBaseProps {
   boardPredicate: (review: IReview) => boolean;
@@ -50,9 +50,9 @@ class BoardBase extends React.Component<
     console.log(reviews);
     return (
       <div className="board">
-        <CardBox reviews={reviews} cardPredicate={review => review.pinned} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} />
         <hr/>
-        <CardBox reviews={reviews} cardPredicate={review => !review.pinned} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} />
       </div>
     )
   }

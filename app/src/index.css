@@ -91,6 +91,9 @@ code {
 }
 
 /* MenuBar */
+.component-menu-bar img {
+  margin-right: 10px;
+}
 .component-menu-bar .btn:focus {
   outline: none !important;
   outline-offset: none !important;

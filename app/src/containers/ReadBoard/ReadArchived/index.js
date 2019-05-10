@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import CreateTags from '../../CreateTags'
 import testimage from '../../../assets/img/boxmain.png'
 
-
 class ReadPinned extends Component {
     render(){
         // init

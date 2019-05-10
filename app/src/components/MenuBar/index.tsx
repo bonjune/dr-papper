@@ -62,7 +62,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                 <span>
                   <img src={ReadIcon} alt="addbutton" />
                 </span>
-                Read
+                 Read
               </button>
             </div>
           </Link>
@@ -72,7 +72,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                 <span>
                   <img src={ToReadIcon} alt="addbutton" />
                 </span>
-                ToRead
+                 ToRead
               </button>
             </div>
           </Link>
@@ -81,7 +81,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                 <span>
                   <img src={PinIcon} alt="addbutton" />
                 </span>
-                Pinned
+                 Pinned
               </button>
             </div>
             <div className="row">
@@ -89,7 +89,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                 <span>
                   <img src={TrashIcon} alt="addbutton" />
                 </span>
-                Deleted
+                 Deleted
               </button>
             </div>
         </div>

@@ -14,7 +14,7 @@ export class PapperView extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        modalShow  : false,
+        modalShow  : true,
 
         // Basic Information
         title : "Face to InterFace: Facial Affect",

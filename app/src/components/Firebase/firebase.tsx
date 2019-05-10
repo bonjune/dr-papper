@@ -9,6 +9,7 @@ import React from "react";
 import app from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
+import "firebase/storage";
 import config from "./config";
 
 // Review Entry Template
@@ -96,6 +97,7 @@ class Firebase extends React.Component<any, {}> {
 
   makeNewPapperReview = (entry: IReview) => {
       const newReviewRef = this.reviews().push();
+      entry.reviewID = newReviewRef.key as string;
       newReviewRef.set({
           ...entry
       })

@@ -19,7 +19,7 @@ export default class ReadEdit extends React.Component{
 
     addBox = () => {
         var {containers, boxes, key} = this.state
-        var box = <BoxFormat key={containers.length} handleEdit={this.handleEdit.bind(this, key)} onDelete={this.handleDelete.bind(this, key)}/>
+        var box = <BoxFormat key={this.state.key} handleEdit={this.handleEdit.bind(this, key)} onDelete={this.handleDelete.bind(this, key)}/>
         containers[key] = box
 
         boxes[key] = {
@@ -42,7 +42,6 @@ export default class ReadEdit extends React.Component{
         var {containers, boxes} = this.state
         delete containers[key];
         delete boxes[key];
-        console.log(boxes)
         this.setState({containers : containers, boxes:boxes}, () => this.props.handleEdit({boxes:this.state.boxes}))
     }
 

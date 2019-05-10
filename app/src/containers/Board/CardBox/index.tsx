@@ -58,16 +58,16 @@ class CardBox extends React.Component<ICardBoxProps, any> {
   }
 
   render() {
+    const { cardPredicate } = this.props;
+    const reviews = this.props.reviews.filter(cardPredicate);
     return (
       <div>
-        {this.props.reviews.map(review =>
-          this.props.cardPredicate(review)
-            ? <Card
-                title={review.title}
-                summary={review.comment}
-                tags={review.tags.map(tag => tag.name)}
-              />
-            : <div/>
+        {reviews.map(review =>
+          <Card
+            title={review.title}
+            summary={review.comment}
+            tags={review.tags.map(tag => tag.name)}
+          />
         )}
       </div>
     )

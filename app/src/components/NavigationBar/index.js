@@ -6,44 +6,88 @@ import {
 
 import * as ROUTES from "../../constants/routes";
 import './index.css';
+import { Link } from 'react-router-dom';
+import { AuthUserContext } from '../Auth/Session';
+import SignOut from '../Auth/SignOut';
 
 class NavigationBar extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          isOpen: false
-        };
-      }
+  constructor(props) {
+    super(props);
+  }
 
-      toggle = () => {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
-
-      render() {
-        return (
-          <div className="navBar">
-            <div className="logoBox">
-              <div className="logoText">Dr.Papper</div>
-            </div>
-            <div className="componentBox">
-              <div className="searchBox">
-                <InputGroup style={{marginTop: "13px"}}>
-                  <Input placeholder="search" />
-                  <Button color="secondary">search</Button>
-                </InputGroup>
-              </div>
-              <div className="infoBox">
-                <div className="userBox"><div className="userText">USER</div></div>
-                <div className="settingBox"><div className="settingText">SETTING</div></div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-
+  render() {
+    return (
+      <AuthUserContext.Consumer>
+        {authUser => authUser ? <NavBarForAuth/> : <NavBarForNonAuth/>}
+      </AuthUserContext.Consumer>
+    );
+  }
 }
 
+const NavBarForNonAuth = () => (
+  <div className="navBar">
+    <div className="logoBox">
+      <div className="logoText">
+        <Link to={ROUTES.HOME}>
+          Dr.Papper
+        </Link>
+      </div>
+    </div>
+    <div className="componentBox">
+      <div className="searchBox">
+        <InputGroup style={{marginTop: "13px"}}>
+          <Input placeholder="search" />
+          <Button color="secondary">search</Button>
+        </InputGroup>
+      </div>
+      <div className="infoBox">
+        <div className="userBox">
+          <div className="userText">
+            USER
+          </div>
+        </div>
+        <div className="settingBox">
+          <div className="settingText">
+            SETTING
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const NavBarForAuth = () => (
+  <div className="navBar">
+    <div className="logoBox">
+      <div className="logoText">
+        <Link to={ROUTES.HOME}>
+          Dr.Papper
+        </Link>
+      </div>
+    </div>
+    <div className="componentBox">
+      <div className="searchBox">
+        <InputGroup style={{marginTop: "13px"}}>
+          <Input placeholder="search" />
+          <Button color="secondary">search</Button>
+        </InputGroup>
+      </div>
+      <div className="infoBox">
+        <div className="userBox">
+          <div className="userText">
+            USER
+          </div>
+        </div>
+        <div className="settingBox">
+          <div className="settingText">
+            SETTING
+          </div>
+        </div>
+        <div className="nav-bar-sign-out-button">
+          <SignOut/>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 export default NavigationBar;

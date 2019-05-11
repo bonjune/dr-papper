@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 
 // Components;
 import MenuBar from "../../components/MenuBar";
@@ -63,36 +64,34 @@ const AppForNonAuth = compose(
  * App for authorised users
  */
 const AppForAuthBase = () => (
-  <div className="container full-width">
-    <div className="row">
-      <div className="col-md-1">
-        <MenuBar />
-      </div>
-      <div className="col-md-10">
-        <TagBar />
-        <Switch>
-          <Route
-            exact={true}
-            path={ROUTES.HOME}
-            render={(props) => <HomePage />}
-          />
-          <Route
-            exact={true}
-            path={ROUTES.READ}
-            render={(props) => <Board {...props} boardPredicate={BoardPredicate.Read} />}
-          />
-          <Route
-            path={ROUTES.TO_READ}
-            render={(props) => <Board {...props} boardPredicate={BoardPredicate.ToRead} />}
-          />
-          <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
-          <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
-        </Switch>
-      </div>
-      <div className="col-md-1">
-      </div>
-    </div>
-  </div>
+    <Container className="full-width">
+      <Row>
+        <Col lg="2">
+          <MenuBar />
+        </Col>
+        <Col lg="10">
+          <TagBar />
+          <Switch>
+            <Route
+              exact={true}
+              path={ROUTES.HOME}
+              render={(props) => <HomePage />}
+            />
+            <Route
+              exact={true}
+              path={ROUTES.READ}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.Read} />}
+            />
+            <Route
+              path={ROUTES.TO_READ}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.ToRead} />}
+            />
+            <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
+            <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
+          </Switch>
+        </Col>
+      </Row>
+    </Container>
 )
 
 const AppForAuth = compose(

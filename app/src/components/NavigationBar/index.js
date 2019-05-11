@@ -80,11 +80,8 @@ const NavBarForAuth = () => (
         </div>
         <div className="settingBox">
           <div className="settingText">
-            SETTING
+            <SignOut/>
           </div>
-        </div>
-        <div className="nav-bar-sign-out-button">
-          <SignOut/>
         </div>
       </div>
     </div>

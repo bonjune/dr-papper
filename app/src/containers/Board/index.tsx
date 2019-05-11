@@ -47,12 +47,13 @@ class BoardBase extends React.Component<
   render() {
     const { boardPredicate } = this.props;
     const reviews = this.state.reviews.filter(boardPredicate);
+    const imgShow = boardPredicate === BoardPredicate.Read;
     console.log(reviews);
     return (
       <div className="board">
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={boardPredicate === BoardPredicate.Read} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={boardPredicate === BoardPredicate.Read} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
       </div>
     )
   }

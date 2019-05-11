@@ -50,7 +50,7 @@ class BoardBase extends React.Component<
     const imgShow = boardPredicate === BoardPredicate.Read;
     console.log(reviews);
     return (
-      <div className="board">
+      <div className="papper-board">
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />

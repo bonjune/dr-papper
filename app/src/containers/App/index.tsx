@@ -10,6 +10,7 @@ import TagBar from '../../components/TagBar';
 import Board, { BoardPredicate } from '../Board';
 
 import * as ROUTES from "../../constants/routes";
+import SignIn from 'src/components/Auth/SignIn';
 
 
 const INITIAL_STATE = {
@@ -54,5 +55,39 @@ class App extends React.Component<{}, {}> {
     );
   }
 }
+
+const AppForAuth = () => (
+  <div className="app-for-auth">
+    <NavigationBar />
+      <div className="container full-width">
+        <div className="row">
+          <div className="col-md-1-5">
+          <MenuBar />
+          </div>
+          <div className="col-md-10-5">
+          <TagBar />
+          <Switch>
+            <Route
+              exact={true}
+              path={ROUTES.HOME}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.Read} />}
+            />
+            <Route
+              path={ROUTES.TO_READ}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.ToRead} />}
+            />
+          </Switch>
+          </div>
+        </div>
+      </div>
+    <hr/>
+  </div>
+)
+
+const AppForNonAuth = () => (
+  <div className="app-for-non-auth">
+    <SignIn />
+  </div>
+)
 
 export default App;

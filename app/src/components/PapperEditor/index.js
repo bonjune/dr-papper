@@ -17,10 +17,26 @@ export class PapperEditorBase extends Component {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : false,
+            modalShow : true,
             editMode : true,
         };
         this.handleModal = this.handleModal.bind(this);
+        this.tags = this.props.firebase.tags();
+
+    }
+
+    listTags = async () => {
+        let data = [];
+        await this.tags.once('value')
+          .then(snapshot => {
+            snapshot.forEach((child) => {
+              data.push({id:child.val().name, text:child.val().name});
+            })
+          })
+        
+        this.setState(() => ({
+          suggestions: data
+        }));
     }
     
     makeSubmitEntry = () => ({
@@ -53,15 +69,6 @@ export class PapperEditorBase extends Component {
         "boxes": this.state.boxes
     })
 
-    parseTags = tags => {
-        console.log(tags)
-        const tagList = tags.split(',');
-        var tags = [];
-        tagList.map( (tag, idx) => {
-            tags.push({key:idx, name:tag})
-        })
-        return tags;
-    }
 
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
@@ -76,12 +83,18 @@ export class PapperEditorBase extends Component {
             }
         })
 
-        //console.log(this.makeSubmitEntry());
+        //console.log(this.makeSubmitEntry();
+
+        this.state.tags.forEach(tag => {
+            this.props.firebase.makeNewTag(tag.text)
+        })
 
         //set db
         this.props.firebase.makeNewPapperReview({
             ...this.makeSubmitEntry()
         });
+
+        this.setState({modalShow:false})
     };
 
     onCalendarChange = time => {
@@ -102,9 +115,10 @@ export class PapperEditorBase extends Component {
     };
 
     handleModal = () => {
-        this.setState(prevState => ({
+        this.listTags()
+        .then(() => this.setState(prevState => ({
             modalShow: !prevState.modalShow
-        }));
+        })))
     }
 
     handleMode = (mode) => {
@@ -118,8 +132,12 @@ export class PapperEditorBase extends Component {
         this.setState(e)
     }
 
+    componentWillMount() {
+        this.listTags()
+    }
+
     render() {
-        console.log(this.state)
+        //console.log(this.state)
         return (
           <div>
                 <div className="row">
@@ -140,12 +158,12 @@ export class PapperEditorBase extends Component {
                         </div>
                     </ModalHeader>
                     <ModalBody style={{background:"#EEEEEE"}}>
+                        {this.state.suggestions ?
                         <Form>
-                            <CommonEdit handleEdit={this.handleEdit}/>
+                            <CommonEdit handleEdit={this.handleEdit} suggestions={this.state.suggestions}/>
                             {this.state.editMode ? <ReadEdit handleEdit={this.handleEdit}/> : <ToreadEdit handleEdit={this.handleEdit}/>}
-                            
-
                         </Form>
+                        : <div></div>}
                     </ModalBody>
                     <ModalFooter style={{background:"#EEEEEE"}}>
                         <Button block style={{background:"#B0BEC5", border:"0"}} onClick={this.onSubmit}>Done</Button>

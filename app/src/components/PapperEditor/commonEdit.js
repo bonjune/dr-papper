@@ -1,5 +1,15 @@
 import React, { Component }from "react";
 import {FormGroup, Label, Input, Col} from 'reactstrap'
+import { WithContext as ReactTags } from 'react-tag-input';
+import './tagbox.css'
+
+const KeyCodes = {
+    comma: 188,
+    enter: 13,
+  };
+  
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
 
 export default class CommonEdit extends React.Component{
     constructor(props) {
@@ -10,8 +20,13 @@ export default class CommonEdit extends React.Component{
             publishDate : "",
             published : "",
             link : "",
-            tags: ""
+            tags: [
+            ],
+            suggestions: this.props.suggestions
         };
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        console.log(this.props)
     }
     
     onInputChange = event => {
@@ -24,8 +39,20 @@ export default class CommonEdit extends React.Component{
         
     };
 
+    handleDelete(i) {
+        const { tags } = this.state;
+        this.setState({
+         tags: tags.filter((tag, index) => index !== i),
+        });
+    }
+
+    handleAddition(tag) {
+        this.setState(state => ({ tags: [...state.tags, tag] }), ()=>this.props.handleEdit(this.state));
+    }
+
 
     render() {
+        console.log(this.state)
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>
@@ -60,9 +87,20 @@ export default class CommonEdit extends React.Component{
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"right"}}>Tags</Label>
-                    <Col sm={10}>
-                        <Input type="text" name="tags" bsSize="lg" onChange={this.onInputChange}/>
-                    </Col>
+                    <ReactTags
+                        classNames={{
+                            tags: "col-sm-10",
+                            tagInputField: 'form-control-lg form-control',
+                        }} 
+                        tags={this.state.tags}
+                        suggestions={this.state.suggestions}
+                        handleDelete={this.handleDelete}
+                        handleAddition={this.handleAddition}
+                        allowDeleteFromEmptyInput={false}
+                        allowDragDrop={false}
+                        delimiters={delimiters}
+                        inputFieldPosition="inline"
+                        inline/>
                 </FormGroup>
             </div>
             </div>

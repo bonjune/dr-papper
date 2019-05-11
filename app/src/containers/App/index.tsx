@@ -63,12 +63,11 @@ const AppForNonAuth = compose(
  * App for authorised users
  */
 const AppForAuthBase = () => (
-  <div className="container full-width">
-    <div className="row">
-      <div className="col-md-1">
+    <div>
+      <div className="col-lg-auto">
         <MenuBar />
       </div>
-      <div className="col-md-10">
+      <div className="col-lg-11">
         <TagBar />
         <Switch>
           <Route
@@ -89,10 +88,7 @@ const AppForAuthBase = () => (
           <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
         </Switch>
       </div>
-      <div className="col-md-1">
-      </div>
     </div>
-  </div>
 )
 
 const AppForAuth = compose(

@@ -120,9 +120,9 @@ code {
 .component-menu-bar img{
   width: 20px;
 }
-.component-menu-bar .row {
+/* .component-menu-bar .row {
   width: 100%;
-}
+} */
 #tab_button{
   border-radius: 0;
   margin-top: 10px;

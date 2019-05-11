@@ -50,9 +50,9 @@ class BoardBase extends React.Component<
     console.log(reviews);
     return (
       <div className="board">
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={boardPredicate === BoardPredicate.Read} />
         <hr/>
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} />
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={boardPredicate === BoardPredicate.Read} />
       </div>
     )
   }

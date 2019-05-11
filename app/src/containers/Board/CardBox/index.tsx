@@ -10,12 +10,14 @@ import SmallTag from "../../../components/Tag";
 
 interface ICardProps {
   title: string;
+  imgShow: boolean;
   summary: string;
   tags: string[];
 }
 
 interface ICardBoxProps {
   reviews: IReview[];
+  imgShow: boolean;
   cardPredicate: (review: IReview) => boolean;
 }
 
@@ -31,7 +33,7 @@ class Card extends React.Component<ICardProps> {
   render() {
     return (
       <div className="col-sm-4 box papper-card" onClick={papperview}>
-        <img src={TestImage} alt="testimage"/>
+        {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
         <p className="title font-weight-normal">
           <div className="ellipse">
             {this.props.title}
@@ -58,12 +60,13 @@ class CardBox extends React.Component<ICardBoxProps, any> {
   }
 
   render() {
-    const { cardPredicate } = this.props;
+    const { cardPredicate, imgShow } = this.props;
     const reviews = this.props.reviews.filter(cardPredicate);
     return (
       <div>
         {reviews.map(review =>
           <Card
+            imgShow={imgShow}
             title={review.title}
             summary={review.comment}
             tags={review.tags.map(tag => tag.name)}
@@ -72,7 +75,6 @@ class CardBox extends React.Component<ICardBoxProps, any> {
       </div>
     )
   }
-
 }
 
 export default CardBox;

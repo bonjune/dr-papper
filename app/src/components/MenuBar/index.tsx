@@ -54,7 +54,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
         <div className="component-menu-bar box">
           <PapperView />
           <PapperEditor />
-          <Link to={ROUTES.HOME}>
+          <Link to={ROUTES.READ}>
             <div className="row">
               <button
                 name="readButton"

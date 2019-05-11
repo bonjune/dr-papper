@@ -38,16 +38,16 @@ code {
   font-size: 90%;
 }
 
-/* read-pinnedBox */
-.component-read-pinned-box {
+/* papperboard */
+.papper-board {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.component-read-pinned-box h3{
+.papper-board h3{
   color: #2c3e50 !important;
   padding-bottom: 0px;
 }
-.component-read-pinned-box h3::after{
+.papper-board h3::after{
   content: '';
   background: #2c3e50;
   display: block;
@@ -56,20 +56,20 @@ code {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.component-read-pinned-box img{
+.papper-board img{
   width: 100%;
 }
-.component-read-pinned-box .title{
+.papper-board .title{
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.component-read-pinned-box .content{
+.papper-board .content{
   margin-bottom: 5px;
 }
-.component-read-pinned-box .tags{
+.papper-board .tags{
   margin-right: 5px;
 }
-.component-read-pinned-box .box{
+.papper-board .box{
   margin-bottom: 10px;
 }
 

@@ -3,8 +3,10 @@
  * Refactored from ReadBoard, ToReadBoard and the children of those from Seungho Baek
  */
 import React from "react";
-import { withFirebase, IFirebaseProps } from "../../components/Firebase";
 import { IReview } from 'src/components/Firebase/interface';
+import { Row, Col } from 'reactstrap';
+// import pinIcon from '../../assets/icons/pinIcon.png';
+import { IFirebaseProps, withFirebase } from "../../components/Firebase";
 import CardBox, { CardPredicate } from './CardBox';
 
 interface IBoardBaseProps {
@@ -47,12 +49,22 @@ class BoardBase extends React.Component<
   render() {
     const { boardPredicate } = this.props;
     const reviews = this.state.reviews.filter(boardPredicate);
-    console.log(reviews);
+    const imgShow = boardPredicate === BoardPredicate.Read;
     return (
-      <div className="board">
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} />
+      <div className="papper-board">
+        <Row>
+          <Col lg="auto">
+            <h3 className="text-uppercase">pinned paper</h3>
+          </Col>
+        </Row>
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} />
+        <Row>
+          <Col lg="auto">
+            <h3 className="text-uppercase">archived</h3>
+          </Col>
+        </Row>
+        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
       </div>
     )
   }

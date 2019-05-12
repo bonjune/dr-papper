@@ -4,7 +4,6 @@ import PapperView from "../PapperView";
 import PapperEditor from "../PapperEditor";
 
 import * as ROUTES from "../../constants/routes";
-// import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 import { ReadIcon, ToReadIcon, PinIcon, TrashIcon } from '../../assets/icons';
 
@@ -33,11 +32,10 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
 
   changeColor = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.currentTarget;
-    this.setState(current => ({
+    this.setState(() => ({
       ...IMenuBarButtonActivationsInit,
       [target.name]: true
     }));
-
   }
 
     render() {
@@ -56,9 +54,15 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
         <div className="component-menu-bar box">
           <PapperView />
           <PapperEditor />
-          <Link to={ROUTES.HOME}>
+          <Link to={ROUTES.READ}>
             <div className="row">
-              <button name="readButton" type="button" id={setButtonID(readButton)} className="btn text-uppercase" onClick={this.changeColor}>
+              <button
+                name="readButton"
+                type="button"
+                id={setButtonID(readButton)}
+                className="btn text-uppercase"
+                onClick={this.changeColor}
+              >
                 <span>
                   <img src={ReadIcon} alt="addbutton" />
                 </span>
@@ -68,7 +72,13 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
           </Link>
           <Link to={ROUTES.TO_READ}>
             <div className="row">
-              <button name="toReadButton" type="button" id={setButtonID(toReadButton)} className="btn text-uppercase" onClick={this.changeColor}>
+              <button
+                name="toReadButton"
+                type="button"
+                id={setButtonID(toReadButton)}
+                className="btn text-uppercase"
+                onClick={this.changeColor}
+              >
                 <span>
                   <img src={ToReadIcon} alt="addbutton" />
                 </span>
@@ -77,7 +87,13 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
             </div>
           </Link>
             <div className="row">
-              <button name="pinnedButton" type="button" id={setButtonID(pinnedButton)} className="btn text-uppercase" onClick={this.changeColor}>
+              <button
+                name="pinnedButton"
+                type="button"
+                id={setButtonID(pinnedButton)}
+                className="btn text-uppercase"
+                onClick={this.changeColor}
+              >
                 <span>
                   <img src={PinIcon} alt="addbutton" />
                 </span>
@@ -85,7 +101,13 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
               </button>
             </div>
             <div className="row">
-              <button name="trashButton" type="button" id={setButtonID(trashButton)} className="btn text-uppercase" onClick={this.changeColor}>
+              <button
+                name="trashButton"
+                type="button"
+                id={setButtonID(trashButton)}
+                className="btn text-uppercase"
+                onClick={this.changeColor}
+              >
                 <span>
                   <img src={TrashIcon} alt="addbutton" />
                 </span>

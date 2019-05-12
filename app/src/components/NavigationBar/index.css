@@ -20,8 +20,12 @@
 	vertical-align: middle;
 	font-weight: bold;
 }
+.logoText link {
+	text-decoration: none;
+	color: #0D47A1;
+}
 .componentBox {
-	width: 80%; 
+	width: 85%; 
 	height: 64px;
 	display: table;
 	float: right;
@@ -62,6 +66,7 @@
 	height: 64px;
 	text-align: center;
 	display: table;
+	vertical-align: middle;
 }
 .settingText {
 	font-family: 'Barlow', sans-serif;

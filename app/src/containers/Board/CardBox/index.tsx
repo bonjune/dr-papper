@@ -7,15 +7,19 @@ import React from "react";
 import { IReview } from "../../../components/Firebase/interface"
 import { TestImage } from "../../../assets/img";
 import SmallTag from "../../../components/Tag";
+import { Row, Col } from 'reactstrap';
+
 
 interface ICardProps {
   title: string;
+  imgShow: boolean;
   summary: string;
   tags: string[];
 }
 
 interface ICardBoxProps {
   reviews: IReview[];
+  imgShow: boolean;
   cardPredicate: (review: IReview) => boolean;
 }
 
@@ -30,8 +34,8 @@ const papperview = () => {
 class Card extends React.Component<ICardProps> {
   render() {
     return (
-      <div className="col-sm-4 box papper-card" onClick={papperview}>
-        <img src={TestImage} alt="testimage"/>
+      <Col lg="4" className="box papper-card" onClick={papperview}>
+        {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
         <p className="title font-weight-normal">
           <div className="ellipse">
             {this.props.title}
@@ -45,7 +49,7 @@ class Card extends React.Component<ICardProps> {
             <SmallTag tagName={tag} />
           ))}
         </section>
-      </div>
+      </Col>
     )
   }
 
@@ -58,21 +62,21 @@ class CardBox extends React.Component<ICardBoxProps, any> {
   }
 
   render() {
-    const { cardPredicate } = this.props;
+    const { cardPredicate, imgShow } = this.props;
     const reviews = this.props.reviews.filter(cardPredicate);
     return (
-      <div>
+      <Row>
         {reviews.map(review =>
           <Card
+            imgShow={imgShow}
             title={review.title}
             summary={review.comment}
             tags={review.tags.map(tag => tag.name)}
           />
         )}
-      </div>
+      </Row>
     )
   }
-
 }
 
 export default CardBox;

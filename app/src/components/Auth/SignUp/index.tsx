@@ -1,5 +1,7 @@
 import React, { ChangeEvent, FormEvent } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import * as ROUTES from "../../../constants/routes";
 
 import { withFirebase } from "../../Firebase";
 
@@ -43,29 +45,28 @@ class SignUpFormBase extends React.Component<
   }
 
   onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    const {username, email, password} = this.state
+    const { username, email, password } = this.state;
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
-      .then((authUser: firebase.User) => {
-        return this.props.firebase
-          .user(authUser.uid)
+      .then((authUser: firebase.auth.UserCredential) => {
+        return authUser.user ? this.props.firebase
+          .user(authUser.user.uid)
           .set({
             username,
             email,
-          });
+          }) : null;
       })
-      .then((authUser: firebase.User) => {
+      .then(() => {
         this.setState({
           ...SignUpFormInit
         })
+        this.props.history.push(ROUTES.HOME);
       })
       .catch((error: any) => {
         if (error !== undefined) {
           alert(error.message)
         }
-        this.setState({
-          error
-        })
+        this.setState({ error });
       });
     event.preventDefault();
   }
@@ -100,13 +101,13 @@ class SignUpFormBase extends React.Component<
           />
           <input
             name="password"
-            type="text"
+            type="password"
             onChange={this.onSignUpFormChange}
             placeholder="Your Password"
           />
           <input
             name="passwordConfirm"
-            type="text"
+            type="password"
             onChange={this.onSignUpFormChange}
             placeholder="Your Password Again"
           />
@@ -117,7 +118,32 @@ class SignUpFormBase extends React.Component<
   }
 }
 
+export const SignUpPage = () => (
+  <div className="sign-up">
+    <SignUpForm/>
+  </div>
+)
+
+
+export const SignUpLink = () => {
+  return (
+      <div className="row text-center">
+      <div className="col">
+      <p>
+          Don't have an account?
+          <Link
+            to={ROUTES.SIGN_UP}
+            className="sign-up-link">
+            Sign Up
+          </Link>
+      </p>
+      </div>
+      </div>
+  );
+}
+
 const SignUpForm = compose(
+  withRouter,
   withFirebase
 )(SignUpFormBase);
 

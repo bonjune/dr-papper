@@ -2,7 +2,6 @@
  * Author: Bongjun Jang
  */
 
-// Lib
 import React from "react";
 import { Row } from 'reactstrap';
 
@@ -27,8 +26,9 @@ const CardBox = (props: ICardBoxProps) => {
   return (
     <Row>
       {reviews.length !== 0
-        ? reviews.map(review =>
+        ? reviews.map((review) =>
           <Card
+            key={`card-${review.reviewID}`}
             review={review}
             imgShow={imgShow}
           />

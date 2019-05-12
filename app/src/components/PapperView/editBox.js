@@ -11,7 +11,7 @@ import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 export default class EditBox extends Component {
 	constructor(props) {
-    super(props);
+		super(props);
   }
 
   render() {
@@ -39,7 +39,9 @@ class ToreadEdit extends React.Component {
         <FormGroup row>
           <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
           <Col sm={10}>
-            <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.comment}</div>
+            <div className="form-control-lg" style={{ border: "0px", fontSize: "1.25rem", marginBottom: "8px" }}>
+              {this.props.comment}
+            </div>
           </Col>
         </FormGroup>
 	    </div>
@@ -51,12 +53,15 @@ class ReadEdit extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			format : this.props.boxes[0].format,
-			subtitle : this.props.boxes[0].subtitle,
-			content : this.props.boxes[0].content,
-			figsrc : this.props.boxes[0].figsrc
+			format : this.props.boxes.format,
+			subtitle : this.props.boxes.subtitle,
+			content : this.props.boxes.content,
+			figsrc : this.props.boxes.figsrc
 		};
+
 	}
+
+
 
 	render() {
 		var {format} = this.state;
@@ -89,10 +94,10 @@ class ContentFormat extends React.Component {
 			<Row>
         <Col style={{margin:"15px"}}>
           <Row style={{height:"50px"}}>
-            <div class="form-control-lg" style={{background:"#E8EAF6",color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
+            <div className="form-control-lg" style={{background:"#E8EAF6",color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
           </Row>
           <Row style={{height:"140px", marginTop:"10px"}}>
-            <div class="form-control-lg" style={{border: "0px", fontSize:"1rem", marginBottom:"8px"}}>{this.props.content}</div>
+            <div className="form-control-lg" style={{border: "0px", fontSize:"1rem", marginBottom:"8px"}}>{this.props.content}</div>
           </Row>
         </Col>
       </Row>
@@ -104,7 +109,7 @@ class FigureFormatBase extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			figsrc : ""
+			figsrc : null
 		}
 		if(this.props.figsrc) {
 			this.props.firebase.downloadFigure(this.props.figsrc)
@@ -117,14 +122,14 @@ class FigureFormatBase extends React.Component {
 			<div style={{background:"white", marginTop:"10px", padding:"5px"}}>
         <Row>
           <Col xs="4" style={{height:"200px", margin:"15px"}}>
-          	<img src={this.state.figsrc !== "" ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
+          	<img src={this.state.figsrc ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
         	</Col>
           <Col xs="7" style={{margin:"15px"}}>
             <Row style={{height:"50px"}}>
-              <div class="form-control-lg" style={{background:"#E8EAF6", color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
+              <div className="form-control-lg" style={{background:"#E8EAF6", color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
             </Row>
             <Row style={{height:"140px", marginTop:"10px"}}>
-              <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.content}</div>
+              <div className="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.content}</div>
             </Row>
           </Col>
         </Row>

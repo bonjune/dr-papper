@@ -7,7 +7,7 @@ import { Row, Col } from "reactstrap";
 import SmallTag from "../../../components/Tag";
 import PapperView from "../../../components/PapperView";
 
-import { TestImage } from "../../../assets/img";
+import { TestImage} from "../../../assets/img";
 
 import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
 import { IReview } from "../../../components/Firebase/interface";
@@ -31,17 +31,21 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     }
 
     if (this.props.review.boxes) {
-      const boxKeys = Object.keys(this.props.review.boxes)
-      for (let i = 0; i < boxKeys.length; i++) {
-        let fig = this.props.review.boxes[boxKeys[i]].figsrc
-        if (fig) {
-          this.props.firebase.downloadFigure(fig)
-            .then(figsrc => this.setState({ figsrc }));
-          break;
-        }
-      }
+      const { figsrc } = this.props.review.boxes[0];
+      this.props.firebase.downloadFigure(figsrc)
+        .then(url =>
+          this.setState(current => {
+            if (this.state.figsrc !== null) {
+              return ({ ...current })
+            }
+            return ({
+              ...current,
+              figsrc: url
+            })
+          }));
     }
   }
+
   onPinButtonClicked = () => {
     const { reviewID } = this.props.review;
     this.props.firebase.review(reviewID).update({
@@ -51,16 +55,12 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
 
   onDeleteButtonClicked = () => {
     const { reviewID, trash } = this.props.review;
-    // The Papper is already in trash bin
-    if (trash) {
-      // Delete the papper permanantly
-      this.props.firebase.review(reviewID).remove();
+    if (trash) { // The Papper is already in trash bin
+      this.props.firebase.review(reviewID).remove(); // Delete the papper permanantly
     }
-    // The papper is not in trash bin
-    else {
-      // Move the papper to the trash bin
+    else { // The papper is not in trash bin
       this.props.firebase.review(reviewID).update({
-        trash: true
+        trash: true // Move the papper to the trash bin
       })
     }
    }
@@ -79,23 +79,25 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
+    const { figsrc } = this.state;
+    const { imgShow } = this.props;
     const { trash } = this.props.review;
     return (
       <Col lg="4">
         <div>
           <section className="card-tags">
-            <Row>
+            <Row >
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onPinButtonClicked}
               >
-                {this.props.review.pinned ? <span>Unpin </span>: <span>Pin</span>}
+                {this.props.review.pinned ? <span>Unpin</span>: <span>Pin</span>}
               </button>
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onDeleteButtonClicked}
               >
@@ -133,15 +135,15 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 toggle={this.showPapperView}
               /> 
             : null}
-          {this.props.imgShow
-            ? (this.state.figsrc
-              ? <img src={this.state.figsrc} alt="figure" />
+          {imgShow
+            ? (figsrc
+              ? <img src={figsrc} style={{ height: "200px" }} alt="figure" />
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">
-            <div className="ellipse">
+            <span className="ellipse" style={{ fontWeight: "bold" }}>
               {this.props.review.title}
-            </div>
+            </span>
           </p>
           <p className="content font-weight-light multi-ellipse">
             {this.props.review.comment}
@@ -151,8 +153,10 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
           <section className="card-tags">
             {this.props.review.tags
               ? (this.props.review.tags.map((tag, i) => (
-                <SmallTag keyName={`card-${i}`} tagName={tag.name} />
-                )))
+                <SmallTag
+                  key={`card-smalltag-${i}`}
+                  tagName={tag.name}
+                />)))
               : null}
           </section>
         </div>

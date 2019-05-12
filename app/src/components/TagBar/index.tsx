@@ -1,6 +1,5 @@
 import React from "react";
-import { compose } from 'recompose';
-import SmallTag, { withTags, TagsContext } from '../Tag'
+import SmallTag, { TagsContext } from '../Tag'
 
 const TagBarBase = (props: any) => (
   <TagsContext.Consumer>
@@ -24,8 +23,6 @@ const TagBarBase = (props: any) => (
   </TagsContext.Consumer>
 );
 
-const TagBar = compose(
-  withTags
-)(TagBarBase);
+const TagBar = TagBarBase;
 
 export default TagBar;

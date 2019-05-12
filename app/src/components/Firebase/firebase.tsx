@@ -95,12 +95,12 @@ class Firebase extends React.Component<any, {}> {
 
   tags = () => this.db.ref('tags');
 
-  makeNewPapperReview = (entry: IReview) => {
+  makeNewPapperReview = async (entry: IReview) => {
       const newReviewRef = this.reviews().push();
       entry.reviewID = newReviewRef.key as string;
-      newReviewRef.set({
+      return await newReviewRef.set({
           ...entry
-      })
+      }).then(() => entry.reviewID)
   }
 
   updatePapperReview = (reviewKey: string, entry: IReview) => {
@@ -115,13 +115,23 @@ class Firebase extends React.Component<any, {}> {
       targetReviewRef.remove();
   }
 
-  makeNewTag = (tagName: string) => {
-    const newTagRef = this.tags().push();
-    newTagRef.set(({
-      name: tagName,
-      reviews: []
-    } as ITag));
-    return newTagRef.key;
+  makeNewTag = (tagName: string, reviewID : string) => {
+    const tagRef = this.db.ref('tags/' + tagName);
+    tagRef.once('value').then(function(snapshot) {
+      
+      if(snapshot.val() === null){
+        tagRef.set(({
+          key: tagName,
+          name: tagName,
+          reviews: [reviewID]
+        } as ITag))
+      }
+      else{
+        const reviews = snapshot.val().reviews
+        reviews.push(reviewID)
+        tagRef.child('reviews').set(reviews)
+      }
+    })
   }
 
   uploadFigure = (figure: any, filename: string) => {

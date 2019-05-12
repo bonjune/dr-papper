@@ -19,7 +19,7 @@ export default class EditBox extends Component {
   		<div>
   			{
   				this.props.toRead
-  					? <ToreadEdit />
+  					? <ToreadEdit comment={this.props.comment}/>
   					: <ReadEdit />
   			}
   		</div>
@@ -31,19 +31,15 @@ export default class EditBox extends Component {
 class ToreadEdit extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			content: "hello",
-		};
 	}
 
 	render() {
-		console.log(this.props);
 		return (
       <div style={{background:"white", marginTop:"10px", padding:"5px 5px 5px 1px"}}>
         <FormGroup row>
           <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
           <Col sm={10}>
-            <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.content}</div>
+            <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.comment}</div>
           </Col>
         </FormGroup>
 	    </div>
@@ -62,7 +58,7 @@ class ReadEdit extends React.Component {
 	}
 
 	render() {
-		var {format} = this.state
+		var {format} = this.state;
 		var f
 		switch(format) {
 			case 0:

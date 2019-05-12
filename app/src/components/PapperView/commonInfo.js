@@ -1,5 +1,6 @@
 import React, { Component }from "react";
-import {FormGroup, Label, Input, Col} from 'reactstrap'
+import {FormGroup, Label, Input, Col} from 'reactstrap';
+import SmallTag from "../Tag";
 
 export default class CommonInfo extends React.Component{
     constructor(props) {
@@ -44,7 +45,11 @@ export default class CommonInfo extends React.Component{
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Tags</Label>
                     <Col sm={10}>
-                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.tags}</div>
+                        <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>
+                          {this.props.tags.map(tag => (
+                            <SmallTag tagName={tag} />
+                          ))}
+                        </div>
                     </Col>
                 </FormGroup>
             </div>

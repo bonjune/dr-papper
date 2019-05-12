@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import * as ROUTES from "../../../constants/routes";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Label, Col, Row, Input } from 'reactstrap';
 
 import { withFirebase } from "../../Firebase";
 
@@ -11,6 +12,7 @@ interface ISignUpForm {
   password: string;
   passwordConfirm: string;
   error: null;
+  signModalShow: boolean;
 }
 
 const SignUpFormInit: ISignUpForm = {
@@ -18,7 +20,8 @@ const SignUpFormInit: ISignUpForm = {
   email: "",
   password: "",
   passwordConfirm: "",
-  error: null
+  error: null,
+  signModalShow: true,
 }
 
 class SignUpFormBase extends React.Component<
@@ -27,7 +30,8 @@ class SignUpFormBase extends React.Component<
   constructor(props: any) {
     super(props)
     this.state = {
-      ...SignUpFormInit
+      ...SignUpFormInit,
+      signModalShow: true,
     }
   }
 
@@ -71,6 +75,12 @@ class SignUpFormBase extends React.Component<
     event.preventDefault();
   }
 
+  toggle = () => {
+    this.setState(prevState => ({
+      signModalShow: !prevState.signModalShow,
+    }));
+  }
+
   render() {
     const validateForm = () => {
       const {
@@ -85,35 +95,38 @@ class SignUpFormBase extends React.Component<
         password === passwordConfirm
     }
     return (
-      <div className="sign-up">
-        <form onSubmit={this.onSubmit}>
-          <input
-            name="username"
-            type="text"
-            onChange={this.onSignUpFormChange}
-            placeholder="Username"
-          />
-          <input
-            name="email"
-            type="text"
-            onChange={this.onSignUpFormChange}
-            placeholder="Your Email"
-          />
-          <input
-            name="password"
-            type="password"
-            onChange={this.onSignUpFormChange}
-            placeholder="Your Password"
-          />
-          <input
-            name="passwordConfirm"
-            type="password"
-            onChange={this.onSignUpFormChange}
-            placeholder="Your Password Again"
-          />
-          <button type="submit" disabled={!validateForm()}>Sign In</button>
+      <Modal isOpen={this.state.signModalShow} size="lg">
+        <ModalHeader
+          style={{padding: 0, textAlign:'center', height: "70px", verticalAlign: "center"}}
+          cssModule={{ 'modal-title': 'w-100 mb-0' }}>
+          <div style={{ fontSize: "26px", marginTop: "22px" }}>
+            Sign up
+          </div>
+        </ModalHeader>
+        <form style={{width: "100%"}} onSubmit={this.onSubmit}>
+          <ModalBody>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Username</Label></Col>
+                  <Col lg="10"><Input type="text" name="username" bsSize="lg" placeholder="Username" onChange={this.onSignUpFormChange}/></Col>
+                </Row>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Email</Label></Col>
+                  <Col lg="10"><Input type="text" name="email" bsSize="lg" placeholder="Your Email" onChange={this.onSignUpFormChange}/></Col>
+                </Row>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Password</Label></Col>
+                  <Col lg="10"><Input type="password" name="password" bsSize="lg" placeholder="Your Password" onChange={this.onSignUpFormChange}/></Col>
+                </Row>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Password</Label></Col>
+                  <Col lg="10"><Input type="password" name="passwordConfirm" bsSize="lg" placeholder="Your Password Again" onChange={this.onSignUpFormChange}/></Col>
+                </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button type="submit" block disabled={!validateForm()} style={{background:"#B0BEC5", border:"0"}} onClick={this.toggle}>Sign in</Button>
+          </ModalFooter>
         </form>
-      </div>
+      </Modal>
     )
   }
 }
@@ -126,6 +139,7 @@ export const SignUpPage = () => (
 
 
 export const SignUpLink = () => {
+  const sign = " Sign up"
   return (
       <div className="row text-center">
       <div className="col">
@@ -134,7 +148,7 @@ export const SignUpLink = () => {
           <Link
             to={ROUTES.SIGN_UP}
             className="sign-up-link">
-            Sign Up
+            {sign}
           </Link>
       </p>
       </div>

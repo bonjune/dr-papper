@@ -4,10 +4,13 @@ import * as ROUTES from "../../../constants/routes"
 import { compose } from 'recompose';
 import { SignUpLink } from "../SignUp";
 import { withRouter } from 'react-router';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Label, Col, Row, Input } from 'reactstrap';
+
 
 interface ISignInForm {
   email: string;
   password: string;
+  signModalShow: boolean;
 }
 
 const SignInFormInit = {
@@ -18,8 +21,6 @@ const SignInFormInit = {
 const SignInPage = () => (
   <div className="sign-in">
     <SignInForm/>
-    <hr/>
-    <SignUpLink/>
   </div>
 
 );
@@ -28,7 +29,8 @@ class SignInFormBase extends React.Component<any, ISignInForm> {
   constructor(props: any) {
     super(props)
     this.state = {
-      ...SignInFormInit
+      ...SignInFormInit,
+      signModalShow : true,
     }
   }
 
@@ -60,28 +62,41 @@ class SignInFormBase extends React.Component<any, ISignInForm> {
     event.preventDefault();
   }
 
+  toggle = () => {
+    this.setState(prevState => ({
+      signModalShow: !prevState.signModalShow,
+    }));
+  }
+
   render() {
     return (
-      <div className="sign-in-form">
-        <form onSubmit={this.onSubmit}>
-          <input
-            name="email"
-            onChange={this.onChange}
-            type="text"
-            placeholder="Your Email"
-          />
-          <input
-            name="password"
-            onChange={this.onChange}
-            type="password"
-            placeholder="Your Password"
-          />
-          <button type="submit">
-            Sign In
-          </button>
+      <Modal isOpen={this.state.signModalShow} size="lg">
+        <ModalHeader
+          style={{padding: 0, textAlign:'center', height: "70px", verticalAlign: "center"}}
+          cssModule={{ 'modal-title': 'w-100 mb-0' }}>
+          <div style={{ fontSize: "26px", marginTop: "22px" }}>
+            Sign in
+          </div>
+        </ModalHeader>
+        <form style={{width: "100%"}} onSubmit={this.onSubmit}>
+          <ModalBody>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Email</Label></Col>
+                  <Col lg="10"><Input type="text" name="email" bsSize="lg" placeholder="Your Email" onChange={this.onChange}/></Col>
+                </Row>
+                <Row>
+                  <Col lg="2"><Label size="lg" style={{textAlign:"right"}}>Password</Label></Col>
+                  <Col lg="10"><Input type="password" name="password" bsSize="lg" placeholder="Your Password" onChange={this.onChange}/></Col>
+                </Row>
+                <Row>
+                  <Col lg="12" style={{marginTop: "8px"}}><SignUpLink/></Col>
+                </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button type="submit" block style={{background:"#B0BEC5", border:"0"}} onClick={this.toggle}>Sign in</Button>
+          </ModalFooter>
         </form>
-      </div>
-      
+      </Modal>
     )
   }
 }

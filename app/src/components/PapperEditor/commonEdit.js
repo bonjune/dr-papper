@@ -26,7 +26,7 @@ export default class CommonEdit extends React.Component{
         };
         this.handleDelete = this.handleDelete.bind(this);
         this.handleAddition = this.handleAddition.bind(this);
-        console.log(this.props)
+        //console.log(this.props)
     }
     
     onInputChange = event => {
@@ -43,7 +43,7 @@ export default class CommonEdit extends React.Component{
         const { tags } = this.state;
         this.setState({
          tags: tags.filter((tag, index) => index !== i),
-        });
+        }, ()=>this.props.handleEdit(this.state));
     }
 
     handleAddition(tag) {
@@ -52,7 +52,7 @@ export default class CommonEdit extends React.Component{
 
 
     render() {
-        console.log(this.state)
+        //console.log(this.state)
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>

@@ -15,6 +15,7 @@ import SignInPage from '../../components/Auth/SignIn';
 import { SignUpPage } from 'src/components/Auth/SignUp';
 import HomePage from '../Home';
 import Search from '../../components/Search'
+import { withTags } from 'src/components/Tag';
 
 const App = () => (
   <HashRouter>
@@ -54,4 +55,4 @@ const App = () => (
   </HashRouter>
 );
 
-export default App;
+export default withTags(App);

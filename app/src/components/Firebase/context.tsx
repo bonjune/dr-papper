@@ -1,3 +1,6 @@
+/**
+ * Author: Bongjun Jang
+ */
 import React from "react";
 import Firebase from '.';
 

@@ -52,13 +52,15 @@ export class PapperView extends React.Component {
                   toRead={this.props.toRead}
                   boxes={this.props.boxes}
                   comment={this.props.comment}
-                /> :  Object.keys(this.props.boxes).map(key => 
+                /> : (this.props.boxes
+                  ? Object.keys(this.props.boxes).map(key => 
                   <EditBox
                   toRead={this.props.toRead}
                   boxes={this.props.boxes[key]}
                   comment={this.props.comment}
-                />
-                )}
+                    />)
+                  : null)
+                }
                 
               </ModalBody>
               <ModalFooter style={{background:this.modalBgColor}}>

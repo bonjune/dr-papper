@@ -4,6 +4,7 @@
  */
 import React from "react";
 import { IReview } from 'src/components/Firebase/interface';
+import { Row, Col } from 'reactstrap';
 // import pinIcon from '../../assets/icons/pinIcon.png';
 import { IFirebaseProps, withFirebase } from "../../components/Firebase";
 import CardBox, { CardPredicate } from './CardBox';
@@ -51,18 +52,18 @@ class BoardBase extends React.Component<
     const imgShow = boardPredicate === BoardPredicate.Read;
     return (
       <div className="papper-board">
-        <div className="row">
-          <div className="col-sm-auto">
+        <Row>
+          <Col lg="auto">
             <h3 className="text-uppercase">pinned paper</h3>
-          </div>
-        </div>
+          </Col>
+        </Row>
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
-        <div className="row">
-          <div className="col-sm-auto">
+        <Row>
+          <Col lg="auto">
             <h3 className="text-uppercase">archived</h3>
-          </div>
-        </div>
+          </Col>
+        </Row>
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
       </div>
     )

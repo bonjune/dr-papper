@@ -18,20 +18,18 @@ class SearchBarBase extends Component {
     }
     this.props.firebase.tags()
       .once('value').then(async snapshot => {
-          let raw = snapshot.val();
-          var result = [];
-          var keys = Object.keys(raw);
-          keys.forEach(function(key){
-              result.push(raw[key]);
+        const result = [];
+        await snapshot.forEach((child, i) => {
+          const data = child.val();
+          result.push({
+            id: i,
+            label: data.name
           });
-
-          // to Json
-          result.map((val, key) => {
-            var aJson = new Object();
-            aJson.id = key;
-            aJson.label = val.name;
-            this.state.items.push(aJson);
-          });
+        });
+        this.setState(current => ({
+          ...current,
+          items: result
+        }));
       })  
   }
 
@@ -41,33 +39,36 @@ class SearchBarBase extends Component {
     }
   }
 
-  click = e => {
+  onSearchClick = e => {
     console.log(this.state.value);
     const { value } = this.state;
     this.props.history.push(`/show/${value}`);
+    window.location.reload();
   }
 
   render() {
   return (
     <InputGroup style={{marginTop: "13px"}}>
-    <ReactAutocomplete
-    items={this.state.items}
-    shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-    getItemValue={item => item.label}
-    renderItem={(item, highlighted) =>
-      <div
-        key={item.id}
-        style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
-      >
-        {item.label}
-      </div>
-    }
-    value={this.state.value}
-    onChange={e => this.setState({ value: e.target.value })}
-    onSelect={value => this.setState({ value })}
-    onKeyPress={this._handleKeyPress}
-  />
-  <Button color="secondary" onClick={this.click}>search</Button>
+      <ReactAutocomplete
+        items={this.state.items}
+        shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+        getItemValue={item => item.label}
+        renderItem={(item, highlighted) =>
+          <div
+            key={item.id}
+            style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+          >
+            {item.label}
+          </div>
+        }
+        value={this.state.value}
+        onChange={e => this.setState({ value: e.target.value })}
+        onSelect={value => this.setState({ value })}
+        onKeyPress={this._handleKeyPress}
+      />
+      <Button color="secondary" onClick={this.onSearchClick}>
+        search
+      </Button>
   </InputGroup>
   )
   }

@@ -38,6 +38,15 @@ code {
   font-size: 90%;
 }
 
+/* Tag */
+.papper-tag a {
+  color: #212121;
+}
+
+.papper-tag a:visited {
+  color: #212121;
+}
+
 /* papperboard */
 .papper-board {
   padding-top: 10px;

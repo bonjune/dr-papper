@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow|Pacifico');
 
 .navBar {
-	background-color: #E8EAF6;
+	background-color: #E3F2FD;
 	width: 100%;
 	height: 64px;
 	top: 0;
@@ -15,17 +15,17 @@
 }
 .logoText {
 	font-family: 'Pacifico', cursive;
-	font-size: 23px;
+	font-size: 25px;
 	display: table-cell;
 	vertical-align: middle;
 	font-weight: bold;
 }
-.logoText link {
+.logoText a:visited {
 	text-decoration: none;
-	color: #0D47A1;
+	color: #212121;
 }
 .componentBox {
-	width: 85%; 
+	width: 80%; 
 	height: 64px;
 	display: table;
 	float: right;

@@ -42,9 +42,9 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
   onPinButtonClicked = () => {
     const { reviewID } = this.props.review;
-    this.props.firebase.review(reviewID).set({
+    this.props.firebase.review(reviewID).update({
       pinned: !this.props.review.pinned
-    } as IReview)
+    })
   }
 
   onDeleteButtonClicked = () => {
@@ -72,7 +72,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 className="signout-btn btn text-uppercase"
                 onClick={this.onPinButtonClicked}
               >
-                Pin
+                {this.props.review.pinned ? <span>Unpin </span>: <span>Pin</span>}
               </button>
               <button
                 type="button"

@@ -16,6 +16,7 @@ import { SignUpPage } from 'src/components/Auth/SignUp';
 import HomePage from '../Home';
 import { compose } from 'recompose';
 import { AuthUserContext, withAuthentication } from "../../components/Auth/Session";
+import ShowSearch from '../../components/ShowSearch'
 
 
 const INITIAL_STATE = {
@@ -66,10 +67,10 @@ const AppForNonAuth = compose(
 const AppForAuthBase = () => (
     <Container className="full-width">
       <Row>
-        <Col lg="2">
+        <Col sm="2">
           <MenuBar />
         </Col>
-        <Col lg="10">
+        <Col sm="10">
           <TagBar />
           <Switch>
             <Route
@@ -88,6 +89,7 @@ const AppForAuthBase = () => (
             />
             <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
             <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
+            <Route path={ROUTES.SHOW} component ={ShowSearch} />
           </Switch>
         </Col>
       </Row>

@@ -34,7 +34,7 @@ const papperview = () => {
 class Card extends React.Component<ICardProps> {
   render() {
     return (
-      <Col lg="4" className="box papper-card" onClick={papperview}>
+      <Col sm="4" className="box papper-card" onClick={papperview}>
         {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
         <p className="title font-weight-normal">
           <div className="ellipse">

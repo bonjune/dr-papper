@@ -11,7 +11,6 @@ class SearchBarBase extends Component {
     }
     this.props.firebase.tags()
       .once('value').then(async snapshot => {
-          console.log(snapshot.val());
           let raw = snapshot.val();
           var result = [];
           var keys = Object.keys(raw);
@@ -29,8 +28,10 @@ class SearchBarBase extends Component {
       })
   }
 
-  componentDidMount = () => {
-    
+  _handleKeyPress = e => {
+    if(e.key === 'Enter'){
+      console.log('enter');
+    }
   }
 
   render() {
@@ -50,6 +51,7 @@ class SearchBarBase extends Component {
     value={this.state.value}
     onChange={e => this.setState({ value: e.target.value })}
     onSelect={value => this.setState({ value })}
+    onKeyPress={this._handleKeyPress}
   />
   )
   }

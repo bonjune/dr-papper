@@ -53,14 +53,14 @@ class BoardBase extends React.Component<
     return (
       <div className="papper-board">
         <Row>
-          <Col lg="auto">
+          <Col sm="auto">
             <h3 className="text-uppercase">pinned paper</h3>
           </Col>
         </Row>
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
         <Row>
-          <Col lg="auto">
+          <Col sm="auto">
             <h3 className="text-uppercase">archived</h3>
           </Col>
         </Row>

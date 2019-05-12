@@ -59,40 +59,51 @@ class Card extends React.Component<ICardProps, ICardState> {
 
   render() {
     return (
-      <Col lg="4" className="box papper-card" onClick={this.papperview}>
-        {this.state.modalShow 
-          ? <PapperView title={this.props.title}
-                        authors={this.props.authors}
-                        publishDate={this.props.publishDate}
-                        publishedAt={this.props.publishedAt}
-                        link={this.props.link}
-                        toRead={this.props.toRead}
-                        tags={this.props.tags}
-                        boxex={this.props.boxes}
-                        comment={this.props.summary}
+      <Col lg="4">
+        <div>
+          <section className="card-tags">
+            <Row>
+              <button type="button" style={{float:"right", fontSize: "14px"}} className="signout-btn btn text-uppercase">Pin</button>
+              <button type="button" style={{float:"right", fontSize: "14px"}} className="signout-btn btn text-uppercase">Delete</button>
+            </Row>
+          </section>
+        </div>
+        <div className="box papper-card" onClick={this.papperview}>
+          {this.state.modalShow 
+            ? <PapperView title={this.props.title}
+                          authors={this.props.authors}
+                          publishDate={this.props.publishDate}
+                          publishedAt={this.props.publishedAt}
+                          link={this.props.link}
+                          toRead={this.props.toRead}
+                          tags={this.props.tags}
+                          boxes={this.props.boxes}
+                          comment={this.props.summary}
 
-                        modalShow={this.state.modalShow}
-                        toggle={this.papperview}
-                         /> 
-          : <div></div> }
-        {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
-        <p className="title font-weight-normal">
-          <div className="ellipse">
-            {this.props.title}
-          </div>
-        </p>
-        <p className="content font-weight-light multi-ellipse">
-          {this.props.summary}
-        </p>
-        <section className="card-tags">
-          {this.props.tags.map(tag => (
-            <SmallTag tagName={tag} />
-          ))}
-        </section>
+                          modalShow={this.state.modalShow}
+                          toggle={this.papperview}
+                           /> 
+            : <div></div> }
+          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
+          <p className="title font-weight-normal">
+            <div className="ellipse">
+              {this.props.title}
+            </div>
+          </p>
+          <p className="content font-weight-light multi-ellipse">
+            {this.props.summary}
+          </p>
+        </div>
+        <div>
+          <section className="card-tags">
+            {this.props.tags.map(tag => (
+              <SmallTag tagName={tag} />
+            ))}
+          </section>
+        </div>
       </Col>
     )
   }
-
 }
 
 class CardBox extends React.Component<ICardBoxProps, any> {

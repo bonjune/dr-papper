@@ -39,6 +39,14 @@ const App = () => (
               path={ROUTES.TO_READ}
               render={(props) => <Board {...props} boardPredicate={BoardPredicate.ToRead} />}
             />
+            <Route
+              path={ROUTES.PINNED}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.Pinned} />}
+            />
+            <Route
+              path={ROUTES.DELETED}
+              render={(props) => <Board {...props} boardPredicate={BoardPredicate.Deleted} />}
+            />
           </Switch>
         </Col>
       </Row>

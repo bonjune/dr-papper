@@ -21,6 +21,8 @@ interface IBoardBaseState {
 export const BoardPredicate = {
   Read: (review: IReview) => !review.toRead && !review.trash,
   ToRead: (review: IReview) => review.toRead && !review.trash,
+  Pinned: (review: IReview) => review.pinned,
+  Deleted: (review: IReview) => review.trash
 }
 
 class BoardBase extends React.Component<

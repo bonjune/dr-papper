@@ -84,6 +84,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
               </button>
             </div>
           </Link>
+          <Link to={ROUTES.PINNED}>
             <div className="row">
               <button
                 name="pinnedButton"
@@ -98,6 +99,8 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                  Pinned
               </button>
             </div>
+          </Link>
+          <Link to={ROUTES.DELETED}>
             <div className="row">
               <button
                 name="trashButton"
@@ -112,6 +115,7 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
                  Deleted
               </button>
             </div>
+          </Link>
         </div>
       );
   }

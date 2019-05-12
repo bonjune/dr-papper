@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { compose } from "recompose";
 import { withFirebase } from '../../Firebase';
 import ReactAutocomplete from 'react-autocomplete';
 import { withRouter, Link } from 'react-router-dom';
 import {
   InputGroup,
   Input,
-  Button } from 'reactstrap';
+  Button
+} from 'reactstrap';
 
 class SearchBarBase extends Component {
   constructor(props) {
@@ -41,7 +43,8 @@ class SearchBarBase extends Component {
 
   click = e => {
     console.log(this.state.value);
-    this.props.history.push("/show/"+this.state.value);
+    const { value } = this.state;
+    this.props.history.push(`/show/${value}`);
   }
 
   render() {
@@ -70,6 +73,9 @@ class SearchBarBase extends Component {
   }
 }
 
-const SearchBar = withRouter(withFirebase(SearchBarBase));
+const SearchBar = compose(
+  withRouter,
+  withFirebase
+)(SearchBarBase);
 
 export default SearchBar

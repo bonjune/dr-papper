@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from 'recompose';
 import { withFirebase, IFirebaseProps } from '../Firebase';
 import { ITag } from '../Firebase/interface';
+import SmallTag from '../Tag'
 
 class TagBarBase extends React.Component<IFirebaseProps, {tags: string[]}> {
   tags: firebase.database.Reference
@@ -35,9 +36,7 @@ class TagBarBase extends React.Component<IFirebaseProps, {tags: string[]}> {
           <div className="sm-12">
             <div className="tag-bar-list">
               {this.state.tags.map((tagName) => (
-                <span className="badge badge-light font-weight-normal">
-                  {tagName}
-                </span>
+                <SmallTag tagName={tagName} />
                 ))}
             </div>
           </div>

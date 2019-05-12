@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AuthUserContext, withAuthentication } from "../../components/Auth/Session";
+import { AuthUserContext, withAuthentication, withAuthorization } from "../../components/Auth/Session";
 import * as ROUTES from "../../constants/routes";
+import { compose } from 'recompose';
 
 const HomePageBase = () => (
   <AuthUserContext.Consumer>
@@ -12,6 +13,11 @@ const HomePageBase = () => (
   </AuthUserContext.Consumer>
 )
 
-const HomePage = withAuthentication(HomePageBase);
+const condition = (authUser: any) => authUser != null;
+
+const HomePage = compose(
+  withAuthentication,
+  withAuthorization(condition)
+)(HomePageBase);
 
 export default HomePage;

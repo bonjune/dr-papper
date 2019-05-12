@@ -64,6 +64,7 @@ class CardBox extends React.Component<ICardBoxProps, any> {
   render() {
     const { cardPredicate, imgShow } = this.props;
     const reviews = this.props.reviews.filter(cardPredicate);
+    
     return (
       <Row>
         {reviews.map(review =>

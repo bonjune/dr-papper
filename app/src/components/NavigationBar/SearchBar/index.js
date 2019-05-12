@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../../Firebase';
 import ReactAutocomplete from 'react-autocomplete';
+import { withRouter, Link } from 'react-router-dom';
+import {
+  InputGroup,
+  Input,
+  Button } from 'reactstrap';
 
 class SearchBarBase extends Component {
   constructor(props) {
@@ -34,8 +39,14 @@ class SearchBarBase extends Component {
     }
   }
 
+  click = e => {
+    console.log(this.state.value);
+    this.props.history.push("/show/"+this.state.value);
+  }
+
   render() {
   return (
+    <InputGroup style={{marginTop: "13px"}}>
     <ReactAutocomplete
     items={this.state.items}
     shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
@@ -53,10 +64,12 @@ class SearchBarBase extends Component {
     onSelect={value => this.setState({ value })}
     onKeyPress={this._handleKeyPress}
   />
+  <Button color="secondary" onClick={this.click}>search</Button>
+  </InputGroup>
   )
   }
 }
 
-const SearchBar = withFirebase(SearchBarBase);
+const SearchBar = withRouter(withFirebase(SearchBarBase));
 
 export default SearchBar

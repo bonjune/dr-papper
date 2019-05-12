@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../Firebase';
 import Board, { BoardPredicate } from '../../containers/Board'
+import CardBox, { CardPredicate } from '../../containers/Board/CardBox';
+
 
 class ShowSearchBase extends Component {
   constructor(props){
@@ -9,19 +11,24 @@ class ShowSearchBase extends Component {
       value: '',
       cards: [],
     }
+    let result = [];
     this.state.value = props.match.params.name;
-    console.log(this.state.value);
     this.props.firebase.tags()
       .once('value').then(async snapshot => {
-        console.log(snapshot.val()[this.state.value]);
-        // firebase.database().ref('/users/' + userId).once('value')
+        snapshot.val()[this.state.value].reviews.map((value) => {
+          this.props.firebase.review(value)
+            .once('value').then(async snapshot => {
+                result.push(snapshot.val());
+                this.setState({cards:result});
+            })
+        })
       })
   }
 
   render() {
     return (
-      <div>
-        <Board boardPredicate={BoardPredicate.Read} />
+      <div className="papper-board">
+        <CardBox reviews={this.state.cards} cardPredicate={CardPredicate.Archived} imgShow="true"/>
       </div>
     )
   }

@@ -57,19 +57,44 @@ class BoardBase extends React.Component<
     const imgShow = boardPredicate === BoardPredicate.Read;
     return (
       <div className="papper-board">
-        <Row>
-          <Col sm="auto">
-            <h3 className="text-uppercase">pinned paper</h3>
-          </Col>
-        </Row>
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
-        <hr/>
-        <Row>
-          <Col sm="auto">
-            <h3 className="text-uppercase">archived</h3>
-          </Col>
-        </Row>
-        <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
+        {boardPredicate === BoardPredicate.Read || boardPredicate === BoardPredicate.ToRead
+          ?
+          <div>
+          <Row>
+            <Col sm="auto">
+              <h3 className="text-uppercase">pinned paper</h3>
+            </Col>
+          </Row>
+          <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
+          <hr/>
+          <Row>
+            <Col sm="auto">
+              <h3 className="text-uppercase">archived</h3>
+            </Col>
+          </Row>
+          <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
+          </div>
+           : null }
+        {boardPredicate === BoardPredicate.Pinned
+          ? <div>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase">pinned paper</h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
+            </div>
+           : null}
+        {boardPredicate === BoardPredicate.Deleted
+          ? <div>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase">deleted paper</h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
+            </div>
+           : null}
       </div>
     )
   }

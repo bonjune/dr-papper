@@ -96,7 +96,7 @@ class BoardBase extends React.Component<
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
-        {boardPredicate && search
+        {boardPredicate && (search === true)
           ? <div>
               <Row>
                 <Col sm="auto">
@@ -105,7 +105,7 @@ class BoardBase extends React.Component<
               </Row>
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
-          : <p>FUCK</p>}
+          : null}
       </div>
     )
   }

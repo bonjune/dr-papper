@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link, withRouter } from 'react-router-dom'
 import PapperEditor from "../PapperEditor";
 
 import * as ROUTES from "../../constants/routes";
 
 import { ReadIcon, ToReadIcon, PinIcon, TrashIcon } from '../../assets/icons';
+import { RouterProps } from 'react-router';
 
 interface IMenuBarButtonActivations {
   readButton: boolean;
@@ -20,12 +21,27 @@ const IMenuBarButtonActivationsInit: IMenuBarButtonActivations = {
   trashButton: false
 }
 
-class MenuBar extends Component<{}, IMenuBarButtonActivations> {
+class MenuBar extends React.Component<RouterProps, IMenuBarButtonActivations> {
   constructor(props: any) {
     super(props);
+    
+    const menu = (pathname: string)  => {
+      switch (pathname) {
+        case ROUTES.READ:
+          return "readButton";
+        case ROUTES.TO_READ:
+          return "toReadButton";
+        case ROUTES.PINNED:
+          return "pinnedButton";
+        case ROUTES.DELETED:
+          return "trashButton";
+        default:
+          return "default";
+      }
+    }
     this.state = {
       ...IMenuBarButtonActivationsInit,
-      readButton: true
+      [menu(this.props.history.location.pathname)]: true
     }
   }
 
@@ -122,4 +138,4 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
 
 }
 
-export default MenuBar;
+export default withRouter(MenuBar);

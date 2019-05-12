@@ -1,16 +1,24 @@
-import React, { Component } from 'react';
-import DatePicker from "react-date-picker";
-import { reviewEntry } from '../Firebase/reviewEntry';
-import { Button, ButtonGroup, Col, Row, Input, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label } from 'reactstrap'
+import React from 'react';
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Row,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label
+} from 'reactstrap'
 
 import CommonInfo from './commonInfo'
 import EditBox from './editBox'
 
-import { compose, withState } from "recompose";
-import { withFirebase } from "../Firebase";
-import addbutton from '../../assets/icons/MenuBar_addReview.png'
+import { compose } from "recompose";
 
-export class PapperView extends Component {
+export class PapperView extends React.Component {
     constructor(props) {
       super(props);
       this.modalBgColor = '#EEEEEE';

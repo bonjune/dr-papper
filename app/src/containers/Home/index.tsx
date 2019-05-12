@@ -1,6 +1,6 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import { AuthUserContext } from "../../components/Auth/Session";
+import { Link } from "react-router-dom";
+import { AuthUserContext, withAuthentication } from "../../components/Auth/Session";
 import * as ROUTES from "../../constants/routes";
 
 const HomePageBase = () => (
@@ -12,6 +12,6 @@ const HomePageBase = () => (
   </AuthUserContext.Consumer>
 )
 
-const HomePage = withRouter(HomePageBase);
+const HomePage = withAuthentication(HomePageBase);
 
 export default HomePage;

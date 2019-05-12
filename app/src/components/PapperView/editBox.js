@@ -19,8 +19,8 @@ export default class EditBox extends Component {
   		<div>
   			{
   				this.props.toRead
-  					? <ToreadEdit />
-  					: <ReadEdit />
+  					? <ToreadEdit comment={this.props.comment}/>
+  					: <ReadEdit boxes={this.props.boxes}/>
   			}
   		</div>
 		)
@@ -31,19 +31,15 @@ export default class EditBox extends Component {
 class ToreadEdit extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			content: "hello",
-		};
 	}
 
 	render() {
-		console.log(this.props);
 		return (
       <div style={{background:"white", marginTop:"10px", padding:"5px 5px 5px 1px"}}>
         <FormGroup row>
           <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
           <Col sm={10}>
-            <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.state.content}</div>
+            <div class="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.comment}</div>
           </Col>
         </FormGroup>
 	    </div>
@@ -55,18 +51,19 @@ class ReadEdit extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			format : 0,
-			subtitle : "Contribution",
-			content : "You can click on a link and jump to another document. When you move the mouse over a link, the mouse arrow will turn into a little ..."
+			format : this.props.boxes[0].format,
+			subtitle : this.props.boxes[0].subtitle,
+			content : this.props.boxes[0].content,
+			figsrc : this.props.boxes[0].figsrc
 		};
 	}
 
 	render() {
-		var {format} = this.state
+		var {format} = this.state;
 		var f
 		switch(format) {
 			case 0:
-				f = <FigureFormat subtitle={this.state.subtitle} content={this.state.content}/>
+				f = <FigureFormat subtitle={this.state.subtitle} content={this.state.content} figsrc={this.state.figsrc}/>
 				break
 			case 1:
 				f = <ContentFormat subtitle={this.state.subtitle} content={this.state.content}/>
@@ -103,9 +100,16 @@ class ContentFormat extends React.Component {
 	}
 }
 
-class FigureFormat extends React.Component {
+class FigureFormatBase extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			figsrc : ""
+		}
+		if(this.props.figsrc !== "") {
+			this.props.firebase.downloadFigure(this.props.figsrc)
+			.then(figsrc => this.setState({figsrc}))
+		}
 	}
 
 	render() {
@@ -113,7 +117,7 @@ class FigureFormat extends React.Component {
 			<div style={{background:"white", marginTop:"10px", padding:"5px"}}>
         <Row>
           <Col xs="4" style={{height:"200px", margin:"15px"}}>
-          	<img src={sample} style={{height:"100%", width:"100%"}}/>
+          	<img src={this.state.figsrc !== "" ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
         	</Col>
           <Col xs="7" style={{margin:"15px"}}>
             <Row style={{height:"50px"}}>
@@ -128,3 +132,5 @@ class FigureFormat extends React.Component {
 		)
 	}
 }
+
+const FigureFormat = withFirebase(FigureFormatBase);

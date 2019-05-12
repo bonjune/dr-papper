@@ -9,12 +9,15 @@ import { TestImage } from "../../../assets/img";
 import SmallTag from "../../../components/Tag";
 import { Row, Col } from 'reactstrap';
 
+import PapperView from "../../../components/PapperView";
 
 interface ICardProps {
-  title: string;
   imgShow: boolean;
-  summary: string;
-  tags: string[];
+  review: IReview;
+}
+
+interface ICardState {
+  modalShow: boolean;
 }
 
 interface ICardBoxProps {
@@ -28,56 +31,92 @@ export const CardPredicate = {
   Archived: (review: IReview) => !review.pinned,
 }
 
-const papperview = () => {
-}
+class Card extends React.Component<ICardProps, ICardState> {
+  constructor(props: ICardProps) {
+    super(props);
+    this.state = {
+      modalShow: false,
+    }
+  }
+  papperview = () => {
+    this.setState(prevState => ({
+      modalShow: !prevState.modalShow,
+    }));
+  }
 
-class Card extends React.Component<ICardProps> {
   render() {
     return (
-      <Col sm="4" className="box papper-card" onClick={papperview}>
-        {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
-        <p className="title font-weight-normal">
-          <div className="ellipse">
-            {this.props.title}
-          </div>
-        </p>
-        <p className="content font-weight-light multi-ellipse">
-          {this.props.summary}
-        </p>
-        <section className="card-tags">
-          {this.props.tags.map(tag => (
-            <SmallTag tagName={tag} />
-          ))}
-        </section>
+      <Col lg="4">
+        <div>
+          <section className="card-tags">
+            <Row>
+              <button
+                type="button"
+                style={{ float: "right", fontSize: "14px" }}
+                className="signout-btn btn text-uppercase" >
+                Pin
+              </button>
+              <button
+                type="button"
+                style={{ float: "right", fontSize: "14px" }}
+                className="signout-btn btn text-uppercase" >
+                Delete
+              </button>
+            </Row>
+          </section>
+        </div>
+        <div className="box papper-card" onClick={this.papperview}>
+          {this.state.modalShow 
+            ? <PapperView
+                title={this.props.review.title}
+                authors={this.props.review.authors}
+                publishDate={this.props.review.publishDate}
+                publishedAt={this.props.review.publishedAt}
+                link={this.props.review.link}
+                toRead={this.props.review.toRead}
+                tags={this.props.review.tags.map(tag => tag.name)}
+                boxes={this.props.review.boxes}
+                comment={this.props.review.comment}
+
+                modalShow={this.state.modalShow}
+                toggle={this.papperview}
+              /> 
+            : null}
+          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : null}
+          <p className="title font-weight-normal">
+            <div className="ellipse">
+              {this.props.review.title}
+            </div>
+          </p>
+          <p className="content font-weight-light multi-ellipse">
+            {this.props.review.comment}
+          </p>
+        </div>
+        <div>
+          <section className="card-tags">
+            {this.props.review.tags.map((tag, i) => (
+              <SmallTag keyName={`card-${i}`} tagName={tag.name} />
+            ))}
+          </section>
+        </div>
       </Col>
     )
   }
-
 }
 
-class CardBox extends React.Component<ICardBoxProps, any> {
-  reviews: IReview[]
-  constructor(props: ICardBoxProps) {
-    super(props);
-  }
-
-  render() {
-    const { cardPredicate, imgShow } = this.props;
-    const reviews = this.props.reviews.filter(cardPredicate);
-    
-    return (
-      <Row>
-        {reviews.map(review =>
-          <Card
-            imgShow={imgShow}
-            title={review.title}
-            summary={review.comment}
-            tags={review.tags.map(tag => tag.name)}
-          />
-        )}
-      </Row>
-    )
-  }
+const CardBox = (props: ICardBoxProps) => {
+  const { cardPredicate, imgShow } = props;
+  const reviews = props.reviews.filter(cardPredicate);
+  return (
+    <Row>
+      {reviews.map(review =>
+        <Card
+          review={review}
+          imgShow={imgShow}
+        />
+      )}
+    </Row>
+  )
 }
 
 export default CardBox;

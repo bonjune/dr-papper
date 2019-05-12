@@ -5,9 +5,10 @@
 import React from "react";
 import { IReview } from 'src/components/Firebase/interface';
 import { Row, Col } from 'reactstrap';
-// import pinIcon from '../../assets/icons/pinIcon.png';
-import { IFirebaseProps, withFirebase } from "../../components/Firebase";
+import { IFirebaseProps } from "../../components/Firebase";
 import CardBox, { CardPredicate } from './CardBox';
+import { withAuthorization, withAuthentication } from "../../components/Auth/Session";
+import { compose } from "recompose";
 
 interface IBoardBaseProps {
   boardPredicate: (review: IReview) => boolean;
@@ -30,20 +31,22 @@ class BoardBase extends React.Component<
     this.state = {
       reviews: []
     };
-    this.props.firebase.reviews()
-      .once('value').then(async snapshot => {
-        const children: IReview[] = [];
-        await snapshot.forEach(child => {
-          const reviewVal: IReview = child.val();
-          children.push({
-            ...reviewVal
-          });
+  }
+
+  componentDidMount() {
+    this.props.firebase.reviews().on('value', snapshot => {
+      if (snapshot === null) return;
+      const children: IReview[] = [];
+      snapshot.forEach(child => {
+        const reviewVal: IReview = child.val();
+        children.push({
+          ...reviewVal
         })
-        this.setState({
-          reviews: children
-        });
-      }
-    );
+      })
+      this.setState({
+        reviews: children
+      })
+    });
   }
 
   render() {
@@ -70,5 +73,18 @@ class BoardBase extends React.Component<
   }
 }
 
-const Board = withFirebase(BoardBase);
+const condition = (authUser: any) => authUser != null;
+
+
+/**
+ * * Why no firebase context provider here?
+ * - withAuthorization already contains Firebase context
+ * - For readability, it'd better to add withFirebase
+ * - But for preformance, I omitted withFirebase. It works anyway!
+ */
+const Board = compose<any, any>(
+  withAuthentication,
+  withAuthorization(condition),
+)(BoardBase);
+
 export default Board;

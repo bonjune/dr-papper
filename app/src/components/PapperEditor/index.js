@@ -40,8 +40,8 @@ export class PapperEditorBase extends Component {
     }
     
     makeSubmitEntry = () => ({
-        "reviewId": "",
-        "userId": "defaultUser",
+        "reviewID": "",
+        "userID": "defaultUser",
     
         // Time Stamp
         "createAt": Date.now(),
@@ -60,7 +60,7 @@ export class PapperEditorBase extends Component {
         "trash": false,
     
         // Tags
-        "tags": this.state.tags,
+        "tags": this.state.tags.length === 0 ? "" : this.state.tags,
 
         //toread comment
         "comment": this.state.comment,
@@ -73,6 +73,8 @@ export class PapperEditorBase extends Component {
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
 
+        var {tags, suggestions} = this.state
+
         //uploading figure image in box
         if(this.state.boxes !== ""){
             var boxKeys = Object.keys(this.state.boxes)
@@ -84,17 +86,18 @@ export class PapperEditorBase extends Component {
                 }
         })}
 
-        //console.log(this.makeSubmitEntry();
-
-        if(this.state.tags !== ""){
-            this.state.tags.forEach(tag => {
-                this.props.firebase.makeNewTag(tag.text)
-        })}
+        //console.log(this.makeSubmitEntry());
 
         //set db
         this.props.firebase.makeNewPapperReview({
             ...this.makeSubmitEntry()
-        });
+        })
+        .then(key => {
+            tags.forEach(tag => {
+            this.props.firebase.makeNewTag(tag.text, key)
+        })})
+        
+        
 
         this.setState({
             ...reviewEntry,
@@ -122,6 +125,7 @@ export class PapperEditorBase extends Component {
     handleModal = () => {
         this.listTags()
         .then(() => this.setState(prevState => ({
+            ...reviewEntry,
             modalShow: !prevState.modalShow
         })))
     }

@@ -30,7 +30,7 @@ class SearchBarBase extends Component {
             aJson.label = val.name;
             this.state.items.push(aJson);
           });
-      })
+      })  
   }
 
   _handleKeyPress = e => {

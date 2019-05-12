@@ -1,7 +1,7 @@
 export const reviewEntry = {
     // Identification
-    "reviewId": "",
-    "userId": "",
+    "reviewID": "",
+    "userID": "",
 
     // Time Stamp
     "createAt": "",
@@ -23,7 +23,7 @@ export const reviewEntry = {
     "trash": false,
 
     // Tags
-    "tags": "",
+    "tags": [],
 
     // Note
     "comment": "",

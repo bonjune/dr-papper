@@ -38,6 +38,7 @@ export interface IReview {
     figure: string;
     subtitle: string;
     content: string;
+    figsrc: string;
   }>
 }
 

@@ -8,9 +8,7 @@ import { Row } from 'reactstrap';
 
 // Rendering Component
 import Card from "../Card";
-
-// Interface
-import { IReview } from "../../../components/Firebase/interface"
+import { IReview } from "../../../components/Firebase/interface";
 
 interface ICardBoxProps {
   reviews: IReview[];

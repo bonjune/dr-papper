@@ -54,11 +54,12 @@ export class PapperView extends React.Component {
                   comment={this.props.comment}
                 /> : (this.props.boxes
                   ? Object.keys(this.props.boxes).map(key => 
-                  <EditBox
-                  toRead={this.props.toRead}
-                  boxes={this.props.boxes[key]}
-                  comment={this.props.comment}
-                    />)
+                      <EditBox
+                        key={`edit-box-${key}`}
+                        toRead={this.props.toRead}
+                        boxes={this.props.boxes[key]}
+                        comment={this.props.comment}
+                      />)
                   : null)
                 }
                 

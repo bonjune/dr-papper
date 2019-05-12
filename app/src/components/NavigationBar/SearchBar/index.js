@@ -45,6 +45,7 @@ class SearchBarBase extends Component {
     console.log(this.state.value);
     const { value } = this.state;
     this.props.history.push(`/show/${value}`);
+    window.location.reload();
   }
 
   render() {

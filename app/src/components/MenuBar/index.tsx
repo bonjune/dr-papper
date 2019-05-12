@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-import PapperView from "../PapperView";
 import PapperEditor from "../PapperEditor";
 
 import * as ROUTES from "../../constants/routes";
@@ -52,7 +51,6 @@ class MenuBar extends Component<{}, IMenuBarButtonActivations> {
 
       return (
         <div className="component-menu-bar box">
-          <PapperView />
           <PapperEditor />
           <Link to={ROUTES.READ}>
             <div className="row">

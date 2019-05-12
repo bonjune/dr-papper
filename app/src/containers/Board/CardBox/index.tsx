@@ -4,17 +4,33 @@
 
 import React from "react";
 
-import { IReview } from "../../../components/Firebase/interface"
+import { IReview, Format } from "../../../components/Firebase/interface"
 import { TestImage } from "../../../assets/img";
 import SmallTag from "../../../components/Tag";
 import { Row, Col } from 'reactstrap';
 
+import PapperView from "../../../components/PapperView";
 
 interface ICardProps {
   title: string;
+  authors: string[];
+  publishDate: string;
+  publishedAt: string;
+  link: string;
+  toRead: boolean;
   imgShow: boolean;
   summary: string;
   tags: string[];
+  boxes: Array<{
+    format: Format;
+    figure: string;
+    subtitle: string;
+    content: string;
+  }>
+}
+
+interface ICardState {
+  modalShow: boolean;
 }
 
 interface ICardBoxProps {
@@ -28,13 +44,37 @@ export const CardPredicate = {
   Archived: (review: IReview) => !review.pinned,
 }
 
-const papperview = () => {
-}
+class Card extends React.Component<ICardProps, ICardState> {
+  constructor(props: ICardProps) {
+    super(props);
+    this.state = {
+      modalShow: false,
+    }
+  }
+  papperview = () => {
+    this.setState(prevState => ({
+      modalShow: !prevState.modalShow,
+    }));
+  }
 
-class Card extends React.Component<ICardProps> {
   render() {
     return (
-      <Col lg="4" className="box papper-card" onClick={papperview}>
+      <Col lg="4" className="box papper-card" onClick={this.papperview}>
+        {this.state.modalShow 
+          ? <PapperView title={this.props.title}
+                        authors={this.props.authors}
+                        publishDate={this.props.publishDate}
+                        publishedAt={this.props.publishedAt}
+                        link={this.props.link}
+                        toRead={this.props.toRead}
+                        tags={this.props.tags}
+                        boxex={this.props.boxes}
+                        comment={this.props.summary}
+
+                        modalShow={this.state.modalShow}
+                        toggle={this.papperview}
+                         /> 
+          : <div></div> }
         {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
         <p className="title font-weight-normal">
           <div className="ellipse">
@@ -70,8 +110,14 @@ class CardBox extends React.Component<ICardBoxProps, any> {
           <Card
             imgShow={imgShow}
             title={review.title}
+            authors={review.authors}
+            publishDate={review.publishDate}
+            publishedAt={review.publishedAt}
+            link={review.link}
+            toRead={review.toRead}
             summary={review.comment}
             tags={review.tags.map(tag => tag.name)}
+            boxes={review.boxes}
           />
         )}
       </Row>

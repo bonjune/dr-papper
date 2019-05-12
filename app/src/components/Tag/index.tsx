@@ -1,8 +1,8 @@
 import React from "react";
 
-const SmallTag = (props: { index: number; tagName: string; }) => (
+const SmallTag = (props: { keyName: string; tagName: string; }) => (
   <span
-    key={`tag-${props.index}`}
+    key={`tag-${props.keyName}`}
     className="badge badge-light font-weight-normal papper-tag"
   >
     #{props.tagName}

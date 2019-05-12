@@ -95,7 +95,7 @@ class Card extends React.Component<ICardProps, ICardState> {
         <div>
           <section className="card-tags">
             {this.props.review.tags.map((tag, i) => (
-              <SmallTag index={i} tagName={tag.name} />
+              <SmallTag keyName={`card-${i}`} tagName={tag.name} />
             ))}
           </section>
         </div>

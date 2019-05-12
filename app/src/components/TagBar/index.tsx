@@ -36,7 +36,7 @@ class TagBarBase extends React.Component<IFirebaseProps, {tags: string[]}> {
           <div className="sm-12">
             <div className="tag-bar-list">
               {this.state.tags.map((tagName, i) => (
-                <SmallTag index={i} tagName={tagName} />
+                <SmallTag keyName={`bar-${i}`} tagName={tagName} />
                 ))}
             </div>
           </div>

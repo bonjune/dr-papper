@@ -2,7 +2,6 @@
  * Author: Bongjun Jang
  */
 
-// Lib
 import React from "react";
 import { Row } from 'reactstrap';
 

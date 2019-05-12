@@ -4,29 +4,24 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import './tagbox.css'
 
 const KeyCodes = {
-    comma: 188,
-    enter: 13,
-  };
+  comma: 188,
+  enter: 13,
+};
   
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
 
 export default class CommonEdit extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            title : "",
+            title : "Untitled",
             authors : "",
             publishDate : "",
             published : "",
             link : "",
-            tags: [
-            ],
+            tags: [],
             suggestions: this.props.suggestions
         };
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddition = this.handleAddition.bind(this);
-        //console.log(this.props)
     }
     
     onInputChange = event => {
@@ -39,15 +34,18 @@ export default class CommonEdit extends React.Component{
         
     };
 
-    handleDelete(i) {
+    handleDelete = (i) => {
         const { tags } = this.state;
         this.setState({
          tags: tags.filter((tag, index) => index !== i),
         }, ()=>this.props.handleEdit(this.state));
     }
 
-    handleAddition(tag) {
-        this.setState(state => ({ tags: [...state.tags, tag] }), ()=>this.props.handleEdit(this.state));
+    handleAddition = (tag) => {
+      this.setState(state => (
+        { tags: [...state.tags, tag] }),
+        () => this.props.handleEdit(this.state)
+      );
     }
 
 

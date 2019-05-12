@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import { Row } from 'reactstrap';
 
 // Rendering Component
 import Card from "../Card";

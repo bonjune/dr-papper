@@ -33,15 +33,15 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   componentDidMount() {
-    if (this.props.review.boxes === null)
-      return;
-    const boxKeys = Object.keys(this.props.review.boxes)
-    for (let i = 0; i < boxKeys.length; i++) {
-      let fig = this.props.review.boxes[boxKeys[i]].figsrc;
-      if (fig) {
-        this.props.firebase.downloadFigure(fig)
-          .then(figsrc => this.setState({ figsrc }));
-        break;
+    if (this.props.review.boxes) {
+      const boxKeys = Object.keys(this.props.review.boxes)
+      for (let i = 0; i < boxKeys.length; i++) {
+        let fig = this.props.review.boxes[boxKeys[i]].figsrc;
+        if (fig) {
+          this.props.firebase.downloadFigure(fig)
+            .then(figsrc => this.setState({ figsrc }));
+          break;
+        }
       }
     }
   }

@@ -7,7 +7,8 @@ import { Row, Col } from "reactstrap";
 import SmallTag from "../../../components/Tag";
 import PapperView from "../../../components/PapperView";
 
-import { TestImage } from "../../../assets/img";
+import { TestImage} from "../../../assets/img";
+// import { PinIcon, TrashIcon } from "../../../assets/icons";
 
 import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
 import { IReview } from "../../../components/Firebase/interface";
@@ -88,10 +89,10 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
       <Col lg="4">
         <div>
           <section className="card-tags">
-            <Row>
+            <Row >
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onPinButtonClicked}
               >
@@ -99,7 +100,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               </button>
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onDeleteButtonClicked}
               >
@@ -137,13 +138,9 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 toggle={this.showPapperView}
               /> 
             : null}
-          {this.props.imgShow
-            ? (this.state.figsrc
-              ? <img src={this.state.figsrc} alt="figure" />
-              : <img src={TestImage} alt="testimage" />)
-            : null}
+          {this.props.imgShow ? this.state.figsrc ? <img src={this.state.figsrc} style={{height:"200px"}} alt="figure"/> :<img src={TestImage} alt="testimage"/> : null}
           <p className="title font-weight-normal">
-            <div className="ellipse">
+            <div className="ellipse" style={{ fontWeight: "bold" }}>
               {this.props.review.title}
             </div>
           </p>

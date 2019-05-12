@@ -73,6 +73,22 @@ code {
   margin-bottom: 10px;
 }
 
+/* Card */
+.card-tags button {
+  border-radius: 1px;
+  background-color: #FAFAFA;
+  height: 28px;
+}
+.card-tags button:hover{
+  background-color: #EEEEEE;
+}
+.card-tags button:focus,
+.card-tags button:active,
+.card-tags button:active {
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
+}
+
 /* NavBar */
 .navClass {
   width: 100%;

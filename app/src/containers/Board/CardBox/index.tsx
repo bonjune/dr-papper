@@ -94,7 +94,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 publishedAt={this.props.review.published}
                 link={this.props.review.link}
                 toRead={this.props.review.toRead}
-                tags={this.props.review.tags.map(tag => tag.name)}
+                tags={this.props.review.tags ? this.props.review.tags.map(tag => tag.name) : null}
                 boxes={this.props.review.boxes}
                 comment={this.props.review.comment}
 

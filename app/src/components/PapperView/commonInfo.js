@@ -46,9 +46,9 @@ export default class CommonInfo extends React.Component{
                     <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Tags</Label>
                     <Col sm={10}>
                         <div className="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>
-                          {this.props.tags.map(tag => (
+                          {this.props.tags ? this.props.tags.map(tag => (
                             <SmallTag tagName={tag} />
-                          ))}
+                          )) : null}
                         </div>
                     </Col>
                 </FormGroup>

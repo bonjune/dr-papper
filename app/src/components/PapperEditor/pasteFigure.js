@@ -11,17 +11,20 @@ export default class App extends Component {
 
   pasteFigure = (file) => {
 
-    var item = file.clipboardData.items[0]
+    for(var i = 1;i<file.clipboardData.items.length;i++){
+      var item = file.clipboardData.items[i]
 
-    if (item.type.indexOf("image") !== -1) {
-      //image
-      var blob = item.getAsFile();
-      var URLObj = window.URL || window.webkitURL;
-      var source = URLObj.createObjectURL(blob);
-      this.setState({
-        figure:blob,
-        figuresrc:source
-      }, () => this.props.handleFigure(this.state.figure))
+      if (item.type.indexOf("image") !== -1) {
+        //image
+        var blob = item.getAsFile();
+        var URLObj = window.URL || window.webkitURL;
+        var source = URLObj.createObjectURL(blob);
+        this.setState({
+          figure:blob,
+          figuresrc:source
+        }, () => this.props.handleFigure(this.state.figure))
+      }
+      break
     }
   }
 

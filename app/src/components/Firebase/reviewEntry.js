@@ -27,5 +27,5 @@ export const reviewEntry = {
 
     // Note
     "comment": "",
-    "boxes": "",
+    "boxes": [],
 }

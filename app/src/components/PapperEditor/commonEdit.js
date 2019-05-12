@@ -47,7 +47,8 @@ export default class CommonEdit extends React.Component{
     }
 
     handleAddition(tag) {
-        this.setState(state => ({ tags: [...state.tags, tag] }), ()=>this.props.handleEdit(this.state));
+        var ntag = {key:tag.text, name:tag.text}
+        this.setState(state => ({ tags: [...state.tags, ntag] }), ()=>this.props.handleEdit(this.state));
     }
 
 
@@ -56,7 +57,7 @@ export default class CommonEdit extends React.Component{
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>
-                <Input type="text" name="title" placeholder="Add Title" style={{border:"0", fontSize:"30px", marginBottom:"8px"}}
+                <Input type="text" name="title" placeholder="Add Title" style={{fontSize:"30px", marginBottom:"8px", background:"#E3F2FD"}}
                         onChange={this.onInputChange}></Input>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"right"}}>Authors</Label>

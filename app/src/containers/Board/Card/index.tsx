@@ -18,6 +18,7 @@ interface ICardProps {
 }
 
 interface ICardState {
+  figsrc: string | null;
   modalShow: boolean;
 }
 
@@ -25,7 +26,20 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   constructor(props: ICardProps & IFirebaseProps) {
     super(props);
     this.state = {
+      figsrc: null,
       modalShow: false,
+    }
+
+    if (this.props.review.boxes) {
+      const boxKeys = Object.keys(this.props.review.boxes)
+      for (let i = 0; i < boxKeys.length; i++) {
+        let fig = this.props.review.boxes[boxKeys[i]].figsrc
+        if (fig) {
+          this.props.firebase.downloadFigure(fig)
+            .then(figsrc => this.setState({ figsrc }));
+          break;
+        }
+      }
     }
   }
   onPinButtonClicked = () => {
@@ -37,12 +51,12 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
 
   onDeleteButtonClicked = () => {
     const { reviewID } = this.props.review;
-    this.props.firebase.review(reviewID).set({
+    this.props.firebase.review(reviewID).update({
       trash: true
     } as IReview)
    }
 
-  papperview = () => {
+  showPapperView = () => {
     this.setState(prevState => ({
       modalShow: !prevState.modalShow,
     }));
@@ -73,7 +87,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
             </Row>
           </section>
         </div>
-        <div className="box papper-card" onClick={this.papperview}>
+        <div className="box papper-card" onClick={this.showPapperView}>
           {this.state.modalShow 
             ? <PapperView
                 title={this.props.review.title}
@@ -88,10 +102,10 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 comment={this.props.review.comment}
 
                 modalShow={this.state.modalShow}
-                toggle={this.papperview}
+                toggle={this.showPapperView}
               /> 
             : null}
-          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : null}
+          {this.props.imgShow ? this.state.figsrc ? <img src={this.state.figsrc} alt="figure"/> :<img src={TestImage} alt="testimage"/> : null}
           <p className="title font-weight-normal">
             <div className="ellipse">
               {this.props.review.title}

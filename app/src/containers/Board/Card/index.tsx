@@ -8,13 +8,12 @@ import SmallTag from "../../../components/Tag";
 import PapperView from "../../../components/PapperView";
 
 import { TestImage} from "../../../assets/img";
-// import { PinIcon, TrashIcon } from "../../../assets/icons";
 
 import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
 import { IReview } from "../../../components/Firebase/interface";
 
 interface ICardProps {
-  figSrc: string | null;
+  imgShow: boolean;
   review: IReview;
 }
 
@@ -30,17 +29,20 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
       figsrc: null,
       modalShow: false,
     }
-  }
 
-  componentDidMount() {
-    const { figsrc } = this.state;
-    if (figsrc)
-      return;
-    const { boxes } = this.props.review;
-    if (boxes) {
-      const src = boxes[0].figsrc;
-      this.props.firebase.downloadFigure(src)
-        .then(figsrc => this.setState({ figsrc }));
+    if (this.props.review.boxes) {
+      const { figsrc } = this.props.review.boxes[0];
+      this.props.firebase.downloadFigure(figsrc)
+        .then(url =>
+          this.setState(current => {
+            if (this.state.figsrc !== null) {
+              return ({ ...current })
+            }
+            return ({
+              ...current,
+              figsrc: url
+            })
+          }));
     }
   }
 
@@ -53,16 +55,12 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
 
   onDeleteButtonClicked = () => {
     const { reviewID, trash } = this.props.review;
-    // The Papper is already in trash bin
-    if (trash) {
-      // Delete the papper permanantly
-      this.props.firebase.review(reviewID).remove();
+    if (trash) { // The Papper is already in trash bin
+      this.props.firebase.review(reviewID).remove(); // Delete the papper permanantly
     }
-    // The papper is not in trash bin
-    else {
-      // Move the papper to the trash bin
+    else { // The papper is not in trash bin
       this.props.firebase.review(reviewID).update({
-        trash: true
+        trash: true // Move the papper to the trash bin
       })
     }
    }
@@ -81,8 +79,8 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
-    console.log(this.props.review.title, this.state.figsrc);
     const { figsrc } = this.state;
+    const { imgShow } = this.props;
     const { trash } = this.props.review;
     return (
       <Col lg="4">
@@ -137,15 +135,15 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 toggle={this.showPapperView}
               /> 
             : null}
-          {this.props.imgShow
-            ? ( figsrc
+          {imgShow
+            ? (figsrc
               ? <img src={figsrc} style={{ height: "200px" }} alt="figure" />
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">
-            <div className="ellipse" style={{ fontWeight: "bold" }}>
+            <span className="ellipse" style={{ fontWeight: "bold" }}>
               {this.props.review.title}
-            </div>
+            </span>
           </p>
           <p className="content font-weight-light multi-ellipse">
             {this.props.review.comment}
@@ -155,8 +153,10 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
           <section className="card-tags">
             {this.props.review.tags
               ? (this.props.review.tags.map((tag, i) => (
-                <SmallTag keyName={`card-${i}`} tagName={tag.name} />
-                )))
+                <SmallTag
+                  key={`card-smalltag-${i}`}
+                  tagName={tag.name}
+                />)))
               : null}
           </section>
         </div>

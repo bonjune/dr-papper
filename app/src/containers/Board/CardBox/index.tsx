@@ -23,12 +23,12 @@ export const CardPredicate = {
 const CardBox = (props: ICardBoxProps) => {
   const { cardPredicate, imgShow } = props;
   const reviews = props.reviews.filter(cardPredicate);
-  console.log(cardPredicate, reviews);
   return (
     <Row>
       {reviews.length !== 0
-        ? reviews.map(review =>
+        ? reviews.map((review) =>
           <Card
+            key={`card-${review.reviewID}`}
             review={review}
             imgShow={imgShow}
           />

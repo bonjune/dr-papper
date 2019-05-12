@@ -73,7 +73,7 @@ export class PapperEditorBase extends Component {
     onSubmit = event => {
         //this.state.tags = this.parseTags(this.state.tags);
 
-        var {tags} = this.state
+        var {tags, suggestions} = this.state
 
         //uploading figure image in box
         if(this.state.boxes !== ""){
@@ -93,7 +93,6 @@ export class PapperEditorBase extends Component {
             ...this.makeSubmitEntry()
         })
         .then(key => {
-            console.log(tags, key)
             tags.forEach(tag => {
             this.props.firebase.makeNewTag(tag.text, key)
         })})

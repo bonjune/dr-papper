@@ -116,13 +116,22 @@ class Firebase extends React.Component<any, {}> {
   }
 
   makeNewTag = (tagName: string, reviewID : string) => {
-    const newTagRef = this.db.ref('tags/' + tagName);
-    newTagRef.set(({
-      key: tagName,
-      name: tagName,
-      reviews: [reviewID]
-    } as ITag));
-    return newTagRef.key;
+    const tagRef = this.db.ref('tags/' + tagName);
+    tagRef.once('value').then(function(snapshot) {
+      
+      if(snapshot.val() === null){
+        tagRef.set(({
+          key: tagName,
+          name: tagName,
+          reviews: [reviewID]
+        } as ITag))
+      }
+      else{
+        const reviews = snapshot.val().reviews
+        reviews.push(reviewID)
+        tagRef.child('reviews').set(reviews)
+      }
+    })
   }
 
   uploadFigure = (figure: any, filename: string) => {

@@ -15,38 +15,17 @@ class ShowSearchBase extends React.Component {
     this.state.value = props.match.params.name;
     console.log(props.match.params.name);
     this.props.firebase.tags()
-      .once('value').then(async snapshot => {
+      .once('value').then(snapshot => {
         snapshot.val()[this.state.value].reviews.map((value) => {
           this.props.firebase.review(value)
-            .once('value').then(async snapshot => {
+            .once('value').then(snapshot => {
                 result.push(snapshot.val());
                 this.setState({cards:result});
             })
         })
       })
   }
-  // componentWillReceiveProps(nextProps){
-  //   let name = nextProps.match.params.name;
-  //   let result = [];
-  //   // console.log(name);
-  //   this.props.firebase.tags()
-  //   .once('value').then(async snapshot => {
-  //     let tmp = snapshot.val()[name];
-  //     // console.log(tmp);
-  //     if (tmp != null){
-  //       await tmp.reviews.forEach(review => {
-  //         result.push(review);
-  //         this.state.cards = result;
-  //       })
-  //       this.setState({
-  //         reviews: children
-  //       });
-  //     }
-  //   })
-  // }
-
   render() {
-
     console.log("rere", this.state.cards);
     return (
       <div className="papper-board">

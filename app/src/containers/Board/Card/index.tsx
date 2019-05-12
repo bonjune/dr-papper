@@ -7,13 +7,14 @@ import { Row, Col } from "reactstrap";
 import SmallTag from "../../../components/Tag";
 import PapperView from "../../../components/PapperView";
 
-import { TestImage } from "../../../assets/img";
+import { TestImage} from "../../../assets/img";
+// import { PinIcon, TrashIcon } from "../../../assets/icons";
 
 import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
 import { IReview } from "../../../components/Firebase/interface";
 
 interface ICardProps {
-  imgShow: boolean;
+  figSrc: string | null;
   review: IReview;
 }
 
@@ -29,19 +30,20 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
       figsrc: null,
       modalShow: false,
     }
+  }
 
-    if (this.props.review.boxes) {
-      const boxKeys = Object.keys(this.props.review.boxes)
-      for (let i = 0; i < boxKeys.length; i++) {
-        let fig = this.props.review.boxes[boxKeys[i]].figsrc
-        if (fig) {
-          this.props.firebase.downloadFigure(fig)
-            .then(figsrc => this.setState({ figsrc }));
-          break;
-        }
-      }
+  componentDidMount() {
+    const { figsrc } = this.state;
+    if (figsrc)
+      return;
+    const { boxes } = this.props.review;
+    if (boxes) {
+      const src = boxes[0].figsrc;
+      this.props.firebase.downloadFigure(src)
+        .then(figsrc => this.setState({ figsrc }));
     }
   }
+
   onPinButtonClicked = () => {
     const { reviewID } = this.props.review;
     this.props.firebase.review(reviewID).update({
@@ -79,23 +81,25 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
+    console.log(this.props.review.title, this.state.figsrc);
+    const { figsrc } = this.state;
     const { trash } = this.props.review;
     return (
       <Col lg="4">
         <div>
           <section className="card-tags">
-            <Row>
+            <Row >
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onPinButtonClicked}
               >
-                {this.props.review.pinned ? <span>Unpin </span>: <span>Pin</span>}
+                {this.props.review.pinned ? <span>Unpin</span>: <span>Pin</span>}
               </button>
               <button
                 type="button"
-                style={{ float: "right", fontSize: "14px" }}
+                style={{fontSize: "12px" }}
                 className="signout-btn btn text-uppercase"
                 onClick={this.onDeleteButtonClicked}
               >
@@ -134,12 +138,12 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               /> 
             : null}
           {this.props.imgShow
-            ? (this.state.figsrc
-              ? <img src={this.state.figsrc} alt="figure" />
+            ? ( figsrc
+              ? <img src={figsrc} style={{ height: "200px" }} alt="figure" />
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">
-            <div className="ellipse">
+            <div className="ellipse" style={{ fontWeight: "bold" }}>
               {this.props.review.title}
             </div>
           </p>

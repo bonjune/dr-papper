@@ -85,7 +85,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     return (
       <Col lg="4">
         <div>
-          <section className="card-tags">
+          <section className="card-tags" style={{marginLeft: "10px", marginBottom: "5px"}}>
             <Row >
               <button
                 type="button"
@@ -141,7 +141,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">
-            <span className="ellipse" style={{ fontWeight: "bold" }}>
+            <span className="ellipse" style={{ fontWeight: "bold", marginLeft: "5px" }}>
               {this.props.review.title}
             </span>
           </p>

@@ -62,14 +62,14 @@ class BoardBase extends React.Component<
           <div>
           <Row>
             <Col sm="auto">
-              <h3 className="text-uppercase">pinned paper</h3>
+              <h3 className="text-uppercase" style={{marginBottom: "25px"}}>pinned paper</h3>
             </Col>
           </Row>
           <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
           <hr/>
           <Row>
             <Col sm="auto">
-              <h3 className="text-uppercase">archived</h3>
+              <h3 className="text-uppercase" style={{marginBottom: "25px"}}>archived</h3>
             </Col>
           </Row>
           <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />

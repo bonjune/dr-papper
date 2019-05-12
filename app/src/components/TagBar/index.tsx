@@ -31,7 +31,7 @@ class TagBarBase extends React.Component<IFirebaseProps, {tags: string[]}> {
   render() {
     this.listTags();
     return (
-      <section className="component-tag-bar">
+      <section className="component-tag-bar" style={{minHeight: "80px", marginTop: "10px"}}>
         <div>
           <div className="sm-12">
             <div className="tag-bar-list">

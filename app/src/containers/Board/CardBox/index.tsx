@@ -29,8 +29,8 @@ interface ICardBoxProps {
 }
 
 export const CardPredicate = {
-  Pinned: (review: IReview) => review.pinned,
-  Archived: (review: IReview) => !review.pinned,
+  Pinned: (review: IReview) => review !== null && review.pinned,
+  Archived: (review: IReview) => review !== null && !review.pinned,
 }
 
 class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> {
@@ -94,7 +94,8 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 publishedAt={this.props.review.published}
                 link={this.props.review.link}
                 toRead={this.props.review.toRead}
-                tags={this.props.review.tags ? this.props.review.tags.map(tag => tag.name) : null}
+                tags={ this.props.review.tags ? 
+                  this.props.review.tags.map(tag => tag.name) : []}
                 boxes={this.props.review.boxes}
                 comment={this.props.review.comment}
 

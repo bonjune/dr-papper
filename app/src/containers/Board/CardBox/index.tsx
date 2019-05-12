@@ -63,28 +63,39 @@ class Card extends React.Component<ICardProps, ICardState> {
         <div>
           <section className="card-tags">
             <Row>
-              <button type="button" style={{float:"right", fontSize: "14px"}} className="signout-btn btn text-uppercase">Pin</button>
-              <button type="button" style={{float:"right", fontSize: "14px"}} className="signout-btn btn text-uppercase">Delete</button>
+              <button
+                type="button"
+                style={{ float: "right", fontSize: "14px" }}
+                className="signout-btn btn text-uppercase" >
+                Pin
+              </button>
+              <button
+                type="button"
+                style={{ float: "right", fontSize: "14px" }}
+                className="signout-btn btn text-uppercase" >
+                Delete
+              </button>
             </Row>
           </section>
         </div>
         <div className="box papper-card" onClick={this.papperview}>
           {this.state.modalShow 
-            ? <PapperView title={this.props.title}
-                          authors={this.props.authors}
-                          publishDate={this.props.publishDate}
-                          publishedAt={this.props.publishedAt}
-                          link={this.props.link}
-                          toRead={this.props.toRead}
-                          tags={this.props.tags}
-                          boxes={this.props.boxes}
-                          comment={this.props.summary}
+            ? <PapperView
+                title={this.props.title}
+                authors={this.props.authors}
+                publishDate={this.props.publishDate}
+                publishedAt={this.props.publishedAt}
+                link={this.props.link}
+                toRead={this.props.toRead}
+                tags={this.props.tags}
+                boxes={this.props.boxes}
+                comment={this.props.summary}
 
-                          modalShow={this.state.modalShow}
-                          toggle={this.papperview}
-                           /> 
-            : <div></div> }
-          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : <div/>}
+                modalShow={this.state.modalShow}
+                toggle={this.papperview}
+              /> 
+            : null}
+          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : null}
           <p className="title font-weight-normal">
             <div className="ellipse">
               {this.props.title}
@@ -106,34 +117,27 @@ class Card extends React.Component<ICardProps, ICardState> {
   }
 }
 
-class CardBox extends React.Component<ICardBoxProps, any> {
-  reviews: IReview[]
-  constructor(props: ICardBoxProps) {
-    super(props);
-  }
-
-  render() {
-    const { cardPredicate, imgShow } = this.props;
-    const reviews = this.props.reviews.filter(cardPredicate);
-    return (
-      <Row>
-        {reviews.map(review =>
-          <Card
-            imgShow={imgShow}
-            title={review.title}
-            authors={review.authors}
-            publishDate={review.publishDate}
-            publishedAt={review.publishedAt}
-            link={review.link}
-            toRead={review.toRead}
-            summary={review.comment}
-            tags={review.tags.map(tag => tag.name)}
-            boxes={review.boxes}
-          />
-        )}
-      </Row>
-    )
-  }
+const CardBox = (props: ICardBoxProps) => {
+  const { cardPredicate, imgShow } = props;
+  const reviews = props.reviews.filter(cardPredicate);
+  return (
+    <Row>
+      {reviews.map(review =>
+        <Card
+          imgShow={imgShow}
+          title={review.title}
+          authors={review.authors}
+          publishDate={review.publishDate}
+          publishedAt={review.publishedAt}
+          link={review.link}
+          toRead={review.toRead}
+          summary={review.comment}
+          tags={review.tags.map(tag => tag.name)}
+          boxes={review.boxes}
+        />
+      )}
+    </Row>
+  )
 }
 
 export default CardBox;

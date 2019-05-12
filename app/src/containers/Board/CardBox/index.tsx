@@ -33,7 +33,7 @@ const CardBox = (props: ICardBoxProps) => {
             imgShow={imgShow}
           />
         )
-      : <p>There is no papper!</p>}
+      : <div style={{marginLeft: "20px", height: "50px", marginTop: "10px"}}>Add new papper</div>}
     </Row>
   )
 }

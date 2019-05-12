@@ -15,6 +15,7 @@
     "firebase": "^5.10.1",
     "jquery": "^3.4.1",
     "react": "^16.8.6",
+    "react-autocomplete": "^1.8.1",
     "react-date-picker": "^7.5.0",
     "react-dnd": "^7.4.5",
     "react-dnd-html5-backend": "^7.4.4",

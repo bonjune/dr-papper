@@ -26,8 +26,10 @@ class ShowSearchBase extends Component {
   }
 
   render() {
+    console.log(this.state.value);
     return (
       <div className="papper-board">
+        <h1>{this.state.value}</h1>
         <CardBox reviews={this.state.cards} cardPredicate={CardPredicate.Archived} imgShow="true"/>
       </div>
     )

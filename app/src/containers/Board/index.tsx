@@ -19,8 +19,10 @@ interface IBoardBaseState {
 }
 
 export const BoardPredicate = {
-  Read: (review: IReview) => !review.toRead,
-  ToRead: (review: IReview) => review.toRead,
+  Read: (review: IReview) => !review.toRead && !review.trash,
+  ToRead: (review: IReview) => review.toRead && !review.trash,
+  Pinned: (review: IReview) => review.pinned,
+  Deleted: (review: IReview) => review.trash
 }
 
 class BoardBase extends React.Component<
@@ -56,14 +58,14 @@ class BoardBase extends React.Component<
     return (
       <div className="papper-board">
         <Row>
-          <Col lg="auto">
+          <Col sm="auto">
             <h3 className="text-uppercase">pinned paper</h3>
           </Col>
         </Row>
         <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
         <hr/>
         <Row>
-          <Col lg="auto">
+          <Col sm="auto">
             <h3 className="text-uppercase">archived</h3>
           </Col>
         </Row>

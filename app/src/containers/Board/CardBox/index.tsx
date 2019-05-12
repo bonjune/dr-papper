@@ -11,6 +11,8 @@ import { Row, Col } from 'reactstrap';
 
 import PapperView from "../../../components/PapperView";
 
+import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
+
 interface ICardProps {
   imgShow: boolean;
   review: IReview;
@@ -27,17 +29,31 @@ interface ICardBoxProps {
 }
 
 export const CardPredicate = {
-  Pinned: (review: IReview) => review.pinned,
-  Archived: (review: IReview) => !review.pinned,
+  Pinned: (review: IReview) => review !== null && review.pinned,
+  Archived: (review: IReview) => review !== null && !review.pinned,
 }
 
-class Card extends React.Component<ICardProps, ICardState> {
-  constructor(props: ICardProps) {
+class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> {
+  constructor(props: ICardProps & IFirebaseProps) {
     super(props);
     this.state = {
       modalShow: false,
     }
   }
+  onPinButtonClicked = () => {
+    const { reviewID } = this.props.review;
+    this.props.firebase.review(reviewID).update({
+      pinned: !this.props.review.pinned
+    })
+  }
+
+  onDeleteButtonClicked = () => {
+    const { reviewID } = this.props.review;
+    this.props.firebase.review(reviewID).set({
+      trash: true
+    } as IReview)
+   }
+
   papperview = () => {
     this.setState(prevState => ({
       modalShow: !prevState.modalShow,
@@ -53,13 +69,17 @@ class Card extends React.Component<ICardProps, ICardState> {
               <button
                 type="button"
                 style={{ float: "right", fontSize: "14px" }}
-                className="signout-btn btn text-uppercase" >
-                Pin
+                className="signout-btn btn text-uppercase"
+                onClick={this.onPinButtonClicked}
+              >
+                {this.props.review.pinned ? <span>Unpin </span>: <span>Pin</span>}
               </button>
               <button
                 type="button"
                 style={{ float: "right", fontSize: "14px" }}
-                className="signout-btn btn text-uppercase" >
+                className="signout-btn btn text-uppercase"
+                onClick={this.onDeleteButtonClicked}
+              >
                 Delete
               </button>
             </Row>
@@ -71,10 +91,11 @@ class Card extends React.Component<ICardProps, ICardState> {
                 title={this.props.review.title}
                 authors={this.props.review.authors}
                 publishDate={this.props.review.publishDate}
-                publishedAt={this.props.review.publishedAt}
+                publishedAt={this.props.review.published}
                 link={this.props.review.link}
                 toRead={this.props.review.toRead}
-                tags={this.props.review.tags.map(tag => tag.name)}
+                tags={ this.props.review.tags ? 
+                  this.props.review.tags.map(tag => tag.name) : []}
                 boxes={this.props.review.boxes}
                 comment={this.props.review.comment}
 
@@ -94,15 +115,19 @@ class Card extends React.Component<ICardProps, ICardState> {
         </div>
         <div>
           <section className="card-tags">
-            {this.props.review.tags.map((tag, i) => (
-              <SmallTag keyName={`card-${i}`} tagName={tag.name} />
-            ))}
+            {this.props.review.tags
+              ? (this.props.review.tags.map((tag, i) => (
+                <SmallTag keyName={`card-${i}`} tagName={tag.name} />
+                )))
+              : null}
           </section>
         </div>
       </Col>
     )
   }
 }
+
+const Card = withFirebase(CardBase);
 
 const CardBox = (props: ICardBoxProps) => {
   const { cardPredicate, imgShow } = props;

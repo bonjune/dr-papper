@@ -17,7 +17,7 @@ export interface IReview {
   title: string;
   authors: string[];
   publishDate: string;
-  publishedAt: string;
+  published: string;
   link: string;
 
   mainFigure: string;
@@ -29,6 +29,7 @@ export interface IReview {
   tags: Array<{
     key: string;
     name: string;
+    reviews: string[];
   }>
 
   comment: string;

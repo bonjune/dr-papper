@@ -106,7 +106,7 @@ class FigureFormatBase extends React.Component {
 		this.state = {
 			figsrc : ""
 		}
-		if(this.props.figsrc !== "") {
+		if(this.props.figsrc) {
 			this.props.firebase.downloadFigure(this.props.figsrc)
 			.then(figsrc => this.setState({figsrc}))
 		}

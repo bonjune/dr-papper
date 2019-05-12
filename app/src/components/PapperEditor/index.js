@@ -60,7 +60,7 @@ export class PapperEditorBase extends Component {
         "trash": false,
     
         // Tags
-        "tags": this.state.tags.length === 0 ? "" : this.state.tags,
+        "tags": this.state.tags,
 
         //toread comment
         "comment": this.state.comment,
@@ -76,15 +76,15 @@ export class PapperEditorBase extends Component {
         var {tags, suggestions} = this.state
 
         //uploading figure image in box
-        if(this.state.boxes !== ""){
-            var boxKeys = Object.keys(this.state.boxes)
-            boxKeys.forEach(key => {
-                if(this.state.boxes[key].figure !== ""){
-                    var figsrc = `${Math.random().toString(36)}_${key}.png`;
-                    this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
-                    this.state.boxes[key].figsrc = figsrc
-                }
-        })}
+        var boxKeys = Object.keys(this.state.boxes)
+        boxKeys.forEach(key => {
+            console.log(this.state.boxes[key].figure)
+            if(this.state.boxes[key].figure !== ""){
+                var figsrc = `${Math.random().toString(36)}_${key}.png`;
+                this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
+                this.state.boxes[key].figsrc = figsrc
+            }
+        })
 
         //console.log(this.makeSubmitEntry());
 
@@ -94,7 +94,7 @@ export class PapperEditorBase extends Component {
         })
         .then(key => {
             tags.forEach(tag => {
-            this.props.firebase.makeNewTag(tag.text, key)
+            this.props.firebase.makeNewTag(tag.name, key)
         })})
         
         

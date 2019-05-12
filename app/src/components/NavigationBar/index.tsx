@@ -1,30 +1,16 @@
-import React, { Component } from "react";
-import {
-    InputGroup,
-    Input,
-    Button } from 'reactstrap';
-
+import React from "react";
 import * as ROUTES from "../../constants/routes";
 import './index.css';
 import { Link } from 'react-router-dom';
 import { AuthUserContext, withAuthentication } from '../Auth/Session';
 import SignOut from '../Auth/SignOut';
 import SearchBar from './SearchBar';
-import { func } from 'prop-types';
 
-class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <AuthUserContext.Consumer>
-        {authUser => authUser ? <NavBarForAuth/> : <NavBarForNonAuth/>}
-      </AuthUserContext.Consumer>
-    );
-  }
-}
+const NavigationBar = () => (
+  <AuthUserContext.Consumer>
+    {authUser => authUser ? <NavBarForAuth /> : <NavBarForNonAuth />}
+  </AuthUserContext.Consumer>
+);
 
 const NavBarForNonAuth = () => (
   <div className="navBar">
@@ -59,7 +45,7 @@ const NavBarForAuth = () => (
   <div className="navBar">
     <div className="logoBox">
       <div className="logoText">
-        <Link to={ROUTES.HOME}>
+        <Link to={ROUTES.READ}>
           Dr.Papper
         </Link>
       </div>

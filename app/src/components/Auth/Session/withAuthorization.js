@@ -12,7 +12,7 @@ const withAuthorization = condition => Component => {
       this.listener = this.props.firebase.auth.onAuthStateChanged(
         authUser => {
           if (!condition(authUser)) { // If the user condition is not validated
-            this.props.history.push(ROUTES.HOME);
+            this.props.history.push(ROUTES.SIGN_IN);
           }
         },
       );

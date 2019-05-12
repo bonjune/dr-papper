@@ -10,19 +10,11 @@ import { Link } from 'react-router-dom';
 import { AuthUserContext, withAuthentication } from '../Auth/Session';
 import SignOut from '../Auth/SignOut';
 import SearchBar from './SearchBar';
-import jQuery from 'jquery';
-
-window.$ = window.jQuery = jQuery;
+import { func } from 'prop-types';
 
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount = () => {
-    $('button').on('click', function() {
-      // alert('helle')
-    })
   }
 
   render() {
@@ -45,11 +37,7 @@ const NavBarForNonAuth = () => (
     </div>
     <div className="componentBox">
       <div className="searchBox">
-        <InputGroup style={{marginTop: "13px"}}>
-          <SearchBar />
-          <Input placeholder="search" />
-          <Button color="secondary">search</Button>
-        </InputGroup>
+      <SearchBar />
       </div>
       <div className="infoBox">
         <div className="userBox">
@@ -78,11 +66,7 @@ const NavBarForAuth = () => (
     </div>
     <div className="componentBox">
       <div className="searchBox">
-        <InputGroup style={{marginTop: "13px"}}>
-          {/* <Input placeholder="search" /> */}
-          <SearchBar />
-          <Button color="secondary">search</Button>
-        </InputGroup>
+      <SearchBar />
       </div>
       <div className="infoBox">
         <div className="userBox">

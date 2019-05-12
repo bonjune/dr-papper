@@ -27,8 +27,8 @@ export interface IReview {
   trash: boolean;
 
   tags: Array<{
-    id: string;
-    text: string;
+    key: string;
+    name: string;
     reviews: string[];
   }>
 

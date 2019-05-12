@@ -50,7 +50,7 @@ class SignInFormBase extends React.Component<any, ISignInForm> {
       .then(() => {
         // Reset form to the empty one
         this.setState({ ...SignInFormInit });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.READ);
       })
       .catch((error: any) => {
         this.setState(current => ({

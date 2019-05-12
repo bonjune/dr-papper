@@ -25,25 +25,6 @@ class ShowSearchBase extends React.Component {
         })
       })
   }
-  // componentWillReceiveProps(nextProps){
-  //   let name = nextProps.match.params.name;
-  //   let result = [];
-  //   // console.log(name);
-  //   this.props.firebase.tags()
-  //   .once('value').then(async snapshot => {
-  //     let tmp = snapshot.val()[name];
-  //     // console.log(tmp);
-  //     if (tmp != null){
-  //       await tmp.reviews.forEach(review => {
-  //         result.push(review);
-  //         this.state.cards = result;
-  //       })
-  //       this.setState({
-  //         reviews: children
-  //       });
-  //     }
-  //   })
-  // }
 
   render() {
 

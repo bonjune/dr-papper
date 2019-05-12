@@ -5,9 +5,10 @@
 import React from "react";
 import { IReview } from 'src/components/Firebase/interface';
 import { Row, Col } from 'reactstrap';
-// import pinIcon from '../../assets/icons/pinIcon.png';
-import { IFirebaseProps, withFirebase } from "../../components/Firebase";
+import { IFirebaseProps } from "../../components/Firebase";
 import CardBox, { CardPredicate } from './CardBox';
+import { withAuthorization, withAuthentication } from "../../components/Auth/Session";
+import { compose } from "recompose";
 
 interface IBoardBaseProps {
   boardPredicate: (review: IReview) => boolean;
@@ -70,5 +71,12 @@ class BoardBase extends React.Component<
   }
 }
 
-const Board = withFirebase(BoardBase);
+const condition = (authUser: any) => authUser != null;
+
+
+const Board = compose<any, any>(
+  withAuthentication,
+  withAuthorization(condition),
+)(BoardBase);
+
 export default Board;

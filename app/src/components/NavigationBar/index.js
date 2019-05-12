@@ -7,7 +7,7 @@ import {
 import * as ROUTES from "../../constants/routes";
 import './index.css';
 import { Link } from 'react-router-dom';
-import { AuthUserContext } from '../Auth/Session';
+import { AuthUserContext, withAuthentication } from '../Auth/Session';
 import SignOut from '../Auth/SignOut';
 import SearchBar from './SearchBar';
 import jQuery from 'jquery';
@@ -21,7 +21,7 @@ class NavigationBar extends Component {
 
   componentDidMount = () => {
     $('button').on('click', function() {
-      alert('helle')
+      // alert('helle')
     })
   }
 
@@ -99,4 +99,4 @@ const NavBarForAuth = () => (
     </div>
   </div>
 )
-export default NavigationBar;
+export default withAuthentication(NavigationBar);

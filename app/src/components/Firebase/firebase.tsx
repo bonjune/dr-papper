@@ -144,8 +144,7 @@ class Firebase extends React.Component<any, {}> {
   }
 
   downloadFigure = (filename : string) => {
-
-    var pathReference = this.storage.ref(filename);
+    const pathReference = this.storage.ref(filename);
     return pathReference.getDownloadURL()
   }
 

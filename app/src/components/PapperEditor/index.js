@@ -17,7 +17,7 @@ export class PapperEditorBase extends Component {
         super(props);
         this.state = {
             ...reviewEntry,
-            modalShow : true,
+            modalShow : false,
             editMode : true,
         };
         this.handleModal = this.handleModal.bind(this);

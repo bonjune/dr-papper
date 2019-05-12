@@ -29,19 +29,22 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
       figsrc: null,
       modalShow: false,
     }
+  }
 
-    if (this.props.review.boxes) {
-      const boxKeys = Object.keys(this.props.review.boxes)
-      for (let i = 0; i < boxKeys.length; i++) {
-        let fig = this.props.review.boxes[boxKeys[i]].figsrc
-        if (fig) {
-          this.props.firebase.downloadFigure(fig)
-            .then(figsrc => this.setState({ figsrc }));
-          break;
-        }
+  componentDidMount() {
+    if (this.props.review.boxes === null)
+      return;
+    const boxKeys = Object.keys(this.props.review.boxes)
+    for (let i = 0; i < boxKeys.length; i++) {
+      let fig = this.props.review.boxes[boxKeys[i]].figsrc;
+      if (fig) {
+        this.props.firebase.downloadFigure(fig)
+          .then(figsrc => this.setState({ figsrc }));
+        break;
       }
     }
   }
+
   onPinButtonClicked = () => {
     const { reviewID } = this.props.review;
     this.props.firebase.review(reviewID).update({
@@ -79,6 +82,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
+    console.log(this.props.review.title, this.state.figsrc);
     const { trash } = this.props.review;
     return (
       <Col lg="4">
@@ -91,7 +95,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 className="signout-btn btn text-uppercase"
                 onClick={this.onPinButtonClicked}
               >
-                {this.props.review.pinned ? <span>Unpin </span>: <span>Pin</span>}
+                {this.props.review.pinned ? <span>Unpin</span>: <span>Pin</span>}
               </button>
               <button
                 type="button"

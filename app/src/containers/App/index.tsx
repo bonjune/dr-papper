@@ -14,7 +14,7 @@ import * as ROUTES from "../../constants/routes";
 import SignInPage from '../../components/Auth/SignIn';
 import { SignUpPage } from 'src/components/Auth/SignUp';
 import HomePage from '../Home';
-import ShowSearch from '../../components/ShowSearch'
+import Search from '../../components/Search'
 
 const App = () => (
   <HashRouter>
@@ -30,7 +30,7 @@ const App = () => (
             <Route exact={true} path={ROUTES.HOME} component={HomePage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-            <Route path={ROUTES.SHOW} component ={ShowSearch} />
+            <Route path={ROUTES.SEARCH} component ={Search} />
             <Route
               path={ROUTES.READ}
               render={(props) => <Board {...props} boardPredicate={BoardPredicate.Read} />}

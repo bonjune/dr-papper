@@ -7,4 +7,4 @@ export const DELETED = "/deleted";
 export const PINNED = "/pinned";
 export const ACCOUNT = "/account";
 export const COMPONENTS = "/components";
-export const SHOW = "/show/:name"
+export const SEARCH = "/show/:query"

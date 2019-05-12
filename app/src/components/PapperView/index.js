@@ -39,11 +39,19 @@ export class PapperView extends Component {
                   link={this.props.link}
                   tags={this.props.tags}
                 />
+                {this.props.toread ? 
                 <EditBox
                   toRead={this.props.toRead}
                   boxes={this.props.boxes}
                   comment={this.props.comment}
+                /> :  Object.keys(this.props.boxes).map(key => 
+                  <EditBox
+                  toRead={this.props.toRead}
+                  boxes={this.props.boxes[key]}
+                  comment={this.props.comment}
                 />
+                )}
+                
               </ModalBody>
               <ModalFooter style={{background:this.modalBgColor}}>
               <Button

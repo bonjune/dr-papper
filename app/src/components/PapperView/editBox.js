@@ -11,7 +11,7 @@ import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
 export default class EditBox extends Component {
 	constructor(props) {
-    super(props);
+		super(props);
   }
 
   render() {
@@ -51,12 +51,15 @@ class ReadEdit extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			format : this.props.boxes[0].format,
-			subtitle : this.props.boxes[0].subtitle,
-			content : this.props.boxes[0].content,
-			figsrc : this.props.boxes[0].figsrc
+			format : this.props.boxes.format,
+			subtitle : this.props.boxes.subtitle,
+			content : this.props.boxes.content,
+			figsrc : this.props.boxes.figsrc
 		};
+
 	}
+
+
 
 	render() {
 		var {format} = this.state;
@@ -104,7 +107,7 @@ class FigureFormatBase extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			figsrc : ""
+			figsrc : null
 		}
 		if(this.props.figsrc) {
 			this.props.firebase.downloadFigure(this.props.figsrc)
@@ -117,7 +120,7 @@ class FigureFormatBase extends React.Component {
 			<div style={{background:"white", marginTop:"10px", padding:"5px"}}>
         <Row>
           <Col xs="4" style={{height:"200px", margin:"15px"}}>
-          	<img src={this.state.figsrc !== "" ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
+          	<img src={this.state.figsrc ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
         	</Col>
           <Col xs="7" style={{margin:"15px"}}>
             <Row style={{height:"50px"}}>

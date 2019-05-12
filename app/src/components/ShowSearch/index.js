@@ -6,12 +6,14 @@ import CardBox, { CardPredicate } from '../../containers/Board/CardBox';
 class ShowSearchBase extends React.Component {
   constructor(props){
     super(props);
+    console.log(props.match.params.name);
     this.state = {
       value: '',
       cards: [],
     }
     let result = [];
     this.state.value = props.match.params.name;
+    console.log(props.match.params.name);
     this.props.firebase.tags()
       .once('value').then(async snapshot => {
         snapshot.val()[this.state.value].reviews.map((value) => {
@@ -23,16 +25,36 @@ class ShowSearchBase extends React.Component {
         })
       })
   }
+  // componentWillReceiveProps(nextProps){
+  //   let name = nextProps.match.params.name;
+  //   let result = [];
+  //   // console.log(name);
+  //   this.props.firebase.tags()
+  //   .once('value').then(async snapshot => {
+  //     let tmp = snapshot.val()[name];
+  //     // console.log(tmp);
+  //     if (tmp != null){
+  //       await tmp.reviews.forEach(review => {
+  //         result.push(review);
+  //         this.state.cards = result;
+  //       })
+  //       this.setState({
+  //         reviews: children
+  //       });
+  //     }
+  //   })
+  // }
 
   render() {
-    console.log(this.state.value);
+
+    console.log("rere", this.state.cards);
     return (
       <div className="papper-board">
         <h1>{this.state.value}</h1>
         <CardBox reviews={this.state.cards} cardPredicate={CardPredicate.Archived} imgShow="true"/>
       </div>
     )
-  }
+    }
 }
 
 const ShowSearch = withFirebase(ShowSearchBase);

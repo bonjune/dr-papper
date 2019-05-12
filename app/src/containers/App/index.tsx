@@ -30,7 +30,7 @@ const App = () => (
             <Route exact={true} path={ROUTES.HOME} component={HomePage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-            <Route exact={true} path={ROUTES.SHOW} component ={ShowSearch} />
+            <Route path={ROUTES.SHOW} component ={ShowSearch} />
             <Route
               path={ROUTES.READ}
               render={(props) => <Board {...props} boardPredicate={BoardPredicate.Read} />}

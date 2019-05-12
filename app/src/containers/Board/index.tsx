@@ -22,7 +22,7 @@ export const BoardPredicate = {
   Read: (review: IReview) => !review.toRead && !review.trash,
   ToRead: (review: IReview) => review.toRead && !review.trash,
   Pinned: (review: IReview) => review.pinned,
-  Deleted: (review: IReview) => review.trash
+  Deleted: (review: IReview) => review.trash,
 }
 
 class BoardBase extends React.Component<
@@ -95,6 +95,16 @@ class BoardBase extends React.Component<
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
+        {boardPredicate
+          ? <div>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase">Search Result</h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
+            </div>
+          : <p>FUCK</p>}
       </div>
     )
   }

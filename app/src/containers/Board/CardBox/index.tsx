@@ -4,7 +4,7 @@
 
 import React from "react";
 
-import { IReview, Format } from "../../../components/Firebase/interface"
+import { IReview } from "../../../components/Firebase/interface"
 import { TestImage } from "../../../assets/img";
 import SmallTag from "../../../components/Tag";
 import { Row, Col } from 'reactstrap';
@@ -12,21 +12,8 @@ import { Row, Col } from 'reactstrap';
 import PapperView from "../../../components/PapperView";
 
 interface ICardProps {
-  title: string;
-  authors: string[];
-  publishDate: string;
-  publishedAt: string;
-  link: string;
-  toRead: boolean;
   imgShow: boolean;
-  summary: string;
-  tags: string[];
-  boxes: Array<{
-    format: Format;
-    figure: string;
-    subtitle: string;
-    content: string;
-  }>
+  review: IReview;
 }
 
 interface ICardState {
@@ -81,15 +68,15 @@ class Card extends React.Component<ICardProps, ICardState> {
         <div className="box papper-card" onClick={this.papperview}>
           {this.state.modalShow 
             ? <PapperView
-                title={this.props.title}
-                authors={this.props.authors}
-                publishDate={this.props.publishDate}
-                publishedAt={this.props.publishedAt}
-                link={this.props.link}
-                toRead={this.props.toRead}
-                tags={this.props.tags}
-                boxes={this.props.boxes}
-                comment={this.props.summary}
+                title={this.props.review.title}
+                authors={this.props.review.authors}
+                publishDate={this.props.review.publishDate}
+                publishedAt={this.props.review.publishedAt}
+                link={this.props.review.link}
+                toRead={this.props.review.toRead}
+                tags={this.props.review.tags.map(tag => tag.name)}
+                boxes={this.props.review.boxes}
+                comment={this.props.review.comment}
 
                 modalShow={this.state.modalShow}
                 toggle={this.papperview}
@@ -98,17 +85,17 @@ class Card extends React.Component<ICardProps, ICardState> {
           {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : null}
           <p className="title font-weight-normal">
             <div className="ellipse">
-              {this.props.title}
+              {this.props.review.title}
             </div>
           </p>
           <p className="content font-weight-light multi-ellipse">
-            {this.props.summary}
+            {this.props.review.comment}
           </p>
         </div>
         <div>
           <section className="card-tags">
-            {this.props.tags.map(tag => (
-              <SmallTag tagName={tag} />
+            {this.props.review.tags.map((tag, i) => (
+              <SmallTag index={i} tagName={tag.name} />
             ))}
           </section>
         </div>
@@ -124,16 +111,8 @@ const CardBox = (props: ICardBoxProps) => {
     <Row>
       {reviews.map(review =>
         <Card
+          review={review}
           imgShow={imgShow}
-          title={review.title}
-          authors={review.authors}
-          publishDate={review.publishDate}
-          publishedAt={review.publishedAt}
-          link={review.link}
-          toRead={review.toRead}
-          summary={review.comment}
-          tags={review.tags.map(tag => tag.name)}
-          boxes={review.boxes}
         />
       )}
     </Row>

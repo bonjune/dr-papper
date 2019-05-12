@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withFirebase } from '../Firebase';
-import Board, { BoardPredicate } from '../../containers/Board'
 import CardBox, { CardPredicate } from '../../containers/Board/CardBox';
 
 
-class ShowSearchBase extends Component {
+class ShowSearchBase extends React.Component {
   constructor(props){
     super(props);
     console.log(props.match.params.name);

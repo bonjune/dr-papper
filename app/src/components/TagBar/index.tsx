@@ -32,7 +32,7 @@ class TagBarBase extends React.Component<IFirebaseProps, {tags: string[]}> {
     this.listTags();
     return (
       <section className="component-tag-bar">
-        <div className="container">
+        <div>
           <div className="sm-12">
             <div className="tag-bar-list">
               {this.state.tags.map((tagName) => (

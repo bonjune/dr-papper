@@ -51,11 +51,27 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   onDeleteButtonClicked = () => {
+    const { reviewID, trash } = this.props.review;
+    // The Papper is already in trash bin
+    if (trash) {
+      // Delete the papper permanantly
+      this.props.firebase.review(reviewID).remove();
+    }
+    // The papper is not in trash bin
+    else {
+      // Move the papper to the trash bin
+      this.props.firebase.review(reviewID).update({
+        trash: true
+      })
+    }
+   }
+
+  onRestoreButtonClicked = () => {
     const { reviewID } = this.props.review;
     this.props.firebase.review(reviewID).update({
-      trash: true
-    } as IReview)
-   }
+      trash: false
+    })
+  }
 
   showPapperView = () => {
     this.setState(prevState => ({
@@ -64,6 +80,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
+    const { trash } = this.props.review;
     return (
       <Col lg="4">
         <div>
@@ -85,6 +102,17 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               >
                 Delete
               </button>
+              { trash
+                ? <button
+                    type="button"
+                    style={{ float: "right", fontSize: "14px" }}
+                    className="signout-btn btn text-uppercase"
+                    onClick={this.onRestoreButtonClicked}
+                  >
+                    Restore 
+                  </button>
+                : null
+              }
             </Row>
           </section>
         </div>

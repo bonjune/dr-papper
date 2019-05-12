@@ -2,7 +2,6 @@
  * Author: Bongjun Jang
  */
 
-// Lib
 import React from "react";
 import { Row } from 'reactstrap';
 
@@ -26,12 +25,14 @@ const CardBox = (props: ICardBoxProps) => {
   const reviews = props.reviews.filter(cardPredicate);
   return (
     <Row>
-      {reviews.map(review =>
-        <Card
-          review={review}
-          imgShow={imgShow}
-        />
-      )}
+      {reviews.length !== 0
+        ? reviews.map(review =>
+          <Card
+            review={review}
+            imgShow={imgShow}
+          />
+        )
+      : <p>There is no papper!</p>}
     </Row>
   )
 }

@@ -30,7 +30,7 @@ export class PapperEditorBase extends Component {
         await this.tags.once('value')
           .then(snapshot => {
             snapshot.forEach((child) => {
-              data.push({id:child.val().name, text:child.val().name});
+              data.push({id:child.val().name, name:child.val().name});
             })
           })
         

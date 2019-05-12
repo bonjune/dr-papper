@@ -19,6 +19,7 @@ interface ICardProps {
 }
 
 interface ICardState {
+  figsrc: string | null;
   modalShow: boolean;
 }
 
@@ -37,9 +38,27 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   constructor(props: ICardProps & IFirebaseProps) {
     super(props);
     this.state = {
+      figsrc: null,
       modalShow: false,
     }
+
+    if(this.props.review.boxes){
+      const boxkeys = Object.keys(this.props.review.boxes)
+      for(var i=0;i<boxkeys.length;i++){
+        let fig = this.props.review.boxes[boxkeys[i]].figsrc
+        if(fig){
+          this.props.firebase.downloadFigure(fig)
+          .then(figsrc => this.setState({figsrc}))
+          break;
+        }
+        
+      }
+      
+    }
   }
+
+
+
   onPinButtonClicked = () => {
     const { reviewID } = this.props.review;
     this.props.firebase.review(reviewID).update({
@@ -61,6 +80,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
   }
 
   render() {
+    console.log(this.state)
     return (
       <Col lg="4">
         <div>
@@ -103,7 +123,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                 toggle={this.papperview}
               /> 
             : null}
-          {this.props.imgShow ? <img src={TestImage} alt="testimage"/> : null}
+          {this.props.imgShow ? this.state.figsrc ? <img src={this.state.figsrc} alt="figure"/> :<img src={TestImage} alt="testimage"/> : null}
           <p className="title font-weight-normal">
             <div className="ellipse">
               {this.props.review.title}

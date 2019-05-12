@@ -47,8 +47,7 @@ export default class CommonEdit extends React.Component{
     }
 
     handleAddition(tag) {
-        var ntag = {key:tag.text, name:tag.text}
-        this.setState(state => ({ tags: [...state.tags, ntag] }), ()=>this.props.handleEdit(this.state));
+        this.setState(state => ({ tags: [...state.tags, tag] }), ()=>this.props.handleEdit(this.state));
     }
 
 
@@ -100,6 +99,7 @@ export default class CommonEdit extends React.Component{
                         allowDeleteFromEmptyInput={false}
                         allowDragDrop={false}
                         delimiters={delimiters}
+                        labelField="name"
                         inputFieldPosition="inline"
                         inline/>
                 </FormGroup>

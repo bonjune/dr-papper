@@ -11,6 +11,7 @@ import { withAuthorization, withAuthentication } from "../../components/Auth/Ses
 import { compose } from "recompose";
 
 interface IBoardBaseProps {
+  search?: boolean;
   boardPredicate: (review: IReview) => boolean;
 }
 
@@ -52,7 +53,7 @@ class BoardBase extends React.Component<
   }
 
   render() {
-    const { boardPredicate } = this.props;
+    const { boardPredicate, search } = this.props;
     const reviews = this.state.reviews.filter(boardPredicate);
     const imgShow = boardPredicate === BoardPredicate.Read;
     return (
@@ -95,7 +96,7 @@ class BoardBase extends React.Component<
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
-        {boardPredicate
+        {boardPredicate && search
           ? <div>
               <Row>
                 <Col sm="auto">

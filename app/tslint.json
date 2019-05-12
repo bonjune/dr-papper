@@ -3,6 +3,7 @@
   "defaultSeverity": "warning",
   "linterOptions": {
     "exclude": [
+      "src/serviceWorker.js",
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"

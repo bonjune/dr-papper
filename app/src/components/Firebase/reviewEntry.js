@@ -23,12 +23,7 @@ export const reviewEntry = {
     "trash": false,
 
     // Tags
-    "tags": [
-        {
-            "key": "",
-            "name": "",
-        }
-    ],
+    "tags": "",
 
     // Note
     "comment": "",

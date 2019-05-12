@@ -74,27 +74,32 @@ export class PapperEditorBase extends Component {
         //this.state.tags = this.parseTags(this.state.tags);
 
         //uploading figure image in box
-        var boxKeys = Object.keys(this.state.boxes)
-        boxKeys.forEach(key => {
-            if(this.state.boxes[key].figure !== ""){
-                var figsrc = `${Math.random().toString(36)}_${key}.png`;
-                this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
-                this.state.boxes[key].figsrc = figsrc
-            }
-        })
+        if(this.state.boxes !== ""){
+            var boxKeys = Object.keys(this.state.boxes)
+            boxKeys.forEach(key => {
+                if(this.state.boxes[key].figure !== ""){
+                    var figsrc = `${Math.random().toString(36)}_${key}.png`;
+                    this.props.firebase.uploadFigure(this.state.boxes[key].figure, figsrc);
+                    this.state.boxes[key].figsrc = figsrc
+                }
+        })}
 
         //console.log(this.makeSubmitEntry();
 
-        this.state.tags.forEach(tag => {
-            this.props.firebase.makeNewTag(tag.text)
-        })
+        if(this.state.tags !== ""){
+            this.state.tags.forEach(tag => {
+                this.props.firebase.makeNewTag(tag.text)
+        })}
 
         //set db
         this.props.firebase.makeNewPapperReview({
             ...this.makeSubmitEntry()
         });
 
-        this.setState({modalShow:false})
+        this.setState({
+            ...reviewEntry,
+            modalShow:false
+        })
     };
 
     onCalendarChange = time => {

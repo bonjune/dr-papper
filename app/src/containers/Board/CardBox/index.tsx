@@ -71,10 +71,10 @@ class Card extends React.Component<ICardProps, ICardState> {
                 title={this.props.review.title}
                 authors={this.props.review.authors}
                 publishDate={this.props.review.publishDate}
-                publishedAt={this.props.review.publishedAt}
+                publishedAt={this.props.review.published}
                 link={this.props.review.link}
                 toRead={this.props.review.toRead}
-                tags={this.props.review.tags.map(tag => tag.name)}
+                tags={this.props.review.tags.map(tag => tag.text)}
                 boxes={this.props.review.boxes}
                 comment={this.props.review.comment}
 
@@ -95,7 +95,7 @@ class Card extends React.Component<ICardProps, ICardState> {
         <div>
           <section className="card-tags">
             {this.props.review.tags.map((tag, i) => (
-              <SmallTag keyName={`card-${i}`} tagName={tag.name} />
+              <SmallTag keyName={`card-${i}`} tagName={tag.text} />
             ))}
           </section>
         </div>

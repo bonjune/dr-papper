@@ -15,11 +15,6 @@ interface ICardBoxProps {
   cardPredicate: (review: IReview) => boolean;
 }
 
-export const CardPredicate = {
-  Pinned: (review: IReview) => review !== null && review.pinned,
-  Archived: (review: IReview) => review !== null && !review.pinned,
-}
-
 const CardBox = (props: ICardBoxProps) => {
   const { cardPredicate, imgShow } = props;
   const reviews = props.reviews.filter(cardPredicate);

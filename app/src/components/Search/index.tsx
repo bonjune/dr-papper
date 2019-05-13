@@ -17,7 +17,7 @@ const Search = (props: any) => {
   return (
     <div className="papper-board">
       <h1>{prefix + query}</h1>
-      <Board boardPredicate={predicate(query)} search={true}/>
+      <Board boardType="Search" boardPredicate={predicate(query)} search={true}/>
     </div>
   )
 };

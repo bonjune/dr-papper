@@ -23,8 +23,9 @@ export default class App extends Component {
           figure:blob,
           figuresrc:source
         }, () => this.props.handleFigure(this.state.figure))
+        break
       }
-      break
+      
     }
   }
 

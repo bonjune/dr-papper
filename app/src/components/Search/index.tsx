@@ -4,6 +4,7 @@ import { IReview } from '../Firebase/interface';
 
 const Search = (props: any) => {
   const { query } = props.match.params;
+  const prefix = "# ";
   const predicate = (query: string) => (review: IReview) => {
     for (let key in review.tags) {
       const tagName = review.tags[key].name;
@@ -15,7 +16,7 @@ const Search = (props: any) => {
   }
   return (
     <div className="papper-board">
-      <h1>{query}</h1>
+      <h1>{prefix + query}</h1>
       <Board boardPredicate={predicate(query)} search={true}/>
     </div>
   )

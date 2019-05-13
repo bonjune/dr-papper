@@ -38,6 +38,7 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
                 items={items}
                 shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
                 getItemValue={item => item.label}
+                inputProps = {{style: {width: "100%"}}}
                 renderItem={(item, highlighted) =>
                   <div
                     key={item.id}

@@ -98,6 +98,12 @@ code {
   border-color: #EEEEEE;
 }
 
+/* Search */
+.papper-board h1 {
+  color: #1A237E;
+  margin-bottom: 30px;
+}
+
 /* NavBar */
 .navClass {
   width: 100%;

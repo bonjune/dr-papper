@@ -129,7 +129,7 @@ class FigureFormatBase extends React.Component {
               <div className="form-control-lg" style={{background:"#E8EAF6", color: "black", fontWeight:"bold", border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.subtitle}</div>
             </Row>
             <Row style={{height:"140px", marginTop:"10px"}}>
-              <div className="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>{this.props.content}</div>
+              <div className="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}><p>{this.props.content}</p></div>
             </Row>
           </Col>
         </Row>

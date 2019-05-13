@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
-import {Button, ButtonGroup, Col, Row, Input, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap'
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Row,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label
+} from 'reactstrap'
 
-import {TestImage} from '../../assets/img'
+import { TestImage } from '../../assets/img'
 
-import { compose, withState } from "recompose";
+import { compose } from "recompose";
 import { withFirebase } from "../Firebase";
 import addbutton from '../../assets/icons/MenuBar_addReview.png'
 

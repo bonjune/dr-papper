@@ -22,7 +22,7 @@ interface IBoardBaseState {
 export const BoardPredicate = {
   Read: (review: IReview) => !review.toRead && !review.trash,
   ToRead: (review: IReview) => review.toRead && !review.trash,
-  Pinned: (review: IReview) => review.pinned,
+  Pinned: (review: IReview) => review.pinned && !review.trash,
   Deleted: (review: IReview) => review.trash,
 }
 

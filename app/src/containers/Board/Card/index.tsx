@@ -82,21 +82,22 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
 
   render() {
     const { figsrc } = this.state;
-    const { imgShow } = this.props;
+    const { review, imgShow } = this.props;
     const { trash } = this.props.review;
     return (
       <Col lg="4" style={{marginBottom: "30px"}}>
         <div>
           <section className="card-tags" style={{marginLeft: "10px", marginBottom: "5px"}}>
             <Row >
-              <button
-                type="button"
-                style={{fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
-                className="signout-btn btn text-uppercase"
-                onClick={this.onPinButtonClicked}
-              >
-                {this.props.review.pinned ? <span>Unpin</span>: <span>Pin</span>}
-              </button>
+              {!review.trash
+                ? <button
+                  type="button"
+                  style={{ fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
+                  className="signout-btn btn text-uppercase"
+                  onClick={this.onPinButtonClicked}
+                >
+                  {this.props.review.pinned ? <span>Unpin</span> : <span>Pin</span>}
+                </button> : null}
               <button
                 type="button"
                 style={{fontSize: "12px" }}

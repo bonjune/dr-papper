@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
 import {Button, ButtonGroup, Modal, ModalHeader, ModalBody, ModalFooter, Form} from 'reactstrap'
 

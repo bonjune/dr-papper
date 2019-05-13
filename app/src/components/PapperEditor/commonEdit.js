@@ -54,8 +54,12 @@ export default class CommonEdit extends React.Component{
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>
-                <Input type="text" name="title" placeholder="Add Title" style={{fontSize:"30px", marginBottom:"8px", background:"#E3F2FD"}}
-                        onChange={this.onInputChange}></Input>
+                <FormGroup row>
+                        <Label sm={2} size="lg" style={{textAlign:"right"}}>Title</Label>
+                        <Col sm={10}>
+                            <Input type="text" name="title" bsSize="lg" onChange={this.onInputChange}></Input>
+                        </Col>
+                </FormGroup>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{textAlign:"right"}}>Authors</Label>
                     <Col sm={10}>

@@ -8,6 +8,7 @@ import contentFormatImg from "./PapperEditor_contentFormat.png";
 import addBoxImg from "./PapperEditor_addBox.png";
 import userImg from "./NavBar_user.png";
 import settingImg from "./NavBar_setting.png";
+import searchImg from "./search.png";
 
 export const AddReviewIcon = addReviewImg;
 
@@ -25,3 +26,4 @@ export const AddBoxIcon = addBoxImg;
 // NavigationBar
 export const UserIcon = userImg;
 export const SettingIcon = settingImg;
+export const SearchIcon = searchImg;

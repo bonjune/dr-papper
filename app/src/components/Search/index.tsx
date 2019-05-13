@@ -8,7 +8,7 @@ const Search = (props: any) => {
   const predicate = (query: string) => (review: IReview) => {
     for (let key in review.tags) {
       const tagName = review.tags[key].name;
-      if (tagName.includes(query)) {
+      if (tagName == query) {
         return true;
       }
     }

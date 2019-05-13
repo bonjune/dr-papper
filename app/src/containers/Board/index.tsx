@@ -90,7 +90,7 @@ class BoardBase extends React.Component<
           ? <div>
               <Row>
                 <Col sm="auto">
-                  <h3 className="text-uppercase">deleted paper</h3>
+                  <h3 className="text-uppercase" style={{marginBottom: "25px"}}>deleted paper</h3>
                 </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />

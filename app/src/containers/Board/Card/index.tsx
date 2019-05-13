@@ -141,9 +141,9 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">
-            <span className="ellipse" style={{ fontWeight: "bold", marginLeft: "5px" }}>
+            <div className="ellipse" style={{ fontWeight: "bold", marginLeft: "5px" }}>
               {this.props.review.title}
-            </span>
+            </div>
           </p>
           <p className="content font-weight-light multi-ellipse">
             {this.props.review.comment}

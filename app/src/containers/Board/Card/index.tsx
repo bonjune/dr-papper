@@ -108,7 +108,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               { trash
                 ? <button
                     type="button"
-                    style={{ float: "right", fontSize: "14px" }}
+                    style={{ marginLeft: "10px", fontSize: "12px" }}
                     className="signout-btn btn text-uppercase"
                     onClick={this.onRestoreButtonClicked}
                   >

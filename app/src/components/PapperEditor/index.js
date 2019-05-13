@@ -7,6 +7,8 @@ import CommonEdit from './commonEdit'
 import ToreadEdit from './toreadEdit'
 import ReadEdit from './readEdit'
 
+import { ReadIcon, ToReadIcon } from "../../assets/icons";
+
 
 import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
@@ -95,8 +97,7 @@ export class PapperEditorBase extends Component {
         .then(key => {
             tags.forEach(tag => {
             this.props.firebase.makeNewTag(tag.name, key)
-        })})
-        
+        })})        
         
 
         this.setState({
@@ -159,10 +160,17 @@ export class PapperEditorBase extends Component {
                     <ModalHeader style={{background:"#EEEEEE", padding:"0"}} cssModule={{'modal-title': 'w-100 text-center mb-0'}} >
                         <div style={{flex:"1", display:"flex"}}>
                             <ButtonGroup style={{flex:"1"}}>
-                                <Button style={{flex:"1", border:"0", background: this.state.editMode ? "white" : "#EEEEEE", color:"black", fontSize:"20px"}}
-                                        onClick= {this.handleMode.bind(this, false)}>TOREAD</Button>
-                                <Button style={{flex:"1", border:"0", background:this.state.editMode ? "#EEEEEE" : "white", color:"black", fontSize:"20px"}}
-                                        onClick={this.handleMode.bind(this, true)}>READ</Button>
+                                <Button style={{flex:"1", 
+                                        border: "0",
+                                        background: this.state.editMode ? "white" : "#EEEEEE", color:this.state.editMode ? "rgb(206, 212, 218)" : "black", fontSize:"20px"}}
+                                        onClick= {this.handleMode.bind(this, false)}>
+                                        {this.state.editMode ?  null : <img src={ToReadIcon} alt="toreadicon" style={{height:"20px", width:"20px"}}/>} 
+                                        <b>TOREAD</b></Button>
+                                <Button style={{flex:"1",
+                                        border :"0",
+                                        background:this.state.editMode ? "#EEEEEE" : "white", color:this.state.editMode ? "black" : "rgb(206, 212, 218)", fontSize:"20px"}}
+                                        onClick={this.handleMode.bind(this, true)}>
+                                        {this.state.editMode ? <img src={ReadIcon} alt="readicon" style={{height:"20px", width:"20px"}}/> : null} <b>READ</b></Button>
                             </ButtonGroup>
                         </div>
                     </ModalHeader>

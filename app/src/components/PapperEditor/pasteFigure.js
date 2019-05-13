@@ -11,9 +11,9 @@ export default class App extends Component {
 
   pasteFigure = (file) => {
 
-    for(var i = 1;i<file.clipboardData.items.length;i++){
+    console.log(file.clipboardData.items)
+    for(var i = 0;i<file.clipboardData.items.length;i++){
       var item = file.clipboardData.items[i]
-
       if (item.type.indexOf("image") !== -1) {
         //image
         var blob = item.getAsFile();
@@ -33,7 +33,7 @@ export default class App extends Component {
 
     return (
       <div onPaste={file => this.pasteFigure(file)}>
-      {figuresrc ? <img src={figuresrc} key={figuresrc} style={{maxWidth:"180px", maxHeight:"180px"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div>Paste(Ctrl + V) Figure!</div>}
+      {figuresrc ? <img src={figuresrc} key={figuresrc} style={{maxWidth:"180px", maxHeight:"180px"}} alt={`Pasted`} onPaste={file => this.pasteFigure(file)}/> : <div style={{color:"rgb(108, 117, 125)"}}>Paste(Ctrl + V) Figure!</div>}
       </div>
 
     )

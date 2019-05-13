@@ -32,6 +32,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
 
     if (this.props.review.boxes) {
       const { figsrc } = this.props.review.boxes[0];
+      if(figsrc){
       this.props.firebase.downloadFigure(figsrc)
         .then(url =>
           this.setState(current => {
@@ -43,6 +44,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
               figsrc: url
             })
           }));
+      }
     }
   }
 

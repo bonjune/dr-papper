@@ -50,9 +50,9 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
                 onChange={e => this.setState({ query: e.currentTarget.value })}
                 onSelect={query => this.setState({ query })}
               />
-              <Button color="secondary" onClick={this.onSearchClick}>
+              <span><Button color="secondary" onClick={this.onSearchClick}>
                 search
-              </Button>
+              </Button></span>
             </InputGroup>
           )
         }}

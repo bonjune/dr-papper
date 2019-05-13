@@ -20,17 +20,16 @@ export const withTags = (Component: React.ComponentType) => {
       }
     }
     componentDidMount() {
-      const data: {
-        id: string;
-        name: string;
-      }[] = [];
+      let data: { id: string; name: string; }[];
       this.props.firebase.tags().on('value', snapshot => {
+        data = [];
         if (snapshot) {
           snapshot.forEach(child => {
             data.push(child.val());
           })
         }
-        this.setState(() => ({
+        this.setState((current) => ({
+          ...current,
           tags: data
         }));
       })

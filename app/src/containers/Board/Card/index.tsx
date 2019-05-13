@@ -85,7 +85,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { imgShow } = this.props;
     const { trash } = this.props.review;
     return (
-      <Col lg="4">
+      <Col lg="4" style={{marginBottom: "30px"}}>
         <div>
           <section className="card-tags" style={{marginLeft: "10px", marginBottom: "5px"}}>
             <Row >

@@ -47,7 +47,7 @@ export class PapperView extends React.Component {
                   link={this.props.link}
                   tags={this.props.tags}
                 />
-                {this.props.toread ? 
+                {this.props.toRead ? 
                 <EditBox
                   toRead={this.props.toRead}
                   boxes={this.props.boxes}

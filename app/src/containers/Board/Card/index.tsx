@@ -85,7 +85,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { review, imgShow } = this.props;
     const { trash } = this.props.review;
     return (
-      <Col lg="4" style={{marginBottom: "30px"}}>
+      <Col lg="3" style={{marginBottom: "30px"}}>
         <div>
           <section className="card-tags" style={{marginLeft: "10px", marginBottom: "5px"}}>
             <Row >
@@ -140,7 +140,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
             : null}
           {imgShow
             ? (figsrc
-              ? <img src={figsrc} style={{ height: "200px" }} alt="figure" />
+              ? <img src={figsrc} style={{ height: "150px" }} alt="figure" />
               : <img src={TestImage} alt="testimage" />)
             : null}
           <p className="title font-weight-normal">

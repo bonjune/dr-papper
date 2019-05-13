@@ -3,7 +3,7 @@ import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
 import {Button, ButtonGroup, Col, Row, Input, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap'
 
-import sample from '../../assets/img/boxmain.png'
+import {TestImage} from '../../assets/img'
 
 import { compose, withState } from "recompose";
 import { withFirebase } from "../Firebase";
@@ -122,7 +122,7 @@ class FigureFormatBase extends React.Component {
 			<div style={{background:"white", marginTop:"10px", padding:"5px"}}>
         <Row>
           <Col xs="4" style={{height:"200px", margin:"15px"}}>
-          	<img src={this.state.figsrc ? this.state.figsrc : sample} style={{height:"100%", width:"100%"}}/>
+          	<img src={this.state.figsrc ? this.state.figsrc : TestImage} style={{height:"100%", width:"100%"}}/>
         	</Col>
           <Col xs="7" style={{margin:"15px"}}>
             <Row style={{height:"50px"}}>

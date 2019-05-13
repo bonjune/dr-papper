@@ -1,6 +1,8 @@
 import React, { Component }from "react";
-import {Button, Col, Row, Input , ButtonGroup} from 'reactstrap'
+import {Button, Col, Row, Input , ButtonGroup, Label} from 'reactstrap'
 import PasteFigure from './pasteFigure'
+
+import {AddBoxIcon, FigureFormatIcon, ContentFormatIcon} from "../../assets/icons"
 
 const boxdb = {
     format : 0,
@@ -52,7 +54,9 @@ export default class ReadEdit extends React.Component{
             <div>
             {Object.keys(containers).map(key => containers[key])}
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
-                <Button block color="white" onClick={this.addBox}>+</Button>
+                <Button block color="white" onClick={this.addBox}>
+                    <img src={AddBoxIcon} alt="addbox" style={{height:"20px", width:"20px"}}/>
+                </Button>
             </div>
             </div>
         )}
@@ -108,12 +112,16 @@ class BoxFormat extends React.Component {
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 {f}
                 <div>
-                    <div className="d-inline" style={{marginRight:"10px"}}> format </div>
                     <ButtonGroup className="d-inline">
-                        <Button id="0" onClick={this.changeFormat.bind(this, 0)}>Figure</Button>
-                        <Button id="1" onClick={this.changeFormat.bind(this, 1)}>Content</Button>
+                        <Label style={{width:"80px", textAlign:"center"}}>Format</Label>
+                        <Button id="0" onClick={this.changeFormat.bind(this, 0)} style={{background:"#FFECB3", color:"black", border:"0"}}>
+                            <img src={FigureFormatIcon} alt="figformat" style={{height:"20px", width:"20px"}}/> Figure
+                        </Button>
+                        <Button id="1" onClick={this.changeFormat.bind(this, 1)} style={{background:"#FFF8E1", color:"black", border:"0"}}>
+                            <img src={ContentFormatIcon} alt="contformat" style={{height:"20px", width:"20px"}}/> Content
+                        </Button>
                     </ButtonGroup>
-                    <Button className="float-right d-inline" onClick={this.deleteBox}>Delete</Button>
+                    <Button className="float-right d-inline" onClick={this.deleteBox}  style={{background:"rgba(255,0,0, 0.5)", color:"black", border:"0px"}}>Delete</Button>
                 </div>
             </div>
         )
@@ -149,7 +157,7 @@ class FigureFormat extends React.Component {
         return(
             
             <Row>
-                <Col xs="4" style={{height:"200px", border:"1px solid", margin:"15px", display: "flex", alignItems: "center", justifyContent: "center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
+                <Col xs="4" style={{height:"200px", border:"1px solid rgb(206, 212, 218)", margin:"15px", display: "flex", alignItems: "center", justifyContent: "center"}}><PasteFigure handleFigure={this.onFigureChange}/></Col>
                 <Col xs="7" style={{margin:"15px"}}>
                     <Row style={{height:"50px"}}>
                         <Input placeholder="Add Subtitle" name="subtitle" onChange={this.onInputChange}></Input>

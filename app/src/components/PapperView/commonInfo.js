@@ -12,7 +12,7 @@ export default class CommonInfo extends React.Component{
         return(
             <div>
             <div style={{background:"white", padding:"5px"}}>
-                <div className="form-control" style={{background:"#E3F2FD", border: "0px", fontWeight:"bold", fontSize:"30px", color: "black", marginBottom:"8px"}}>{this.props.title}</div>
+                <div className="form-control" style={{background:"#E3F2FD", border: "0px", fontWeight:"bold", fontSize:"30px", color: "black", marginBottom:"8px", height:"auto"}}>{this.props.title}</div>
                 <FormGroup row>
                     <Label sm={2} size="lg" style={{ textAlign: "right", fontWeight: "bold" }}>
                         Authors

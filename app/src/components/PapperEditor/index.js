@@ -42,7 +42,7 @@ export class PapperEditorBase extends Component {
     
     makeSubmitEntry = () => ({
         "reviewID": "",
-        "userID": "defaultUser",
+        "userID": this.props.firebase.auth.currentUser.uid,
     
         // Time Stamp
         "createAt": Date.now(),

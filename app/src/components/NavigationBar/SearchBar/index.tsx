@@ -8,6 +8,11 @@ import {
 import { TagsContext } from 'src/components/Tag';
 import { RouterProps } from 'react-router';
 import { SearchIcon } from "../../../assets/icons";
+import $ from 'jquery';
+
+$("button").click(function(){
+  console.log('heelo');
+});
 
 class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
   constructor(props: any) {

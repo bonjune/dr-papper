@@ -134,6 +134,27 @@ class Firebase extends React.Component<any, {}> {
     })
   }
 
+  deleteTag = (tagName: string, reviewID : string) => {
+    const tagRef = this.db.ref(`tags/${tagName}`);
+    tagRef.once('value').then(snapshot => {
+
+      const chkReviews = snapshot.val().reviews;
+      if(chkReviews !== null){ 
+        const reviews =  chkReviews as string[];
+        const removedReviews = reviews.filter(review => review !== reviewID)
+
+        if(removedReviews.length > 0){
+          tagRef.child('reviews').set(removedReviews)
+        }
+        else{
+          tagRef.remove();
+        }
+      }
+
+
+    })
+  }
+
   uploadFigure = (figure: any, filename: string) => {
     const targetRef = this.storage.ref().child(filename);
 

@@ -14,6 +14,9 @@ code {
     monospace;
 }
 
+html, body, #root{
+  height: 100%;
+}
 /* Page Layout */
 .full-width {
   max-width:100%;
@@ -22,19 +25,19 @@ code {
   min-width: 100%;
   background-color: #FFFFFF;
 }
-.col-md-1-5 { 
-  width: 12.5%; 
+.col-md-1-5 {
+  width: 12.5%;
   background-color: #FFFFFF;
 }
-.col-md-10-5 { 
-  width: 87.5%; 
+.col-md-10-5 {
+  width: 87.5%;
 }
 
 /* Tagbar */
 .component-tag-bar span{
   margin-top: 5px;
   margin-right: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   font-size: 90%;
 }
 
@@ -122,6 +125,10 @@ code {
 }
 
 /* MenuBar */
+.manu-bar-div {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .component-menu-bar img {
   margin-right: 10px;
 }
@@ -131,18 +138,21 @@ code {
   box-shadow: none!important;
 }
 .component-menu-bar{
-  margin-top: 40px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  background: #EEEEEE;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 100%;
 }
 .component-menu-bar button{
   border-radius: 0;
-  width: 200px;
+  width: 100%;
   margin-top: 5px;
   background-color: #90CAF9;
   margin-bottom: 20px;
   color: black;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 70px;
   min-width: 150px;
 }
 .component-menu-bar button:hover{
@@ -151,14 +161,17 @@ code {
 .component-menu-bar img{
   width: 20px;
 }
+.component-menu-bar a{
+  text-decoration: none;
+}
 #tab_button{
   border-radius: 0;
   margin-top: 10px;
-  background-color: #FFFFFF;
+  background-color: #eeeeee;
   margin-bottom: 0px;
 }
 #tab_button:hover{
-  background-color: #EEEEEE;
+  background-color: rgb(208, 212, 233);
 }
 #tab_button:focus,
 #tab_button:active,
@@ -199,4 +212,9 @@ code {
 }
 .papper-card:hover{
   background: #dfe6e9;
+}
+
+/* baoarddiv */
+.board-div{
+  background: white;
 }

@@ -78,7 +78,7 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
       return (
         <div className="component-menu-bar box">
           <PapperEditor />
-          <Link to={ROUTES.READ}>
+          <Link to={ROUTES.READ} style={{textDecoration:'none'}}>
             <div className="row">
               <button
                 name="readButton"
@@ -94,7 +94,7 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
               </button>
             </div>
           </Link>
-          <Link to={ROUTES.TO_READ}>
+          <Link to={ROUTES.TO_READ} style={{textDecoration:'none'}}>
             <div className="row">
               <button
                 name="toReadButton"
@@ -110,7 +110,7 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
               </button>
             </div>
           </Link>
-          <Link to={ROUTES.PINNED}>
+          <Link to={ROUTES.PINNED} style={{textDecoration:'none'}}>
             <div className="row">
               <button
                 name="pinnedButton"
@@ -126,7 +126,7 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
               </button>
             </div>
           </Link>
-          <Link to={ROUTES.DELETED}>
+          <Link to={ROUTES.DELETED} style={{textDecoration:'none'}}>
             <div className="row">
               <button
                 name="trashButton"

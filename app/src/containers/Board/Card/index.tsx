@@ -60,7 +60,9 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { reviewID, trash, tags } = this.props.review;
     if (trash) { // The Papper is already in trash bin
       this.props.firebase.review(reviewID).remove(); // Delete the papper permanantly
-      tags.forEach(tag => this.props.firebase.deleteTag(tag.name, reviewID))
+      if(tags){
+        tags.forEach(tag => this.props.firebase.deleteTag(tag.name, reviewID)) // delete tags from db
+      }
     
     }
     else { // The papper is not in trash bin

@@ -150,7 +150,7 @@ export class PapperEditorBase extends Component {
         return (
           <div>
                 <div className="row">
-                <button onClick={this.handleModal} type="button" className="btn text-uppercase">
+                <button onClick={this.handleModal} type="button" className="btn text-uppercase" style={{marginTop:'50px'}}>
                         <span><img src={addbutton} alt="addbutton"/></span>Add
                 </button>
                 </div>

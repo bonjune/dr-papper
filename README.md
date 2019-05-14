@@ -17,7 +17,7 @@ Dr.Papper Project for KAIST CS374 (Intro. to Human Computer Interaction)
 * dev : development version (main branch)
 
 1. Make your own branch  
-  It is preferred to name the branch as your given name, name of a new feature to add. Anyway, please describe your branch with the branch name
+  It is preferred to name a branch as your given name, name of a new feature to add. Anyway, please describe your branch with the branch name
 2. PR to `dev` branch  
   Feel free to push to dev if we have discussed the commits. Otherwise, make PR to review the codes. **DO NOT PR TO MASTER!!!!**
 

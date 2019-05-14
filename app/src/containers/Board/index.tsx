@@ -52,6 +52,8 @@ class BoardBase extends React.Component<
 
   render() {
     const { boardType, boardPredicate } = this.props;
+    const user = this.props.firebase.auth.currentUser;
+    const uid = user ? user.uid : "";
     const reviews = this.state.reviews.filter(boardPredicate);
     const imgShow = boardType === "Read";
     return (
@@ -122,15 +124,29 @@ class BoardBase extends React.Component<
             </div>
            : null}
         {boardType === "Search"
-          ? <div>
+          ? <div className="saerch-board">
               <Row>
                 <Col sm="auto">
                   <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
-                    Search Result
-                  </h3>
+                    Search Results
+                  </h3> </Col>
+              </Row>
+              <Row>
+                <Col sm="auto">
+                  <h4 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    Other's Reviews
+                  </h4> </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID !== uid)} imgShow={true} />
+            <hr/>
+              <Row>
+                <Col sm="auto">
+                  <h4 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    My Reviews 
+                  </h4>
                 </Col>
               </Row>
-              <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
+              <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID === uid)} imgShow={true} />
             </div>
           : null}
       </div>

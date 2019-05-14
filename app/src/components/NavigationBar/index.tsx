@@ -2,6 +2,7 @@ import React from "react";
 import * as ROUTES from "../../constants/routes";
 import './index.css';
 import { Link } from 'react-router-dom';
+import { Row, Col } from 'reactstrap';
 import { AuthUserContext, withAuthentication } from '../Auth/Session';
 import SignOut from '../Auth/SignOut';
 import SearchBar from './SearchBar';
@@ -13,60 +14,68 @@ const NavigationBar = () => (
 );
 
 const NavBarForNonAuth = () => (
-  <div className="navBar">
-    <div className="logoBox">
-      <div className="logoText">
-        <Link to={ROUTES.HOME}>
-          Dr.Papper
-        </Link>
+  <Row className="navBar">
+    <Col lg="2">
+      <div className="logoBox">
+        <div className="logoText">
+          <Link to={ROUTES.HOME}>
+            Dr.Papper
+          </Link>
+        </div>
       </div>
-    </div>
-    <div className="componentBox">
+    </Col>
+    <Col lg="8">
       <div className="searchBox">
-      <SearchBar />
+        <SearchBar />
       </div>
-      <div className="infoBox">
-        <div className="userBox">
-          <div className="userText">
-            USER
-          </div>
-        </div>
-        <div className="settingBox">
-          <div className="settingText">
-            SETTING
-          </div>
+    </Col>
+    <Col lg="1">
+      <div className="userBox">
+        <div className="userText">
+          USER
         </div>
       </div>
-    </div>
-  </div>
+    </Col>
+    <Col lg="1">
+      <div className="settingBox">
+        <div className="settingText">
+          SETTING
+        </div>
+      </div>
+    </Col>
+  </Row>
 )
 
 const NavBarForAuth = () => (
-  <div className="navBar">
-    <div className="logoBox">
-      <div className="logoText">
-        <Link to={ROUTES.READ}>
-          Dr.Papper
-        </Link>
+  <Row className="navBar">
+    <Col lg="2">
+      <div className="logoBox">
+        <div className="logoText">
+          <Link to={ROUTES.READ}>
+            Dr.Papper
+          </Link>
+        </div>
       </div>
-    </div>
-    <div className="componentBox">
+    </Col>
+    <Col lg="8">
       <div className="searchBox">
-      <SearchBar />
+        <SearchBar />
       </div>
-      <div className="infoBox">
-        <div className="userBox">
-          <div className="userText">
-            USER
-          </div>
-        </div>
-        <div className="settingBox">
-          <div className="settingText">
-            <SignOut/>
-          </div>
+    </Col>
+    <Col lg="1">
+      <div className="userBox">
+        <div className="userText">
+          USER
         </div>
       </div>
-    </div>
-  </div>
+    </Col>
+    <Col lg="1">
+      <div className="settingBox">
+        <div className="settingText">
+          <SignOut/>
+        </div>
+      </div>
+    </Col>
+  </Row>
 )
 export default withAuthentication(NavigationBar);

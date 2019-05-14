@@ -6,25 +6,23 @@ import React from "react";
 import { IReview } from 'src/components/Firebase/interface';
 import { Row, Col } from 'reactstrap';
 import { IFirebaseProps } from "../../components/Firebase";
-import CardBox, { CardPredicate } from './CardBox';
+import CardBox  from './CardBox';
 import { withAuthorization, withAuthentication } from "../../components/Auth/Session";
 import { compose } from "recompose";
+import { ReviewPredicate, ReviewPredicateType, predicateCompose, predicateUnion } from "./predicates";
+
+type BoardType = "Read" | "ToRead" | "Pinned" | "Deleted" | "Search";
 
 interface IBoardBaseProps {
   search?: boolean;
-  boardPredicate: (review: IReview) => boolean;
+  boardType: BoardType;
+  boardPredicate: ReviewPredicateType;
 }
 
 interface IBoardBaseState {
   reviews: IReview[]
 }
 
-export const BoardPredicate = {
-  Read: (review: IReview) => !review.toRead && !review.trash,
-  ToRead: (review: IReview) => review.toRead && !review.trash,
-  Pinned: (review: IReview) => review.pinned,
-  Deleted: (review: IReview) => review.trash,
-}
 
 class BoardBase extends React.Component<
   IFirebaseProps & IBoardBaseProps,
@@ -53,54 +51,83 @@ class BoardBase extends React.Component<
   }
 
   render() {
-    const { boardPredicate, search } = this.props;
+    const { boardType, boardPredicate } = this.props;
     const reviews = this.state.reviews.filter(boardPredicate);
-    const imgShow = boardPredicate === BoardPredicate.Read;
+    const imgShow = boardType === "Read";
     return (
       <div className="papper-board">
-        {boardPredicate === BoardPredicate.Read || boardPredicate === BoardPredicate.ToRead
-          ?
-          <div>
-          <Row>
-            <Col sm="auto">
-              <h3 className="text-uppercase" style={{marginBottom: "25px"}}>pinned paper</h3>
-            </Col>
-          </Row>
-          <CardBox reviews={reviews} cardPredicate={CardPredicate.Pinned} imgShow={imgShow} />
-          <hr/>
-          <Row>
-            <Col sm="auto">
-              <h3 className="text-uppercase" style={{marginBottom: "25px"}}>archived</h3>
-            </Col>
-          </Row>
-          <CardBox reviews={reviews} cardPredicate={CardPredicate.Archived} imgShow={imgShow} />
-          </div>
-           : null }
-        {boardPredicate === BoardPredicate.Pinned
+        {boardType === "Read"
           ? <div>
               <Row>
                 <Col sm="auto">
-                  <h3 className="text-uppercase" style={{marginBottom: "25px"}}>pinned paper</h3>
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    pinned paper
+                  </h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={ReviewPredicate.Pinned} imgShow={imgShow} />
+              <hr/>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    archived
+                  </h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={ReviewPredicate.Archived} imgShow={imgShow} />
+            </div> : null}
+        {boardType === "ToRead"
+          ? <div>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    pinned paper
+                  </h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={ReviewPredicate.Pinned} imgShow={imgShow} />
+              <hr/>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    archived
+                  </h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={ReviewPredicate.Archived} imgShow={imgShow} />
+            </div>
+           : null}
+        {boardType === "Pinned"
+          ? <div>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    pinned paper
+                  </h3>
                 </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
-        {boardPredicate === BoardPredicate.Deleted
+        {boardType === "Deleted"
           ? <div>
               <Row>
                 <Col sm="auto">
-                  <h3 className="text-uppercase" style={{marginBottom: "25px"}}>deleted paper</h3>
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    deleted paper
+                  </h3>
                 </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
-        {boardPredicate && (search === true)
+        {boardType === "Search"
           ? <div>
               <Row>
                 <Col sm="auto">
-                  <h3 className="text-uppercase" style={{marginBottom: "25px"}}>Search Result</h3>
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    Search Result
+                  </h3>
                 </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
@@ -126,3 +153,5 @@ const Board = compose<any, any>(
 )(BoardBase);
 
 export default Board;
+
+export { ReviewPredicate, ReviewPredicateType, predicateCompose, predicateUnion };

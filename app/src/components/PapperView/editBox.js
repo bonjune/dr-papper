@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import DatePicker from "react-date-picker";
 import { reviewEntry } from '../Firebase/reviewEntry';
-import {Button, ButtonGroup, Col, Row, Input, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap'
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Row,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label
+} from 'reactstrap'
 
-import {TestImage} from '../../assets/img'
+import { TestImage } from '../../assets/img'
 
-import { compose, withState } from "recompose";
+import { compose } from "recompose";
 import { withFirebase } from "../Firebase";
 import addbutton from '../../assets/icons/MenuBar_addReview.png'
 
@@ -37,9 +48,9 @@ class ToreadEdit extends React.Component {
 		return (
       <div style={{background:"white", marginTop:"10px", padding:"5px 5px 5px 1px"}}>
         <FormGroup row>
-          <Label sm={2} size="lg" style={{textAlign:"right"}}>Comment</Label>
+          <Label sm={2} size="lg" style={{textAlign:"right", fontWeight:"bold"}}>Comment</Label>
           <Col sm={10}>
-            <div className="form-control-lg" style={{ border: "0px", fontSize: "1.25rem", marginBottom: "8px" }}>
+            <div className="form-control-lg" style={{ border: "0px", fontSize: "1.25rem", marginBottom: "8px", overflowY:"auto", wordBreak:"break-word", height:"100%" }}>
               {this.props.comment}
             </div>
           </Col>

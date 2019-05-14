@@ -21,17 +21,17 @@ code {
   min-width: 100%;
   background-color: #FFFFFF;
 }
-.col-md-1-5 { 
-  width: 12.5%; 
+.col-md-1-5 {
+  width: 12.5%;
   background-color: #FFFFFF;
 }
-.col-md-10-5 { 
-  width: 87.5%; 
+.col-md-10-5 {
+  width: 87.5%;
 }
 
 /* Tagbar */
 .component-tag-bar span{
-  margin-top: 10px;
+  margin-top: 5px;
   margin-right: 10px;
   /* margin-bottom: 10px; */
   font-size: 90%;

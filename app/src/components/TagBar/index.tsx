@@ -4,7 +4,7 @@ import SmallTag, { TagsContext } from '../Tag'
 const TagBarBase = (props: any) => (
   <TagsContext.Consumer>
     {tags => (
-      <section className="component-tag-bar" style={{ minHeight: "80px", marginTop: "20px", marginBottom: "0px" }}>
+      <section className="component-tag-bar" style={{ minHeight: "80px", marginTop: "20px" }}>
         <div>
           <div className="sm-12">
             <div className="tag-bar-list">

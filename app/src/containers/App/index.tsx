@@ -22,11 +22,11 @@ const App = () => (
   <HashRouter>
     <NavigationBar />
     <Container className="full-width">
-      <Row>
+      <Row className="full-height">
         <Col lg="2" className="pl-0 pr-0 menu-bar-div">
           <MenuBar />
         </Col>
-        <Col lg="10" className="pl-4 pr-4 board-div">
+        <Col lg="10" className="pl-5 pr-4 board-div">
           <TagBar />
           <Switch>
             <Route exact={true} path={ROUTES.HOME} component={HomePage} />

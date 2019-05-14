@@ -89,7 +89,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { trash } = this.props.review;
     const pinImg = this.props.review.pinned ? PinIcon : UnPinIcon
     return (
-      <Col lg="3" style={{marginBottom: "30px"}}>
+      <Col lg="3" style={{marginBottom: "10px"}}>
         <div>
           <section className="card-tags" style={{marginBottom: "5px"}}>
             <Row>

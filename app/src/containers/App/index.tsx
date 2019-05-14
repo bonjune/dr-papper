@@ -22,10 +22,10 @@ const App = () => (
     <NavigationBar />
     <Container className="full-width">
       <Row>
-        <Col sm="2">
+        <Col sm="1" className="pl-0 pr-0 menu-bar-div">
           <MenuBar />
         </Col>
-        <Col sm="10">
+        <Col sm="11" className="pr-0 board-div">
           <TagBar />
           <Switch>
             <Route exact={true} path={ROUTES.HOME} component={HomePage} />

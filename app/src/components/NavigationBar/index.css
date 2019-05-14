@@ -89,7 +89,6 @@
 }
 .input-group > div > div{
 	z-index: 8;
-	text-align: center;
 }
 .input-group input{
 	background-color: white;
@@ -97,7 +96,6 @@
 	height: 100%;
 	border: 1px solid gray;
 	border-radius: 5px;
-	text-align: center;
 }
 .input-group button{
 	margin-left: 10px;

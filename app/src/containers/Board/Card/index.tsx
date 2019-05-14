@@ -7,7 +7,8 @@ import { Row, Col } from "reactstrap";
 import SmallTag from "../../../components/Tag";
 import PapperView from "../../../components/PapperView";
 
-import { TestImage} from "../../../assets/img";
+import { TestImage } from "../../../assets/img";
+import { PinIcon, UnPinIcon, Card_TrashIcon, Card_RestoreIcon } from "../../../assets/icons";
 
 import { withFirebase, IFirebaseProps } from "../../../components/Firebase";
 import { IReview } from "../../../components/Firebase/interface";
@@ -84,39 +85,39 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { figsrc } = this.state;
     const { review, imgShow } = this.props;
     const { trash } = this.props.review;
+    const pinImg = this.props.review.pinned ? PinIcon : UnPinIcon
     return (
       <Col lg="3" style={{marginBottom: "30px"}}>
         <div>
-          <section className="card-tags" style={{marginLeft: "10px", marginBottom: "5px"}}>
-            <Row >
-              {!review.trash
-                ? <button
-                  type="button"
-                  style={{ fontSize: "12px", marginLeft: "10px", marginRight: "10px" }}
-                  className="signout-btn btn text-uppercase"
-                  onClick={this.onPinButtonClicked}
-                >
-                  {this.props.review.pinned ? <span>Unpin</span> : <span>Pin</span>}
-                </button> : null}
-              <button
-                type="button"
-                style={{fontSize: "12px" }}
-                className="signout-btn btn text-uppercase"
-                onClick={this.onDeleteButtonClicked}
-              >
-                Delete
-              </button>
+          <section className="card-tags" style={{marginBottom: "5px"}}>
+            <Row>
+              <Col sm="2">
+                {!review.trash
+                  ? <button 
+                      style={{border: "none", backgroundColor: "#FFFFFF" }} 
+                      onClick={this.onPinButtonClicked}>
+                      <span><img src={pinImg} style={{ height: "20px", width: "20px"}} /></span>
+                    </button> 
+                  : null}
+              </Col>
+              { trash ? <Col sm="6"></Col> : <Col sm="8"></Col>}
               { trash
-                ? <button
-                    type="button"
-                    style={{ marginLeft: "10px", fontSize: "12px" }}
-                    className="signout-btn btn text-uppercase"
-                    onClick={this.onRestoreButtonClicked}
-                  >
-                    Restore 
-                  </button>
-                : null
+                  ? <Col sm="2">
+                      <button 
+                        style={{border: "none", backgroundColor: "#FFFFFF"}} 
+                        onClick={this.onRestoreButtonClicked}>
+                        <span><img src={Card_RestoreIcon} style={{ height: "20px", width: "20px"}} /></span>
+                      </button>
+                    </Col>
+                  : null
               }
+              <Col sm="2">
+                <button 
+                  style={{border: "none", backgroundColor: "#FFFFFF" }} 
+                  onClick={this.onDeleteButtonClicked}>
+                  <span><img src={Card_TrashIcon} style={{ height: "16px", width: "16px"}} /></span>
+                </button>
+              </Col>
             </Row>
           </section>
         </div>

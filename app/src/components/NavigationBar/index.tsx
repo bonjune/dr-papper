@@ -24,16 +24,9 @@ const NavBarForNonAuth = () => (
         </div>
       </div>
     </Col>
-    <Col lg="8">
+    <Col lg="9">
       <div className="searchBox">
         <SearchBar />
-      </div>
-    </Col>
-    <Col lg="1">
-      <div className="userBox">
-        <div className="userText">
-          USER
-        </div>
       </div>
     </Col>
     <Col lg="1">
@@ -57,16 +50,9 @@ const NavBarForAuth = () => (
         </div>
       </div>
     </Col>
-    <Col lg="8">
+    <Col lg="9">
       <div className="searchBox">
         <SearchBar />
-      </div>
-    </Col>
-    <Col lg="1">
-      <div className="userBox">
-        <div className="userText">
-          USER
-        </div>
       </div>
     </Col>
     <Col lg="1">

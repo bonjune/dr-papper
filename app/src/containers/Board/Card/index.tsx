@@ -91,7 +91,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
         <div>
           <section className="card-tags" style={{marginBottom: "5px"}}>
             <Row>
-              <Col sm="2">
+              <Col lg="2">
                 {!review.trash
                   ? <button 
                       style={{border: "none", backgroundColor: "#FFFFFF" }} 
@@ -100,9 +100,9 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                     </button> 
                   : null}
               </Col>
-              { trash ? <Col sm="6"></Col> : <Col sm="8"></Col>}
+              { trash ? <Col sm="5"></Col> : <Col lg="7"></Col>}
               { trash
-                  ? <Col sm="2">
+                  ? <Col lg="2">
                       <button 
                         style={{border: "none", backgroundColor: "#FFFFFF"}} 
                         onClick={this.onRestoreButtonClicked}>
@@ -111,7 +111,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
                     </Col>
                   : null
               }
-              <Col sm="2">
+              <Col lg="2">
                 <button 
                   style={{border: "none", backgroundColor: "#FFFFFF" }} 
                   onClick={this.onDeleteButtonClicked}>

@@ -4,10 +4,10 @@ import ReactAutocomplete from 'react-autocomplete';
 import { withRouter } from 'react-router-dom';
 import {
   InputGroup,
-  Button
 } from 'reactstrap';
 import { TagsContext } from 'src/components/Tag';
 import { RouterProps } from 'react-router';
+import { SearchIcon } from "../../../assets/icons";
 
 class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
   constructor(props: any) {
@@ -52,9 +52,11 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
                 onSelect={query => this.setState({ query })}
               />
               <span>
-                <Button color="secondary" onClick={this.onSearchClick}>
-                search
-                </Button>
+                <button 
+                  style={{border: "none", backgroundColor: "#E3F2FD", marginTop: "5px"}}
+                  onClick={this.onSearchClick}>
+                  <span><img src={SearchIcon} style={{ height: "20px", width: "20px"}} /></span>
+                </button>
               </span>
             </InputGroup>
           )

@@ -90,38 +90,39 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     const { review, imgShow } = this.props;
     const { trash } = this.props.review;
     const pinImg = this.props.review.pinned ? PinIcon : UnPinIcon
+    const auth = (review.userID === this.props.firebase.auth.currentUser!.uid);
     return (
       <Col lg="3" style={{marginBottom: "10px"}}>
         <div>
           <section className="card-tags" style={{marginBottom: "5px"}}>
             <Row>
-              <Col lg="2">
-                {!review.trash
-                  ? <button 
+              {!review.trash && auth
+                ? <Col lg="2">
+                    <button 
                       style={{border: "none", backgroundColor: "#FFFFFF" }} 
                       onClick={this.onPinButtonClicked}>
                       <span><img src={pinImg} style={{ height: "20px", width: "20px"}} /></span>
                     </button> 
-                  : null}
-              </Col>
+                  </Col>
+                : null}
               { trash ? <Col sm="5"></Col> : <Col lg="7"></Col>}
-              { trash
-                  ? <Col lg="2">
-                      <button 
-                        style={{border: "none", backgroundColor: "#FFFFFF"}} 
-                        onClick={this.onRestoreButtonClicked}>
-                        <span><img src={Card_RestoreIcon} style={{ height: "20px", width: "20px"}} /></span>
-                      </button>
-                    </Col>
-                  : null
-              }
-              <Col lg="2">
-                <button 
-                  style={{border: "none", backgroundColor: "#FFFFFF" }} 
-                  onClick={this.onDeleteButtonClicked}>
-                  <span><img src={Card_TrashIcon} style={{ height: "16px", width: "16px"}} /></span>
-                </button>
-              </Col>
+              { trash && auth
+                ? <Col lg="2">
+                    <button 
+                      style={{border: "none", backgroundColor: "#FFFFFF"}} 
+                      onClick={this.onRestoreButtonClicked}>
+                      <span><img src={Card_RestoreIcon} style={{ height: "20px", width: "20px"}} /></span>
+                    </button>
+                  </Col>
+                : null }
+              {auth
+                ? <Col lg="2">
+                  <button
+                    style={{ border: "none", backgroundColor: "#FFFFFF" }}
+                    onClick={this.onDeleteButtonClicked}>
+                    <span><img src={Card_TrashIcon} style={{ height: "16px", width: "16px" }} /></span>
+                  </button>
+                  </Col> : null}
             </Row>
           </section>
         </div>

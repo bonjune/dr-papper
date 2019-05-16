@@ -18,8 +18,13 @@ import HomePage from '../Home';
 import Search from '../../components/Search'
 import { withTags } from 'src/components/Tag';
 import { ReviewPredicate } from "../Board";
+import { compose } from 'recompose';
+import Firebase, { withFirebase } from "../../components/Firebase";
 
-const App = () => (
+const App = (props: any) => {
+  const user = (props.firebase as Firebase)!.auth.currentUser;
+  const uid = user ? user.uid : "";
+  return (
   <HashRouter>
     <NavigationBar />
     <Container className="full-width">
@@ -41,6 +46,7 @@ const App = () => (
                   {...props}
                   boardType="Read"
                   boardPredicate={predicateCompose(
+                    ReviewPredicate.Auth(uid),
                     ReviewPredicate.Read,
                     ReviewPredicate.Alive)}
                 />}
@@ -52,6 +58,7 @@ const App = () => (
                   {...props}
                   boardType="ToRead"
                   boardPredicate={predicateCompose(
+                    ReviewPredicate.Auth(uid),
                     ReviewPredicate.ToRead,
                     ReviewPredicate.Alive)}
                 />}
@@ -63,13 +70,21 @@ const App = () => (
                   {...props}
                   boardType="Pinned"
                   boardPredicate={predicateCompose(
+                    ReviewPredicate.Auth(uid),
                     ReviewPredicate.Pinned,
                     ReviewPredicate.Alive)}
                 />}
             />
             <Route
               path={ROUTES.DELETED}
-              render={(props) => <Board {...props} boardType="Deleted" boardPredicate={ReviewPredicate.Deleted} />}
+                render={(props) =>
+                  <Board {...props}
+                    boardType="Deleted"
+                    boardPredicate={predicateCompose(
+                      ReviewPredicate.Auth(uid),
+                      ReviewPredicate.Deleted
+                    ) }
+                  />}
             />
           </Switch>
         </Col>
@@ -77,6 +92,10 @@ const App = () => (
       </Row>
     </Container>
   </HashRouter>
-);
+  )
+};
 
-export default withTags(App);
+export default compose(
+  withFirebase,
+  withTags
+)(App);

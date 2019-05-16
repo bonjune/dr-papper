@@ -27,4 +27,5 @@ export const ReviewPredicate = {
   Archived: ((review: IReview) => !review.pinned) as ReviewPredicateType,
   Alive: ((review: IReview) => !review.trash) as ReviewPredicateType,
   Deleted: ((review: IReview) => review.trash) as ReviewPredicateType,
+  Auth: ((uid: string) => (review: IReview) => (uid === review.userID))
 }

@@ -6,7 +6,6 @@ import { Container, Row, Col } from 'reactstrap';
 import MenuBar from "../../components/MenuBar";
 import NavigationBar from "../../components/NavigationBar";
 import TagBar from '../../components/TagBar';
-import Test from "../../components/Tests";
 
 // Containers;
 import Board, { predicateCompose }  from '../Board';
@@ -88,7 +87,6 @@ const App = (props: any) => {
             />
           </Switch>
         </Col>
-        <Test />
       </Row>
     </Container>
   </HashRouter>

@@ -1,40 +1,89 @@
-/*
-/* Author: 
-/*
+/*  
+/*  Title: PapperEV
+/*  Author: Kihoon Kwon(kwon9804@kaist.ac.kr)
+/* 
 */
 import React from "react";
-import { Modal } from 'reactstrap';
-//import { IReview } from 'src/components/Firebase/interface';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { IReview } from 'src/components/Firebase/interface';
+
+import PapperEVHeader from "./Header";
 
 interface IPapperEV {
-  edit: boolean,
-  toread: boolean,
-  modalShow: boolean
+  edit: boolean;
+  handleModal: () => void;
+  review: IReview;
 }
 
 interface IPapperEVState {
-    modalShow : boolean
+  edit: boolean;
+  modalBgColor : string;
+  review : IReview;
 }
 
 
-class PapperEV extends React.Component<
-                            IPapperEV,
-                            IPapperEVState> {
+class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
   constructor(props: IPapperEV) {
     super(props);
     this.state = {
-        modalShow : props.modalShow
+      edit : props.edit,
+      modalBgColor : '#EEEEEE',
+      review : props.review
     }
   }
 
-  componentWillReceiveProps() {
-      this.setState({modalShow : this.props.modalShow})
+  handleToggle = () => {
+    this.props.handleModal()
+  }
+
+  handleFooterButtonClicked = () => {
+    this.setState(prev => ({edit: !prev.edit}))
+  }
+
+  onReviewChange = (e : object) => {
+    const {review} = this.state
+    const keys = Object.keys(e)
+    keys.forEach(key => {
+      review[key] = e[key]
+    });
+    this.setState({review}, ()=>console.log(this.state))
   }
 
   render() {
-    const {modalShow} = this.state
+
     return (
-        <Modal isOpen={modalShow} size="lg" scrollable={true}/>
+      <Modal
+      isOpen={true}
+      toggle={this.handleToggle}
+      size='lg'
+      scrollable={true}
+      >
+        <ModalHeader
+          style={{ background: this.state.modalBgColor, padding: 0 }}
+          cssModule={{ 'modal-title': 'w-100 text-center mb-0' }}>
+          {this.state.edit ? <PapperEVHeader toRead={this.props.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
+        </ModalHeader>
+
+        <ModalBody style={{background:this.state.modalBgColor}}>
+          <div>1</div>
+        </ModalBody>
+
+        <ModalFooter style={{background:this.state.modalBgColor}}>
+          {this.state.edit ? 
+            <Button
+              block={true}
+              style={{ background: "#B0BEC5", border: 0 }}
+              onClick={this.handleFooterButtonClicked}>
+              Save
+            </Button> :
+            <Button
+              block={true}
+              style={{ background: "#B0BEC5", border: 0 }}
+              onClick={this.handleFooterButtonClicked}>
+              Edit
+            </Button>}
+        </ModalFooter>
+      </Modal>
     )
   }
 }

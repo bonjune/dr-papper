@@ -7,7 +7,9 @@ import React from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { IReview } from 'src/components/Firebase/interface';
 
+import PapperEVBody from "./Body";
 import PapperEVHeader from "./Header";
+
 
 interface IPapperEV {
   edit: boolean;
@@ -37,7 +39,7 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
   }
 
   handleFooterButtonClicked = () => {
-    this.setState(prev => ({edit: !prev.edit}))
+    this.setState(prev => ({edit: !prev.edit}), ()=> console.log(this.state)) // for debugging! erase callback!
   }
 
   onReviewChange = (e : object) => {
@@ -46,7 +48,7 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
     keys.forEach(key => {
       review[key] = e[key]
     });
-    this.setState({review}, ()=>console.log(this.state))
+    this.setState({review}) 
   }
 
   render() {
@@ -56,18 +58,15 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
       isOpen={true}
       toggle={this.handleToggle}
       size='lg'
-      scrollable={true}
-      >
+      scrollable={true}>
         <ModalHeader
           style={{ background: this.state.modalBgColor, padding: 0 }}
           cssModule={{ 'modal-title': 'w-100 text-center mb-0' }}>
           {this.state.edit ? <PapperEVHeader toRead={this.props.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
         </ModalHeader>
-
         <ModalBody style={{background:this.state.modalBgColor}}>
-          <div>1</div>
+          <PapperEVBody edit={this.state.edit} review={this.state.review} onChangeHandler={this.onReviewChange}/>
         </ModalBody>
-
         <ModalFooter style={{background:this.state.modalBgColor}}>
           {this.state.edit ? 
             <Button

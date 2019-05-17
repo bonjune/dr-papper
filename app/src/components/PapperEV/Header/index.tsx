@@ -29,8 +29,8 @@ class PapperEVHeader extends React.Component<IPapperEVHeader, IPapperEVHeaderSta
         }
     }
 
-    onButtonClick = (read:boolean) => {
-        this.setState({toRead:read}, 
+    onButtonClick = (toread:boolean) => {
+        this.setState({toRead:toread}, 
                     () => this.props.onChangeHandler(this.state));
     }
 
@@ -48,7 +48,7 @@ class PapperEVHeader extends React.Component<IPapperEVHeader, IPapperEVHeaderSta
                         color: toRead ? select.text : unselect.text,
                         flex:"1",
                         fontSize:"20px"}}
-                    onClick={this.onButtonClick.bind(this, true)}>
+                        onClick={this.onButtonClick.bind(this, true)}>
                     {toRead ?  <img src={ToReadIcon} alt="toreadicon" style={{height:"20px", width:"20px"}}/> : null} 
                     <b>TOREAD</b>
                 </Button>

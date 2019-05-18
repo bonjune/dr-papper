@@ -1,9 +1,12 @@
 import React from "react";
+import {Button} from 'reactstrap'
 import { IReview } from 'src/components/Firebase/interface';
+import {AddBoxIcon} from "../../../assets/icons"
 
-
+import EVBoxes from './Boxes';
 import EVContent from "./EVContent";
 import EVTags from './EVTags';
+
 
 interface IPapperEVBody {
     edit : boolean;
@@ -49,6 +52,23 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 <EVTags edit={edit} tags={review.tags} suggestions={[{id:"test", name:"test"}]} onChangeHandler={this.onContentChange}/>
             </div>
+
+            <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
+                {review.toRead ?
+                <EVContent edit={edit} content={{"comment" : review.comment}} label="Comment" onChangeHandler={this.onContentChange}/>:
+                <div>
+                    {review.boxes.map((box, i) => <EVBoxes edit={edit} box={box} key={i} onChangeHandler={this.onContentChange}/>)}
+                    {edit ?
+                    <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
+                        <Button block={true} color="white">
+                            <img src={AddBoxIcon} alt="addbox" style={{height:"20px", width:"20px"}}/>
+                        </Button>
+                    </div> :
+                    null}
+                </div>
+                }
+            </div>
+
         </div>)
     }
 };

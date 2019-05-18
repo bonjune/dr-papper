@@ -1,6 +1,7 @@
 import React from "react";
 import {Col, FormGroup, Label} from "reactstrap"
 import SmallTag from "../../Tag";
+import { IReview } from 'src/components/Firebase/interface';
 
 import {WithContext as ReactTags} from 'react-tag-input';
 import './tagbox.css'
@@ -13,14 +14,8 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 interface IEVTags {
     edit : boolean;
-    tags : Array<{
-        id: string;
-        name: string;
-      }>;
-    suggestions : Array<{
-        id: string;
-        name: string;
-      }>;
+    tags : Pick<IReview, 'tags'>['tags'];
+    suggestions : Pick<IReview, 'tags'>['tags'];
     onChangeHandler:(tags:object) => void;
 }
 

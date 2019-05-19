@@ -141,17 +141,9 @@ class Firebase extends React.Component<any, {}> {
       const chkReviews = snapshot.val().reviews;
       if(chkReviews !== null){ 
         const reviews =  chkReviews as string[];
-        const removedReviews = reviews.filter(review => review !== reviewID)
-
-        if(removedReviews.length > 0){
-          tagRef.child('reviews').set(removedReviews)
-        }
-        else{
-          tagRef.remove();
-        }
+        const filteredReviews = reviews.filter(review => review !== reviewID)
+        tagRef.child('reviews').set(filteredReviews)
       }
-
-
     })
   }
 

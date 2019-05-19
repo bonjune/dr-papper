@@ -63,14 +63,14 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
       if(tags){
         tags.forEach(tag => this.props.firebase.deleteTag(tag.name, reviewID)) // delete tags from db
       }
-    
+      alert('Permantly deleted')
     }
     else { // The papper is not in trash bin
       this.props.firebase.review(reviewID).update({
         trash: true // Move the papper to the trash bin
       })
+      alert('Move to DELETED tap');
     }
-    alert('Move to DELETED tap');
    }
 
   onRestoreButtonClicked = () => {

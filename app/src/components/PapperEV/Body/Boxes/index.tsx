@@ -2,39 +2,34 @@ import React from 'react';
 import {Button, ButtonGroup, Label} from 'reactstrap'
 import {ContentFormatIcon, FigureFormatIcon} from "../../../../assets/icons"
 
-import { Format } from 'src/components/Firebase/interface';
+import { Format, IBox } from 'src/components/Firebase/interface';
 
 import FigureBox from "./FigureBox";
 
 export interface IEVBoxes {
-    box : {
-        format: Format;
-        figure: string;
-        subtitle: string;
-        content: string;
-        figsrc: string;
-      };
+    box : IBox;
     edit : boolean;
     key : number;
+    keyNum: number;
     onChangeHandler : (box:object) => void;
+    onDeleteHandler : (idx:number) => void;
 
 }
 
 export default class EVBoxes extends React.Component<IEVBoxes> {
     constructor(props:IEVBoxes){
         super(props);
-
     }
 
-    onBoxChange = () => {
-
+    onDeleteBox = () => {
+        this.props.onDeleteHandler(this.props.keyNum)
     }
 
     render() {
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                 {this.props.box.format === Format.Figure ?
-                    <FigureBox box={this.props.box} edit={this.props.edit} onChangeHandler={this.onBoxChange}/> :
+                    <FigureBox box={this.props.box} edit={this.props.edit} onClick={this.onDeleteBox}/> :
                     <div>12345</div>
                 }
                 {this.props.edit ?
@@ -48,7 +43,9 @@ export default class EVBoxes extends React.Component<IEVBoxes> {
                             <img src={ContentFormatIcon} alt="contformat" style={{height:"20px", width:"20px"}}/> Content
                         </Button>
                     </ButtonGroup>
-                    <Button className="float-right d-inline" style={{background:"rgba(255,0,0, 0.5)", color:"black", border:"0px"}}>Delete</Button>
+                    <Button className="float-right d-inline" style={{background:"rgba(255,0,0, 0.5)", color:"black", border:"0px"}} onClick={this.onDeleteBox}>
+                        Delete
+                    </Button>
                 </div>:
                 null
                 }

@@ -1,6 +1,6 @@
 import React from "react";
 import {Button} from 'reactstrap'
-import { IReview } from 'src/components/Firebase/interface';
+import { Format, IBox, IReview } from 'src/components/Firebase/interface';
 import {AddBoxIcon} from "../../../assets/icons"
 
 import EVBoxes from './Boxes';
@@ -36,9 +36,25 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
         this.props.onChangeHandler(review)
     }
 
+    addBox = () => {
+        const {review} = this.state;
+        review.boxes.push({format:Format.Figure} as IBox)
+        this.setState({review})
+
+    }
+
+    deleteBox = (keyNum:number) => {
+        const { review } = this.state;
+        review.boxes = review.boxes.filter((box, index) => index !== keyNum)
+        this.setState({
+         review
+        });
+    }
+
     render() {
         const {edit} = this.props
         const {review} = this.state
+
         return(
         <div>
             <div style={{background:"white", padding:"5px"}}>
@@ -57,10 +73,10 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
                 {review.toRead ?
                 <EVContent edit={edit} content={{"comment" : review.comment}} label="Comment" onChangeHandler={this.onContentChange}/>:
                 <div>
-                    {review.boxes.map((box, i) => <EVBoxes edit={edit} box={box} key={i} onChangeHandler={this.onContentChange}/>)}
+                    {review.boxes.map((box, index) => <EVBoxes edit={edit} box={box} key={index} keyNum={index} onChangeHandler={this.onContentChange} onDeleteHandler={this.deleteBox}/>)}
                     {edit ?
                     <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
-                        <Button block={true} color="white">
+                        <Button block={true} color="white" onClick={this.addBox}>
                             <img src={AddBoxIcon} alt="addbox" style={{height:"20px", width:"20px"}}/>
                         </Button>
                     </div> :

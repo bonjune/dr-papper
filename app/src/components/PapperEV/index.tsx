@@ -32,6 +32,7 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
       modalBgColor : '#EEEEEE',
       review : props.review
     }
+    console.log(this.props.review)
   }
 
   handleToggle = () => {
@@ -50,6 +51,7 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
     });
     this.setState({review}) 
   }
+
 
   render() {
 

@@ -7,6 +7,7 @@ import { IReview } from 'src/components/Firebase/interface';
 import { Row, Col } from 'reactstrap';
 import { IFirebaseProps } from "../../components/Firebase";
 import CardBox  from './CardBox';
+import TagBar from "../../components/TagBar";
 import { withAuthorization, withAuthentication } from "../../components/Auth/Session";
 import { compose } from "recompose";
 import { ReviewPredicate, ReviewPredicateType, predicateCompose, predicateUnion } from "./predicates";
@@ -58,6 +59,7 @@ class BoardBase extends React.Component<
     const imgShow = boardType === "Read";
     return (
       <div className="papper-board">
+      <TagBar reviews={this.state.reviews} uid={uid}/>
         {boardType === "Read"
           ? <div>
               <Row>

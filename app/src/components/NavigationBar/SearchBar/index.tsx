@@ -23,7 +23,7 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
       return null;
     }
     this.props.history.push(`/show/${query}`);
-    return;
+    return null;
   }
 
   render() {

@@ -106,7 +106,7 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
                 <span>
                   <img src={ToReadIcon} alt="addbutton" />
                 </span>
-                 ToRead
+                 To Read
               </button>
             </div>
           </Link>

@@ -128,22 +128,16 @@ class BoardBase extends React.Component<
               <Row>
                 <Col sm="auto">
                   <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
-                    Search Results
-                  </h3> </Col>
-              </Row>
-              <Row>
-                <Col sm="auto">
-                  <h4 className="text-uppercase" style={{ marginBottom: "25px" }}>
                     Other's Reviews
-                  </h4> </Col>
+                  </h3> </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID !== uid)} imgShow={true} />
             <hr/>
               <Row>
                 <Col sm="auto">
-                  <h4 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
                     My Reviews 
-                  </h4>
+                  </h3>
                 </Col>
               </Row>
               <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID === uid)} imgShow={true} />

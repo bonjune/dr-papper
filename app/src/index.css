@@ -29,13 +29,6 @@ html, body, #root{
 .full-height {
   height: 100vh;
 }
-.col-md-1-5 {
-  width: 12.5%;
-  background-color: #FFFFFF;
-}
-.col-md-10-5 {
-  width: 87.5%;
-}
 
 /* Tagbar */
 .component-tag-bar span{

@@ -70,6 +70,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
         trash: true // Move the papper to the trash bin
       })
     }
+    alert('Move to DELETED tap');
    }
 
   onRestoreButtonClicked = () => {
@@ -97,32 +98,31 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
           <section className="card-tags" style={{marginBottom: "5px"}}>
             <Row>
               {!review.trash && auth
-                ? <Col lg="2">
+                ? <div className="col">
                     <button 
                       style={{border: "none", backgroundColor: "#FFFFFF" }} 
                       onClick={this.onPinButtonClicked}>
                       <span><img src={pinImg} style={{ height: "20px", width: "20px"}} /></span>
                     </button> 
-                  </Col>
+                  </div>
                 : null}
-              { trash ? <Col sm="5"></Col> : <Col lg="7"></Col>}
               { trash && auth
-                ? <Col lg="2">
+                ? <div className="col">
                     <button 
                       style={{border: "none", backgroundColor: "#FFFFFF"}} 
                       onClick={this.onRestoreButtonClicked}>
                       <span><img src={Card_RestoreIcon} style={{ height: "20px", width: "20px"}} /></span>
                     </button>
-                  </Col>
+                  </div>
                 : null }
               {auth
-                ? <Col lg="2">
+                ? <div className="col-auto">
                   <button
                     style={{ border: "none", backgroundColor: "#FFFFFF" }}
                     onClick={this.onDeleteButtonClicked}>
                     <span><img src={Card_TrashIcon} style={{ height: "16px", width: "16px" }} /></span>
                   </button>
-                  </Col> : null}
+                  </div> : null}
             </Row>
           </section>
         </div>
@@ -157,6 +157,10 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
           <p className="content font-weight-light multi-ellipse">
             {this.props.review.comment}
           </p>
+          <Row>
+            <div className="col text-left" style={{fontSize: "12px", fontWeight: "bold", marginLeft: "5px", color: "#1A237E"}}>Nyoungwoo</div>
+            <div className="col text-right" style={{fontSize: "12px", marginRight: "5px"}}>2018.05.19</div>
+          </Row>
         </div>
         <div>
           <section className="card-tags">

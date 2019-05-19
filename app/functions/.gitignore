@@ -1,0 +1,11 @@
+## Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Typescript v1 declaration files
+typings/
+
+node_modules/
+
+# Admin Crudential
+dr-papper-firebase-adminsdk-xjaxa-58afcfa88d.json

@@ -19,7 +19,11 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
 
   onSearchClick = () => {
     const { query } = this.state;
+    if (query === "") {
+      return null;
+    }
     this.props.history.push(`/show/${query}`);
+    return;
   }
 
   render() {

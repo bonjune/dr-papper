@@ -8,7 +8,7 @@ const Search = (props: any) => {
   query = query.split('&');
   console.log(query);
   const prefix = "# ";
-  const suffix = ' ';
+  const space = ' ';
   const predicate = (query: string[]) => (review: IReview) => {
     for (let key in review.tags) {
       const tagName = review.tags[key].name;
@@ -21,7 +21,7 @@ const Search = (props: any) => {
 
   return (
     <div className="papper-board">
-      <h1>{query && query.map((val:string) => prefix + val + suffix)}</h1>
+      <h1>{query && query.map((val:string) => prefix + val + space)}</h1>
       <Board boardType="Search" boardPredicate={predicate(query)} search={true}/>
     </div>
   )

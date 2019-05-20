@@ -17,6 +17,8 @@ interface IFigureBoxState {
     fbfigsrc : string | null;
 }
 
+
+
 class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigureBoxState> {
     constructor(props:IFigureBox & IFirebaseProps){
         super(props);
@@ -40,16 +42,16 @@ class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigure
                 const URLObj = window.URL;
                 const source = URLObj.createObjectURL(blob);
                 box.figure = blob;
-                this.setState({box, fbfigsrc:source})
+                this.setState({box, fbfigsrc:source}, ()=>this.props.onChangeHandler(box))
                 break;  
             }   
         }
     }
 
-    componentWillReceiveProps(newprops:any){
+    componentWillReceiveProps(newprops:IFigureBox){
         this.setState({
             box : newprops.box,
-            fbfigsrc : null,
+            fbfigsrc : null
         })
         this.renderFigure(newprops.box.figsrc);
 
@@ -85,32 +87,32 @@ class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigure
     
     render() {
         const {fbfigsrc} = this.state;
-        console.log(this.state.box)
         return(
             <div>
             {this.props.edit ?
             <Row>
                 <Col xs="4" style={{height:"200px", border:"1px solid rgb(206, 212, 218)", margin:"15px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    {fbfigsrc
-                    ? 
-                    <img
-                        contentEditable={true}
-                        src={fbfigsrc}
-                        alt={"pasted"}
-                        style={{maxHeight:"180px", maxWidth:"180px"}}
-                        onPaste={file => this.pasteFigure(file)} // WHY NOT WORK????
-                    />
-                    : <div style={{ color: "rgb(108, 117, 125)" }} onPaste={file => this.pasteFigure(file)}>
-                        Paste(Ctrl + V) Figure!
-                        </div>}
+                    <div onPaste={file => this.pasteFigure(file)}>
+                        {fbfigsrc
+                        ? 
+                        <img
+                            src={fbfigsrc}
+                            alt={"pasted"}
+                            style={{maxHeight:"180px", maxWidth:"180px"}}
+                            onPaste={file => this.pasteFigure(file)} // WHY NOT WORK????
+                        />
+                        : <div style={{ color: "rgb(108, 117, 125)" }}>
+                            Paste(Ctrl + V) Figure!
+                            </div>}
+                    </div>
 
                 </Col>
                 <Col xs="7" style={{margin:"15px"}}>
                     <Row style={{height:"50px"}}>
-                        <Input placeholder="Add Subtitle" name="subtitle" defaultValue={this.state.box.subtitle} onChange={this.onInputChange}/>
+                        <Input placeholder="Add Subtitle" name="subtitle" value={this.state.box.subtitle} onChange={this.onInputChange}/>
                     </Row>
                     <Row style={{height:"140px", marginTop:"10px"}}>
-                        <Input placeholder="Add Content" type="textarea" name="content" defaultValue={this.state.box.content} onChange={this.onInputChange}/>
+                        <Input placeholder="Add Content" type="textarea" name="content" value={this.state.box.content} onChange={this.onInputChange}/>
                     </Row>
                 </Col>
             </Row> :

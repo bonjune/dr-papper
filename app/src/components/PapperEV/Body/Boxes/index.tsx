@@ -5,6 +5,8 @@ import {ContentFormatIcon, FigureFormatIcon} from "../../../../assets/icons"
 import { Format, IBox } from 'src/components/Firebase/interface';
 
 import FigureBox from "./FigureBox";
+import ContentBox from './ContentBox'
+
 
 export interface IEVBoxes {
     box : IBox;
@@ -16,30 +18,48 @@ export interface IEVBoxes {
 
 }
 
-export default class EVBoxes extends React.Component<IEVBoxes> {
+interface IEVBoxState {
+    box : IBox
+}
+
+export default class EVBoxes extends React.Component<IEVBoxes, IEVBoxState> {
     constructor(props:IEVBoxes){
         super(props);
+        this.state = {
+            box : this.props.box
+        }
     }
 
     onDeleteBox = () => {
         this.props.onDeleteHandler(this.props.keyNum)
     }
 
+    onChangeInput = (box:IBox) => {
+        this.props.onChangeHandler(box)
+    }
+
+    onFormatChange = (f:Format) => {
+        const {box} = this.state
+        box.format = f
+        this.setState({box})
+        this.props.onChangeHandler(box)
+    }
+
     render() {
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
-                {this.props.box.format === Format.Figure ?
-                    <FigureBox box={this.props.box} edit={this.props.edit} onClick={this.onDeleteBox}/> :
-                    <div>12345</div>
+                {this.state.box.format === Format.Figure ?
+                    <FigureBox box={this.props.box} edit={this.props.edit} onChangeHandler={this.onChangeInput}/>:
+                    <ContentBox box={this.props.box} edit={this.props.edit} onChangeHandler={this.onChangeInput}/>
                 }
                 {this.props.edit ?
                 <div>
                     <ButtonGroup className="d-inline">
                         <Label style={{width:"80px", textAlign:"center"}}>Format</Label>
-                        <Button id="0" style={{background:"#FFECB3", color:"black", border:"0"}}>
+                        <Button id="0" style={{background:"#FFECB3", color:"black", border:"0"}} onClick={() => this.onFormatChange(Format.Figure)}>
                             <img src={FigureFormatIcon} alt="figformat" style={{height:"20px", width:"20px"}}/> Figure
                         </Button>
-                        <Button id="1" style={{background:"#FFF8E1", color:"black", border:"0"}}>
+                        <Button id="1" style={{background:"#FFF8E1", color:"black", border:"0"}}  onClick={() => this.onFormatChange(Format.Content)}>
                             <img src={ContentFormatIcon} alt="contformat" style={{height:"20px", width:"20px"}}/> Content
                         </Button>
                     </ButtonGroup>

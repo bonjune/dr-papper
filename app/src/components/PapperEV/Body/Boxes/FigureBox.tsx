@@ -48,14 +48,6 @@ class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigure
         }
     }
 
-    componentWillReceiveProps(newprops:IFigureBox){
-        this.setState({
-            box : newprops.box,
-            fbfigsrc : null
-        })
-        this.renderFigure(newprops.box.figsrc);
-
-    }
 
     onInputChange = (e:any) => {
 
@@ -95,11 +87,9 @@ class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigure
                     <div onPaste={file => this.pasteFigure(file)}>
                         {fbfigsrc
                         ? 
-                        <img
-                            src={fbfigsrc}
-                            alt={"pasted"}
-                            style={{maxHeight:"180px", maxWidth:"180px"}}
-                            onPaste={file => this.pasteFigure(file)} // WHY NOT WORK????
+                        <div
+                            style={{height:"180px", width:"180px", backgroundImage:`url(${fbfigsrc})`}}
+                            onPaste={file => this.pasteFigure(file)}
                         />
                         : <div style={{ color: "rgb(108, 117, 125)" }}>
                             Paste(Ctrl + V) Figure!

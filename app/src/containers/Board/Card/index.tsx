@@ -87,6 +87,7 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     }));
   }
 
+
   render() {
     const { figsrc } = this.state;
     const { review, imgShow } = this.props;

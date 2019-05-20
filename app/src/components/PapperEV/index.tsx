@@ -6,6 +6,7 @@
 import React from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { IReview } from 'src/components/Firebase/interface';
+import Firebase, { IFirebaseProps, withFirebase } from "../../components/Firebase";
 
 import PapperEVBody from "./Body";
 import PapperEVHeader from "./Header";
@@ -21,18 +22,23 @@ interface IPapperEVState {
   edit: boolean;
   modalBgColor : string;
   review : IReview;
+  uid : string;
 }
 
 
-class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
-  constructor(props: IPapperEV) {
+class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEVState> {
+  constructor(props: IPapperEV & IFirebaseProps) {
     super(props);
+    const user = (props.firebase as Firebase)!.auth.currentUser;
+    
     this.state = {
       edit : props.edit,
       modalBgColor : '#EEEEEE',
-      review : props.review
+      review : Object.assign({}, props.review),
+      uid :  user ? user.uid : ""
     }
-    console.log(this.props.review)
+    
+    //console.log(props)
   }
 
   handleToggle = () => {
@@ -40,7 +46,66 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
   }
 
   handleFooterButtonClicked = () => {
-    this.setState(prev => ({edit: !prev.edit}), ()=> console.log(this.state)) // for debugging! erase callback!
+    if(this.state.edit){
+      const {boxes, reviewID} = this.state.review;
+      let {tags} = this.state.review;
+
+      this.state.review.updateAt = Date.now().toString();
+
+      // uploading figure image in box
+      if(boxes){
+        boxes.forEach((box, idx) => {
+          if(box.figure){
+            const figsrc = `${Math.random().toString(36)}_${idx}.png`;
+            this.props.firebase.uploadFigure(box.figure, figsrc);
+            box.figsrc = figsrc
+          }
+        })
+      }
+
+      // tags
+      if(!tags){
+        tags = [];
+      }
+      if(!this.props.review.tags){
+        this.props.review.tags = [];
+      }
+
+      const addedTags = tags.filter(tag => 
+        {
+          let ret = true;
+          this.props.review.tags.forEach(ptag => {
+            if(ptag.name === tag.name){
+              ret = false;
+            }
+          })
+          return ret;
+        })
+      const deletedTags = this.props.review.tags.filter(tag => {
+        let ret = true;
+        tags.forEach(ptag => {
+          if(ptag.name === tag.name){
+            ret = false;
+          }
+        })
+        return ret;
+      })
+     
+      if(!this.state.review.createAt){
+        this.state.review.createAt = this.state.review.updateAt;
+        this.props.firebase.makeNewPapperReview(this.state.review)
+        .then(id => {
+          addedTags.forEach(tag => this.props.firebase.makeNewTag(tag.name, id))
+          deletedTags.forEach(tag => this.props.firebase.deleteTag(tag.name, id))
+        })
+      }
+      else{
+        this.props.firebase.updatePapperReview(reviewID, this.state.review);
+        addedTags.forEach(tag => this.props.firebase.makeNewTag(tag.name, reviewID))
+        deletedTags.forEach(tag => this.props.firebase.deleteTag(tag.name, reviewID))
+      }
+    }
+    this.setState(prev => ({edit: !prev.edit}))
   }
 
   onReviewChange = (e : object) => {
@@ -51,7 +116,7 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
     });
     this.setState({review}) 
   }
-
+  
 
   render() {
 
@@ -64,30 +129,41 @@ class PapperEV extends React.Component<IPapperEV, IPapperEVState> {
         <ModalHeader
           style={{ background: this.state.modalBgColor, padding: 0 }}
           cssModule={{ 'modal-title': 'w-100 text-center mb-0' }}>
-          {this.state.edit ? <PapperEVHeader toRead={this.props.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
+          {this.state.edit ? <PapperEVHeader toRead={this.state.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
         </ModalHeader>
         <ModalBody style={{background:this.state.modalBgColor}}>
           <PapperEVBody edit={this.state.edit} review={this.state.review} onChangeHandler={this.onReviewChange}/>
         </ModalBody>
         <ModalFooter style={{background:this.state.modalBgColor}}>
-          {this.state.edit ? 
-            <Button
+          {
+            !this.props.review.userID || this.props.review.userID === this.state.uid ? 
+            <div style={{width:"100%"}}>
+              {this.state.edit ? 
+              <Button
+                block={true}
+                style={{ background: "#B0BEC5", border: 0 }}
+                onClick={this.handleFooterButtonClicked}>
+                Save
+              </Button> :
+              <Button
+                block={true}
+                style={{ background: "#B0BEC5", border: 0 }}
+                onClick={this.handleFooterButtonClicked}>
+                Edit
+              </Button>}
+            </div> :
+            <Button 
               block={true}
+              onClick={this.handleToggle}
               style={{ background: "#B0BEC5", border: 0 }}
-              onClick={this.handleFooterButtonClicked}>
-              Save
-            </Button> :
-            <Button
-              block={true}
-              style={{ background: "#B0BEC5", border: 0 }}
-              onClick={this.handleFooterButtonClicked}>
-              Edit
-            </Button>}
+              >Done</Button>
+          }
         </ModalFooter>
       </Modal>
     )
   }
 }
 
+const PapperEV = withFirebase(PapperEVBase);
 
 export default PapperEV;

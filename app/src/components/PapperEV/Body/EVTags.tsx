@@ -42,17 +42,21 @@ class EVTags extends React.Component<IEVTags, IEVTagsState> {
 
     tagNametoText = (tags:Array<{id:string, name:string}>) => {
         const retTag = [] as Array<{id:string, text:string}>
-        tags.forEach(tag => {
-            retTag.push({id:tag.id, text:tag.name})
-        })
+        if(tags){
+            tags.forEach(tag => {
+                retTag.push({id:tag.id, text:tag.name})
+            })
+        }
         return retTag
     }
 
     tagTexttoName = (tags:Array<{id:string, text:string}>) => {
         const retTag = [] as Array<{id:string, name:string}>
-        tags.forEach(tag => {
-            retTag.push({id:tag.id, name:tag.text})
-        })
+        if(tags){
+            tags.forEach(tag => {
+                retTag.push({id:tag.id, name:tag.text})
+            })
+        }
         return retTag
     }
 
@@ -60,7 +64,7 @@ class EVTags extends React.Component<IEVTags, IEVTagsState> {
         const { tags } = this.state;
         this.setState({
          tags: tags.filter((tag, index) => index !== i),
-        }, () => this.props.onChangeHandler({"tags": this.tagTexttoName(tags)}));
+        }, () => this.props.onChangeHandler({"tags": this.tagTexttoName(this.state.tags)}));
     }
 
     handleTagAddition = (tag: { id: string; text: string;}) => {

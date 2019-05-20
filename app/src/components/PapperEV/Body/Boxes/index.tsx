@@ -45,6 +45,13 @@ export default class EVBoxes extends React.Component<IEVBoxes, IEVBoxState> {
         this.props.onChangeHandler(box)
     }
 
+    componentWillReceiveProps(newprops:IEVBoxes){
+        this.setState(prev => ({
+            ...prev,
+            box : newprops.box,
+        }))
+    }
+
     render() {
         return(
             <div style={{background:"white", marginTop:"10px", padding:"5px"}}>

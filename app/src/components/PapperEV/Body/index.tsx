@@ -38,6 +38,9 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
 
     addBox = () => {
         const {review} = this.state;
+        if(!review.boxes) {
+            review.boxes = [];
+        }
         review.boxes.push({format:Format.Figure} as IBox)
         this.setState({review})
 
@@ -69,11 +72,11 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
                 <EVTags edit={edit} tags={review.tags} suggestions={[{id:"test", name:"test"}]} onChangeHandler={this.onContentChange}/>
             </div>
 
-            <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
+            <div style={{background: review.toRead ? "white" : "#EEEEEE", marginTop:"10px", padding:"5px"}}>
                 {review.toRead ?
                 <EVContent edit={edit} content={{"comment" : review.comment}} label="Comment" onChangeHandler={this.onContentChange}/>:
                 <div>
-                    {review.boxes.map((box, index) => <EVBoxes edit={edit} box={box} key={index} keyNum={index} onChangeHandler={this.onContentChange} onDeleteHandler={this.deleteBox}/>)}
+                    {review.boxes ? review.boxes.map((box, index) => <EVBoxes edit={edit} box={box} key={index} keyNum={index} onChangeHandler={this.onContentChange} onDeleteHandler={this.deleteBox}/>) : null}
                     {edit ?
                     <div style={{background:"white", marginTop:"10px", padding:"5px"}}>
                         <Button block={true} color="white" onClick={this.addBox}>

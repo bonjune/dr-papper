@@ -5,7 +5,6 @@ import { Container, Row, Col } from 'reactstrap';
 // Components;
 import MenuBar from "../../components/MenuBar";
 import NavigationBar from "../../components/NavigationBar";
-import TagBar from '../../components/TagBar';
 
 // Containers;
 import Board, { predicateCompose }  from '../Board';
@@ -32,7 +31,6 @@ const App = (props: any) => {
           <MenuBar />
         </Col>
         <Col lg="10" className="pl-5 pr-4 board-div">
-          <TagBar />
           <Switch>
             <Route exact={true} path={ROUTES.HOME} component={HomePage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />

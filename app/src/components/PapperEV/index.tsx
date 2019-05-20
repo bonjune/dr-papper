@@ -50,6 +50,7 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
       const {boxes, reviewID} = this.state.review;
       let {tags} = this.state.review;
 
+      this.state.review.userID = this.state.uid;
       this.state.review.updateAt = Date.now().toString();
 
       // uploading figure image in box

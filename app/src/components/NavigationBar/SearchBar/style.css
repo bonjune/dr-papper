@@ -1,0 +1,12 @@
+.ReactTags__suggestions{
+  z-index: 8;
+}
+.ReactTags__tagInput{
+  /* width: 10%;
+  display: inline;
+  white-space:nowrap; */
+}
+.ReactTags__tagInputField{
+  width: 10%;
+  background: black;
+}

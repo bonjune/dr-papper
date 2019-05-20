@@ -1,13 +1,16 @@
 import React from "react";
 import { withFirebase, IFirebaseProps } from '../Firebase';
 
-export const TagsContext = React.createContext<{ id: string; name: string; }[] |null>(null);
+export const TagsContext = React.createContext<Tag[] | null>(null);
+
+export interface Tag {
+    key: string;
+    name: string;
+    reviews: string[];
+}
 
 interface Tags {
-  tags: {
-    id: string;
-    name: string;
-  }[];
+  tags: Tag[];
 }
 
 export const withTags = (Component: React.ComponentType) => {
@@ -20,7 +23,7 @@ export const withTags = (Component: React.ComponentType) => {
       }
     }
     componentDidMount() {
-      let data: { id: string; name: string; }[];
+      let data: Tag[];
       this.props.firebase.tags().on('value', snapshot => {
         data = [];
         if (snapshot) {

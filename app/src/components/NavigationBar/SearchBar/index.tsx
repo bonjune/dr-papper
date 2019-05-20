@@ -19,7 +19,11 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
 
   onSearchClick = () => {
     const { query } = this.state;
+    if (query === "") {
+      return null;
+    }
     this.props.history.push(`/show/${query}`);
+    return null;
   }
 
   render() {
@@ -53,7 +57,7 @@ class SearchBarBase extends Component<{ query: string;} & RouterProps, any> {
               />
               <span>
                 <button 
-                  style={{border: "none", backgroundColor: "#E3F2FD", marginTop: "5px"}}
+                  style={{border: "none", backgroundColor: "#90CAF9", marginTop: "5px"}}
                   onClick={this.onSearchClick}>
                   <span><img src={SearchIcon} style={{ height: "20px", width: "20px"}} /></span>
                 </button>

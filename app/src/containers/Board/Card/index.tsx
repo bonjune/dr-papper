@@ -87,13 +87,17 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     }));
   }
 
-
   render() {
     const { figsrc } = this.state;
     const { review, imgShow } = this.props;
     const { trash } = this.props.review;
     const pinImg = this.props.review.pinned ? PinIcon : UnPinIcon
     const auth = (review.userID === this.props.firebase.auth.currentUser!.uid);
+    const datetime = parseInt(this.props.review.updateAt, 10);
+    const userName = this.props.firebase.auth.currentUser!.displayName;
+    // const user = this.props.firebase.user(this.props.review.userID);
+    // const userName = this.readUser(user);
+    
     return (
       <Col lg="3" style={{marginBottom: "10px"}}>
         <div>
@@ -150,8 +154,8 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
             {this.props.review.comment}
           </p>
           <Row>
-            <div className="col text-left" style={{fontSize: "12px", fontWeight: "bold", marginLeft: "5px", color: "#1A237E"}}>Nyoungwoo</div>
-            <div className="col text-right" style={{fontSize: "12px", marginRight: "5px"}}>2018.05.19</div>
+            <div className="col text-left" style={{fontSize: "12px", fontWeight: "bold", marginLeft: "5px", color: "#1A237E"}}>{userName}</div>
+            <div className="col text-right" style={{fontSize: "12px", marginRight: "5px"}}>{new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(datetime)}</div>
           </Row>
         </div>
         <div>

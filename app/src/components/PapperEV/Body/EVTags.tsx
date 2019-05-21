@@ -88,6 +88,7 @@ class EVTags extends React.Component<IEVTags, IEVTagsState> {
                         classNames={{
                             tagInputField: 'form-control-lg form-control',
                         }} 
+                        id="evbox"
                         tags={tags}
                         suggestions={suggestions}
                         handleDelete={this.handleTagDelete}

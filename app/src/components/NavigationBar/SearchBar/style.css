@@ -1,13 +1,13 @@
-.ReactTags__suggestions{
+#navbar-tags .ReactTags__suggestions{
   z-index: 8;
 }
-.ReactTags__tagInputField{
+#navbar-tags.ReactTags__tagInputField{
   width: 100%;
 }
-.ReactTags__tag{
+#navbar-tags .ReactTags__tag{
   float: left;
 }
-.ReactTags__tagInput{
+#navbar-tags .ReactTags__tagInput{
   float: right;
   width: 60%;
   margin-top: 2px;

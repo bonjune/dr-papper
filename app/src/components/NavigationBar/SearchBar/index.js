@@ -85,6 +85,7 @@ handleClick = () => {
 render() {
     const { tags, suggestions } = this.state;
     return (
+        <div id="navbar-tags">
         <InputGroup style={{marginTop: "13px"}}>
             <ReactTags tags={tags}
                 suggestions={suggestions}
@@ -96,6 +97,7 @@ render() {
                 autocomplete={true} />
           <span><Button color="secondary" onClick={this.handleClick}>search</Button></span>
         </InputGroup>
+        </div>
     )
 }
 

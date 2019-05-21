@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, withRouter } from 'react-router-dom'
-import PapperEditor from "../PapperEditor";
+import PapperEV from "../PapperEV";
+import { IReview } from "../Firebase/interface";
 
 import * as ROUTES from "../../constants/routes";
 
-import { ReadIcon, ToReadIcon, PinIcon, TrashIcon } from '../../assets/icons';
+import { AddReviewIcon, ReadIcon, ToReadIcon, PinIcon, TrashIcon } from '../../assets/icons';
 
 interface IMenuBarButtonActivations {
   readButton: boolean;
@@ -18,6 +19,10 @@ const IMenuBarButtonActivationsInit: IMenuBarButtonActivations = {
   toReadButton: false,
   pinnedButton: false,
   trashButton: false
+}
+
+interface IModalState {
+  modalShow : boolean;
 }
 
 const menu = (pathname: string)  => {
@@ -35,13 +40,14 @@ const menu = (pathname: string)  => {
   }
 }
 
-class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
+class MenuBar extends React.Component<any, IMenuBarButtonActivations & IModalState> {
   constructor(props: any) {
     super(props);
     
     this.state = {
       ...IMenuBarButtonActivationsInit,
-      [menu(this.props.location.pathname)]: true
+      [menu(this.props.location.pathname)]: true,
+      modalShow : false
     }
   }
 
@@ -63,6 +69,12 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
     }));
   }
 
+  showPapperView = () => {
+    this.setState(prevState => ({
+      modalShow: !prevState.modalShow,
+    }));
+  }
+
     render() {
       const {
         readButton,
@@ -77,7 +89,12 @@ class MenuBar extends React.Component<any, IMenuBarButtonActivations> {
 
       return (
         <div className="component-menu-bar box">
-          <PapperEditor />
+          <div className="row">
+                <button onClick={this.showPapperView} type="button" className="btn text-uppercase" style={{marginTop:'50px'}}>
+                        <span><img src={AddReviewIcon} alt="addbutton"/></span>Add
+                </button>
+          </div>
+          {this.state.modalShow ? <PapperEV edit={true} review={{} as IReview} handleModal={this.showPapperView}/> : null}
           <Link to={ROUTES.READ} style={{textDecoration:'none'}}>
             <div className="row">
               <button

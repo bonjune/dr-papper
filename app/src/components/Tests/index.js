@@ -2,12 +2,14 @@ import React from "react";
 import { withFirebase } from "../../components/Firebase";
 
 import { compose } from "recompose";
-import PapperEditor from "../PapperEditor";
+import PapperEV from "../PapperEV";
 
-class TestBase extends React.Component {
+class Test extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            modal: false
+        };
     }
 
     render() {
@@ -18,10 +20,11 @@ class TestBase extends React.Component {
                 </h3>
                 <div>
                     <button
-                    onClick={this.props.firebase.pushDummyReview}
+                        onClick={() => this.setState({modal:true})}
                     >
-                    NEW DUMMY REVIEW
+                    PapperEV
                     </button>
+                    <PapperEV edit={true} toread={true} modalShow={this.state.modal}/>
                 </div>
                 <hr/>
             </div>
@@ -29,8 +32,5 @@ class TestBase extends React.Component {
     }
 }
 
-const Test = compose(
-    withFirebase
-)(TestBase);
 
 export default Test;

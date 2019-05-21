@@ -32,16 +32,18 @@ export interface IReview {
   }>
 
   comment: string;
-  boxes: Array<{
-    format: Format;
-    figure: string;
-    subtitle: string;
-    content: string;
-    figsrc: string;
-  }>
+  boxes: IBox[];
 }
 
 export interface ITag{
   name: string;
   reviews: string[]; // Review Keys
+}
+
+export interface IBox{
+  format: Format;
+  figure: any;
+  subtitle: string;
+  content: string;
+  figsrc: string;
 }

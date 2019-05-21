@@ -104,10 +104,9 @@ class Firebase extends React.Component<any, {}> {
   }
 
   updatePapperReview = (reviewKey: string, entry: IReview) => {
+      console.log(entry)
       const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
-      let updates = {};
-      updates[`reviews/${reviewKey}`] = entry;
-      targetReviewRef.update(updates);
+      targetReviewRef.set(entry);
   }
 
   deletePapperReview = (reviewKey: string) => {
@@ -129,6 +128,7 @@ class Firebase extends React.Component<any, {}> {
       else{
         const reviews = snapshot.val().reviews
         reviews.push(reviewID)
+        console.log(reviews)
         tagRef.child('reviews').set(reviews)
       }
     })

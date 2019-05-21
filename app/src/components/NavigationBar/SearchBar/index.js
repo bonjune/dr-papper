@@ -55,7 +55,12 @@ handleDelete(i) {
 }
 
 handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
+    console.log(this.state.tags.length);
+    if(this.state.tags.length > 2) {
+        alert('Cannot Search more than 3 tags')
+    } else {
+        this.setState(state => ({ tags: [...state.tags, tag] }));
+    }
 }
 
 handleDrag(tag, currPos, newPos) {

@@ -5,7 +5,8 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
 import SmallTag from "../../../components/Tag";
-import PapperView from "../../../components/PapperView";
+//import PapperView from "../../../components/PapperView";
+import PapperEV from "../../../components/PapperEV";
 
 import { TestImage } from "../../../assets/img";
 import { PinIcon, UnPinIcon, Card_TrashIcon, Card_RestoreIcon } from "../../../assets/icons";
@@ -86,15 +87,6 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
     }));
   }
 
-  // readUser = (user) => {
-  //   user.once('value', function(snapshot) {
-  //     const snapVal = snapshot.val();
-  //     const keyList = Object.keys(snapVal);
-  //     const currentKey = keyList[0];
-  //     return snapVal[currentKey].username
-  //   })
-  // }
-
   render() {
     const { figsrc } = this.state;
     const { review, imgShow } = this.props;
@@ -142,21 +134,11 @@ class CardBase extends React.Component<ICardProps & IFirebaseProps, ICardState> 
         </div>
         <div className="box papper-card" onClick={this.showPapperView}>
           {this.state.modalShow 
-            ? <PapperView
-                title={this.props.review.title}
-                authors={this.props.review.authors}
-                publishDate={this.props.review.publishDate}
-                publishedAt={this.props.review.published}
-                link={this.props.review.link}
-                toRead={this.props.review.toRead}
-                tags={ this.props.review.tags ? 
-                  this.props.review.tags.map(tag => tag.name) : []}
-                boxes={this.props.review.boxes}
-                comment={this.props.review.comment}
-
-                modalShow={this.state.modalShow}
-                toggle={this.showPapperView}
-              /> 
+            ? <PapperEV
+                edit = {false}
+                handleModal = {this.showPapperView}
+                review = {this.props.review}
+              />
             : null}
           {imgShow
             ? (figsrc

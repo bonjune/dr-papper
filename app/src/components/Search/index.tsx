@@ -7,7 +7,7 @@ const Search = (props: any) => {
   console.log(query);
   query = query.split('&');
   console.log(query);
-  const prefix = "# ";
+  const prefix = "#";
   const space = ' ';
   const predicate = (query: string[]) => (review: IReview) => {
     for (let key in review.tags) {

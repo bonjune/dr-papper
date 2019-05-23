@@ -26,3 +26,7 @@ export const sanitizeTag = functions.database.ref('/tags/{tag}')
     }
     return new Promise<void>((resolve, reject) => null);
 })
+
+export const maintainUsername = functions.database.ref('reviews/{review}')
+  .onUpdate((snapshot, context) => {
+  });

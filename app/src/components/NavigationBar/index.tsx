@@ -18,7 +18,7 @@ const NavBarForNonAuth = () => (
     <Col lg="2">
       <div className="logoBox">
         <div className="logoText">
-          <Link to={ROUTES.HOME}>
+          <Link to={ROUTES.READ}>
             Dr.Papper
           </Link>
         </div>

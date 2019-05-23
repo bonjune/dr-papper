@@ -32,13 +32,11 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
     const user = (props.firebase as Firebase)!.auth.currentUser;
     
     this.state = {
-      edit : props.edit,
-      modalBgColor : '#EEEEEE',
-      review : Object.assign({}, props.review),
-      uid :  user ? user.uid : ""
-    }
-    
-    //console.log(props)
+      edit: props.edit,
+      modalBgColor: '#EEEEEE',
+      review: Object.assign({}, props.review),
+      uid: user ? user.uid : ""
+    };
   }
 
   handleToggle = () => {
@@ -47,109 +45,116 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
 
   handleFooterButtonClicked = () => {
     if(this.state.edit){
-      const {boxes, reviewID} = this.state.review;
-      let {tags} = this.state.review;
+      const { boxes, reviewID } = this.state.review;
+      const dispName = this.props.firebase.auth.currentUser!.displayName;
+      let { tags } = this.state.review;
 
       this.state.review.userID = this.state.uid;
+      this.state.review.username = dispName ? dispName : "";
       this.state.review.updateAt = Date.now().toString();
 
-      // uploading figure image in box
-      if(boxes){
+      // Upload a figure image in a box
+      if (boxes) {
         boxes.forEach((box, idx) => {
-          if(box.figure){
+          if (box.figure) {
             const figsrc = `${Math.random().toString(36)}_${idx}.png`;
             this.props.firebase.uploadFigure(box.figure, figsrc);
             box.figsrc = figsrc
           }
-        })
+        });
       }
 
       // tags
       if(!tags){
         tags = [];
       }
-      if(!this.props.review.tags){
+      if (!this.props.review.tags) {
         this.props.review.tags = [];
       }
 
-      const addedTags = tags.filter(tag => 
-        {
-          let ret = true;
-          this.props.review.tags.forEach(ptag => {
-            if(ptag.name === tag.name){
-              ret = false;
-            }
-          })
-          return ret;
-        })
+      const addedTags = tags.filter(tag => {
+        let ret = true;
+        this.props.review.tags.forEach(ptag => {
+          if (ptag.name === tag.name) {
+            ret = false;
+          }
+        });
+        return ret;
+      });
+      
       const deletedTags = this.props.review.tags.filter(tag => {
         let ret = true;
         tags.forEach(ptag => {
-          if(ptag.name === tag.name){
+          if (ptag.name === tag.name) {
             ret = false;
           }
         })
         return ret;
-      })
+      });
      
-      if(!this.state.review.createAt){
+      if (!this.state.review.createAt) {
         this.state.review.createAt = this.state.review.updateAt;
-        this.props.firebase.makeNewPapperReview(this.state.review)
-        .then(id => {
-          addedTags.forEach(tag => this.props.firebase.makeNewTag(tag.name, id))
-          deletedTags.forEach(tag => this.props.firebase.deleteTag(tag.name, id))
-        })
+        this.props.firebase
+          .makeNewPapperReview(this.state.review)
+          .then(id => {
+            addedTags.forEach(tag => this.props.firebase.makeNewTag(tag.name, id))
+            deletedTags.forEach(tag => this.props.firebase.deleteTag(tag.name, id))
+          });
       }
-      else{
+      else {
         this.props.firebase.updatePapperReview(reviewID, this.state.review);
         addedTags.forEach(tag => this.props.firebase.makeNewTag(tag.name, reviewID))
         deletedTags.forEach(tag => this.props.firebase.deleteTag(tag.name, reviewID))
       }
     }
-    this.setState(prev => ({edit: !prev.edit}))
+    this.setState(prev => ({ edit: !prev.edit }));
   }
 
   onReviewChange = (e : object) => {
-    const {review} = this.state
-    const keys = Object.keys(e)
+    const { review } = this.state;
+    const keys = Object.keys(e);
     keys.forEach(key => {
       review[key] = e[key]
     });
-    this.setState({review}) 
+    this.setState({ review });
   }
-  
 
   render() {
-
     return (
       <Modal
-      isOpen={true}
-      toggle={this.handleToggle}
-      size='lg'
-      scrollable={true}>
-        <ModalHeader
-          style={{ background: this.state.modalBgColor, padding: 0 }}
-          cssModule={{ 'modal-title': 'w-100 text-center mb-0' }}>
-          {this.state.edit ? <PapperEVHeader toRead={this.state.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
-        </ModalHeader>
-        <ModalBody style={{background:this.state.modalBgColor}}>
-          <PapperEVBody edit={this.state.edit} review={this.state.review} onChangeHandler={this.onReviewChange}/>
-        </ModalBody>
+        isOpen={true}
+        toggle={this.handleToggle}
+        size='lg'
+        scrollable={true}
+      >
+      <ModalHeader
+        style={{ background: this.state.modalBgColor, padding: 0 }}
+        cssModule={{ 'modal-title': 'w-100 text-center mb-0' }}>
+        {this.state.edit ? <PapperEVHeader toRead={this.state.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
+      </ModalHeader>
+      <ModalBody style={{background:this.state.modalBgColor}}>
+        <PapperEVBody
+          edit={this.state.edit}
+          review={this.state.review}
+          onChangeHandler={this.onReviewChange}
+        />
+      </ModalBody>
         <ModalFooter style={{background:this.state.modalBgColor}}>
-          {
-            !this.props.review.userID || this.props.review.userID === this.state.uid ? 
-            <div style={{width:"100%"}}>
-              {this.state.edit ? 
-              <Button
-                block={true}
-                style={{ background: "#B0BEC5", border: 0 }}
-                onClick={this.handleFooterButtonClicked}>
-                Save
-              </Button> :
-              <Button
-                block={true}
-                style={{ background: "#B0BEC5", border: 0 }}
-                onClick={this.handleFooterButtonClicked}>
+          {!this.props.review.userID || this.props.review.userID === this.state.uid
+            ? <div style={{width:"100%"}}>
+              {this.state.edit
+                ? <Button
+                    block={true}
+                    style={{ background: "#B0BEC5", border: 0 }}
+                    onClick={this.handleFooterButtonClicked}
+                  >
+                    Save
+                  </Button>
+                : <Button
+                    block={true}
+                    style={{ background: "#B0BEC5", border: 0 }}
+                    onClick={this.handleFooterButtonClicked}
+                  >
                 Edit
               </Button>}
             </div> :
@@ -157,7 +162,8 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
               block={true}
               onClick={this.handleToggle}
               style={{ background: "#B0BEC5", border: 0 }}
-              >Done</Button>
+              >Done
+            </Button>
           }
         </ModalFooter>
       </Modal>

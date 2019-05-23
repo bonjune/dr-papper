@@ -67,7 +67,7 @@ class SignUpFormBase extends React.Component<
         this.setState({
           ...SignUpFormInit
         })
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.READ);
       })
       .catch((error: any) => {
         if (error !== undefined) {

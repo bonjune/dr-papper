@@ -125,7 +125,7 @@ class BoardBase extends React.Component<
               <CardBox reviews={reviews} cardPredicate={() => true} imgShow={true} />
             </div>
            : null}
-        {boardType === "Search"
+        {boardType === "Search" && this.props.search === true
           ? <div className="saerch-board">
               <Row>
                 <Col sm="auto">
@@ -135,6 +135,18 @@ class BoardBase extends React.Component<
               </Row>
               <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID !== uid)} imgShow={true} />
             <hr/>
+              <Row>
+                <Col sm="auto">
+                  <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>
+                    My Reviews 
+                  </h3>
+                </Col>
+              </Row>
+              <CardBox reviews={reviews} cardPredicate={(review: IReview) => (review.userID === uid)} imgShow={true} />
+            </div>
+          : null}
+        {boardType === "Search" && this.props.search !== true
+          ? <div className="search-board">
               <Row>
                 <Col sm="auto">
                   <h3 className="text-uppercase" style={{ marginBottom: "25px" }}>

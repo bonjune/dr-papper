@@ -8,12 +8,16 @@ export enum Format {
 }
 
 export interface IReview {
+  // Indentification
   reviewID: string;
   userID: string;
+  username: string;
 
+  // Maintainence
   createAt: string;
   updateAt: string;
 
+  // Basic Info
   title: string;
   authors: string[];
   publishDate: string;
@@ -22,10 +26,12 @@ export interface IReview {
 
   mainFigure: string;
   
+  // State
   toRead: boolean;
   pinned: boolean;
   trash: boolean;
 
+  // Memos
   tags: Array<{
     id: string;
     name: string;

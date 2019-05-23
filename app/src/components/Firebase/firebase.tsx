@@ -96,42 +96,40 @@ class Firebase extends React.Component<any, {}> {
   tags = () => this.db.ref('tags');
 
   makeNewPapperReview = async (entry: IReview) => {
-      const newReviewRef = this.reviews().push();
-      entry.reviewID = newReviewRef.key as string;
-      return await newReviewRef.set({
-          ...entry
-      }).then(() => entry.reviewID)
+    const newReviewRef = this.reviews().push();
+    entry.reviewID = newReviewRef.key as string;
+    return await newReviewRef.set({
+      ...entry
+    }).then(() => entry.reviewID);
   }
 
   updatePapperReview = (reviewKey: string, entry: IReview) => {
-      console.log(entry)
-      const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
-      targetReviewRef.set(entry);
+    const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
+    targetReviewRef.set(entry);
   }
 
   deletePapperReview = (reviewKey: string) => {
-      const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
-      targetReviewRef.remove();
+    const targetReviewRef = this.db.ref(`reviews/${reviewKey}`);
+    targetReviewRef.remove();
   }
 
   makeNewTag = (tagName: string, reviewID : string) => {
     const tagRef = this.db.ref('tags/' + tagName);
-    tagRef.once('value').then(function(snapshot) {
-      
-      if(snapshot.val() === null){
+    tagRef.once('value').then(function (snapshot) {
+      if (snapshot.val() === null) {
         tagRef.set(({
           key: tagName,
           name: tagName,
           reviews: [reviewID]
-        } as ITag))
+        } as ITag));
       }
-      else{
+      else {
         const reviews = snapshot.val().reviews
         reviews.push(reviewID)
         console.log(reviews)
         tagRef.child('reviews').set(reviews)
       }
-    })
+    });
   }
 
   deleteTag = (tagName: string, reviewID : string) => {
@@ -141,8 +139,8 @@ class Firebase extends React.Component<any, {}> {
       const chkReviews = snapshot.val().reviews;
       if(chkReviews !== null){ 
         const reviews =  chkReviews as string[];
-        const filteredReviews = reviews.filter(review => review !== reviewID)
-        tagRef.child('reviews').set(filteredReviews)
+        const filteredReviews = reviews.filter(review => review !== reviewID);
+        tagRef.child('reviews').set(filteredReviews);
       }
     })
   }

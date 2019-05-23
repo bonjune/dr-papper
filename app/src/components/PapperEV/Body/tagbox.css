@@ -4,12 +4,8 @@ div.ReactTags__tags {
 }
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
-<<<<<<< HEAD
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus
 #evbox {
-=======
-div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
->>>>>>> 8c4c0072a59fd5d3dd0e80a6b9516b3a3dc0de6e
     height: 31px;
     margin: 0;
     font-size: 12px;

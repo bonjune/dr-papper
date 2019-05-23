@@ -88,7 +88,7 @@ class FigureBoxBase extends React.Component<IFigureBox & IFirebaseProps, IFigure
                         {fbfigsrc
                         ? 
                         <div
-                            style={{height:"180px", width:"180px", backgroundImage:`url(${fbfigsrc})`}}
+                            style={{height:"180px", width:"180px", backgroundImage:`url(${fbfigsrc})`, backgroundRepeat: "no-repeat", backgroundSize:"contain"}}
                             onPaste={file => this.pasteFigure(file)}
                         />
                         : <div style={{ color: "rgb(108, 117, 125)" }}>

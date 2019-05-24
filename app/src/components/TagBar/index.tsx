@@ -19,7 +19,6 @@ class TagBarBase extends React.Component<ITagBarProps> {
    */
   tagPredicate = (tag: Tag, reviews: IReview[], uid: string) => (
     reviews ? reviews.filter(ReviewPredicate.Auth(uid)).map((review) => {
-      
       if (review.tags) {
         for (let index = 0; index < review.tags.length; index++) {
           const tagName = review.tags[index].name;

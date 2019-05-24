@@ -12,3 +12,6 @@
   width: 60%;
   margin-top: 2px;
 }
+#navbar-tags input{
+  text-indent: 15px;
+}

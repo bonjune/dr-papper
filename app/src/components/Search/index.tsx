@@ -4,7 +4,9 @@ import { IReview } from '../Firebase/interface';
 
 const Search = (props: any) => {
   let { query } = props.match.params;
-  const { others } = props.location.state;
+  let others = true;
+  if (props.location.state)
+    others = props.location.state;
   query = query.split('&');
   const prefix = "#";
   const space = ' ';
@@ -20,7 +22,9 @@ const Search = (props: any) => {
 
   return (
     <div className="papper-board">
-      <h1 style={{marginTop: '10px', marginBottom:'5px'}}>{query && query.map((val:string) => prefix + val + space)}</h1>
+      <h1 style={{ marginTop: '10px', marginBottom: '5px' }}>
+        {query && query.map((val: string) => prefix + val + space)}
+      </h1>
       <Board
         boardType="Search"
         search={others}

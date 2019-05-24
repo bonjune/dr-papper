@@ -71,9 +71,13 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
           <EVTags edit={edit} tags={review.tags} suggestions={[{ id: "test", name: "test" }]} onChangeHandler={this.onContentChange} />
         </div>
 
+        <div style={{ background: "white", marginTop: "10px", padding: "5px" }}>
+          <EVContent edit={edit} content={{ "comment": review.comment }} label="Comment" onChangeHandler={this.onContentChange} />
+        </div>
+
         <div style={{ background: review.toRead ? "white" : "#EEEEEE", marginTop: "10px", padding: "5px" }}>
           {review.toRead ?
-            <EVContent edit={edit} content={{ "comment": review.comment }} label="Comment" onChangeHandler={this.onContentChange} /> :
+            null :
             <div>
               {review.boxes ?
                 review.boxes.map((box, index) =>

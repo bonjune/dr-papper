@@ -6,7 +6,12 @@ const SmallTag = (props: { tagName: string; }) => (
   <span style={{backgroundColor:"#E8EAF6", marginBottom: "7px"}}
     className="badge badge-light font-weight-normal papper-tag"
   >
-    <Link to={`/show/${props.tagName}`}>
+    <Link to={{
+      pathname: `/show/${props.tagName}`,
+      state: {
+        others: false
+      }
+    }}>
       #{props.tagName}
     </Link>
   </span>

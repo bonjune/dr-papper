@@ -1,12 +1,11 @@
 import React from 'react'
-import Board from "../../containers/Board";
+import Board, { predicateCompose, ReviewPredicate } from "../../containers/Board";
 import { IReview } from '../Firebase/interface';
 
 const Search = (props: any) => {
   let { query } = props.match.params;
-  console.log(query);
+  const { others } = props.location.state;
   query = query.split('&');
-  console.log(query);
   const prefix = "#";
   const space = ' ';
   const predicate = (query: string[]) => (review: IReview) => {
@@ -22,7 +21,15 @@ const Search = (props: any) => {
   return (
     <div className="papper-board">
       <h1 style={{marginTop: '10px', marginBottom:'5px'}}>{query && query.map((val:string) => prefix + val + space)}</h1>
-      <Board boardType="Search" boardPredicate={predicate(query)} search={true}/>
+      <Board
+        boardType="Search"
+        search={others}
+        boardPredicate={predicateCompose(
+          ReviewPredicate.Read,
+          ReviewPredicate.Alive,
+          predicate(query)
+        )}
+      />
     </div>
   )
 };

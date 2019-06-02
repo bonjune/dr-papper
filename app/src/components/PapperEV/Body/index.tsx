@@ -12,6 +12,7 @@ interface IPapperEVBody {
     edit : boolean;
     review : IReview;
     onChangeHandler:(review:object) => void;
+    suggestions : any;
 }
 
 interface IPapperEVBodyState {
@@ -24,6 +25,7 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
     this.state = {
       review: this.props.review
     };
+    console.log(this.props.suggestions)
   };
 
   onContentChange = (content: object) => {
@@ -41,7 +43,7 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
     if (!review.boxes) {
       review.boxes = [];
     }
-    review.boxes.push({ format: Format.Figure } as IBox)
+    review.boxes.push({ format: Format.Figure, subtitle:"", content: "", figsrc: "" } as IBox)
     this.setState({ review })
   };
 
@@ -68,7 +70,7 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
         </div>
 
         <div style={{ background: "white", marginTop: "10px", padding: "5px" }}>
-          <EVTags edit={edit} tags={review.tags} suggestions={[{ id: "test", name: "test" }]} onChangeHandler={this.onContentChange} />
+          <EVTags edit={edit} tags={review.tags} suggestions={this.props.suggestions} onChangeHandler={this.onContentChange} />
         </div>
 
         <div style={{ background: "white", marginTop: "10px", padding: "5px" }}>

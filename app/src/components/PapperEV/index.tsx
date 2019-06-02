@@ -23,6 +23,10 @@ interface IPapperEVState {
   modalBgColor : string;
   review : IReview;
   uid : string;
+  suggestions : Array<{
+    id: string;
+    name: string;
+  }> | null;
 }
 
 
@@ -35,8 +39,26 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
       edit: props.edit,
       modalBgColor: '#EEEEEE',
       review: Object.assign({}, props.review),
-      uid: user ? user.uid : ""
+      uid: user ? user.uid : "",
+      suggestions : null
     };
+
+    this.listTags();
+  }
+
+
+  listTags = async () => {
+      const data:any[] = [];
+      await this.props.firebase.tags().once('value')
+        .then(snapshot => {
+          snapshot.forEach((child) => {
+            data.push({id:child.val().name, name:child.val().name});
+          })
+        })
+      
+      this.setState(() => ({
+        suggestions: data
+      }));
   }
 
   handleToggle = () => {
@@ -45,22 +67,30 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
 
   handleFooterButtonClicked = () => {
     if(this.state.edit){
-      const { boxes, reviewID } = this.state.review;
+
+      const { reviewID } = this.state.review;
       const dispName = this.props.firebase.auth.currentUser!.displayName;
-      let { tags } = this.state.review;
+      let { boxes, tags } = this.state.review;
 
       this.state.review.userID = this.state.uid;
       this.state.review.username = dispName ? dispName : "";
       this.state.review.updateAt = Date.now().toString();
 
-      // Upload a figure image in a box
+      // Upload a figure image in a box and delete empty box
       if (boxes) {
+        const emptyBox:number[] = []
         boxes.forEach((box, idx) => {
           if (box.figure) {
             const figsrc = `${Math.random().toString(36)}_${idx}.png`;
             this.props.firebase.uploadFigure(box.figure, figsrc);
             box.figsrc = figsrc
           }
+          if(box.subtitle === "" && box.content === "" && box.figsrc === ""){
+            emptyBox.push(idx);
+          }
+        });
+        this.state.review.boxes = boxes.filter((box, idx) => {
+          return !emptyBox.includes(idx)
         });
       }
 
@@ -133,11 +163,13 @@ class PapperEVBase extends React.Component<IPapperEV & IFirebaseProps, IPapperEV
         {this.state.edit ? <PapperEVHeader toRead={this.state.review.toRead} onChangeHandler={this.onReviewChange}/> : null}
       </ModalHeader>
       <ModalBody style={{background:this.state.modalBgColor}}>
+        {this.state.suggestions ? 
         <PapperEVBody
           edit={this.state.edit}
           review={this.state.review}
           onChangeHandler={this.onReviewChange}
-        />
+          suggestions={this.state.suggestions}
+        /> : null }
       </ModalBody>
         <ModalFooter style={{background:this.state.modalBgColor}}>
           {!this.props.review.userID || this.props.review.userID === this.state.uid

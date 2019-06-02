@@ -64,8 +64,8 @@ class PapperEVBody extends React.Component<IPapperEVBody, IPapperEVBodyState> {
         <div style={{ background: "white", padding: "5px" }}>
           <EVContent edit={edit} content={{ "title": review.title }} label="Title" onChangeHandler={this.onContentChange} />
           <EVContent edit={edit} content={{ "authors": review.authors }} label="Authors" onChangeHandler={this.onContentChange} />
-          <EVContent edit={edit} content={{ "publishDate": review.publishDate }} label="Date" onChangeHandler={this.onContentChange} />
-          <EVContent edit={edit} content={{ "published": review.published }} label="Published" onChangeHandler={this.onContentChange} />
+          {/* <EVContent edit={edit} content={{ "publishDate": review.publishDate }} label="Date" onChangeHandler={this.onContentChange} /> */}
+          <EVContent edit={edit} content={{ "published": review.published }} label="Published In" onChangeHandler={this.onContentChange} />
           <EVContent edit={edit} content={{ "link": review.link }} label="Link" onChangeHandler={this.onContentChange} />
         </div>
 

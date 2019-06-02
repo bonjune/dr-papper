@@ -46,13 +46,13 @@ class EVContent extends React.Component<IEVContent, IEVContentState> {
                 {contentValue}
             </div> :
             <FormGroup row={true}>
-                <Label sm={2} size="lg" style={{ textAlign: "right", fontWeight: "bold" }}>
+                <Label sm={2} size="lg" style={{ textAlign: "right", fontWeight: "bold", fontSize: "1rem" }}>
                     {label}
                 </Label>
                 <Col sm={10}>
                     {edit ? 
                         <Input type={label === "Comment" ? "textarea" : "text"} name={contentKey} bsSize="lg" defaultValue={contentValue} onChange={this.onInputChange}/> :
-                        <div className="form-control-lg" style={{ border: "0px", fontSize: "1.25rem", marginBottom: "8px" }}>
+                        <div className="form-control-lg" style={{ border: "0px", fontSize: "1rem", marginBottom: "8px" }}>
                             {contentKey==='link' ? <a href={contentValue}>{contentValue}</a> : contentValue}
                         </div>}
                 </Col>

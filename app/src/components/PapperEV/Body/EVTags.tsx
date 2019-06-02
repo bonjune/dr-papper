@@ -79,7 +79,7 @@ class EVTags extends React.Component<IEVTags, IEVTagsState> {
 
         return(
             <FormGroup row={true}>
-                <Label sm={2} size="lg" style={{ textAlign: "right", fontWeight: "bold" }}>
+                <Label sm={2} size="lg" style={{ textAlign: "right", fontWeight: "bold", fontSize: "1rem" }}>
                     Tags
                 </Label>
                 <Col sm={10}>
@@ -98,7 +98,7 @@ class EVTags extends React.Component<IEVTags, IEVTagsState> {
                         allowDragDrop={false}
                         delimiters={delimiters}
                         inline={true}/> :
-                    <div className="form-control-lg" style={{border: "0px", fontSize:"1.25rem", marginBottom:"8px"}}>
+                    <div className="form-control-lg" style={{border: "0px", fontSize:"1rem", marginBottom:"8px"}}>
                         {tags ? tags.map((tag, i) => (
                             <SmallTag key={`common-info-tag-${tag.text}`} tagName={tag.text} />
                         )) : null}
